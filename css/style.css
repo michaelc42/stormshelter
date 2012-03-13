@@ -1,0 +1,323 @@
+#container {
+margin-top:10px;
+}
+
+#header {
+margin-bottom:30px;
+}
+
+#header #dupont-home {
+font-size:92%;
+text-align:right;
+}
+
+#header p {
+margin-bottom:0;
+}
+
+#header #header-img {
+width:820px;
+height:330px;
+background-image:url("../images/header2.jpg");
+background-size:820px;
+}
+
+#header #logo-link {
+top:80px;
+left:10px;
+position:relative;
+}
+
+#header #logo-link #logo {
+width:250px;
+}
+
+#contact-form h5 {
+color:#c00;
+font-weight:400;
+margin-bottom:15px;
+}
+
+#contact-form p {
+font-family:Verdana, Arial, Helvetica, sans-serif;
+color:#666;
+font-size:93%;
+margin-bottom:0;
+}
+
+#contact-form #honeypot {
+display:none;
+position:absolute;
+left:-999em;
+}
+
+#info img {
+height:90px;
+width:120px;
+border:1px solid #000;
+margin-top:12px;
+margin-bottom:55px;
+}
+
+#info h5 {
+margin-bottom:0;
+color:#c00;
+font-weight:400;
+width:64%;
+}
+
+#info p {
+font-family:Verdana, Arial, Helvetica, sans-serif;
+color:#666;
+font-size:93%;
+text-align:justify;
+width:64%;
+}
+
+#youtube-link {
+background-color:#87002f;
+color:#FFF;
+}
+
+#youtube-link #youtube-link-content {
+padding:10px 20px;
+}
+
+#youtube-link #youtube-link-content h5 {
+margin-bottom:10px;
+line-height:20px;
+font-weight:400;
+}
+
+#youtube-link #youtube-link-content p {
+text-align:left;
+}
+
+#youtube-link #youtube-link-content a {
+font-size:110%;
+color:#FFF;
+text-decoration:none;
+}
+
+#youtube-link #youtube-link-content a:hover,a:active {
+text-decoration:underline;
+}
+
+#pre-footer {
+margin-top:100px;
+margin-bottom:15px;
+}
+
+#pre-footer h3 {
+color:#c00;
+margin-bottom:10px;
+}
+
+#pre-footer #logo {
+text-align:right;
+}
+
+#footer #footer-content {
+border-top:1px solid #000;
+padding-top:15px;
+}
+
+#header #dupont-home a:link,a:visited,a:hover,a:active,#contact-form .errors p,#dupont-link a,#pre-footer #contact-info a,.errors {
+color:#c00;
+}
+
+#contact-form .success,.success {
+color:green;
+}
+
+#pre-footer #contact-info,#footer p {
+color:gray;
+}
+
+/*
+
+#container{
+	margin-top: 10px;
+}
+
+#header{
+	margin-bottom: 30px;
+}
+
+#header #dupont-home{
+	font-size: 92%;
+	text-align: right;
+}
+
+#header #dupont-home a:link, a:visited, a:hover, a:active{
+	color: #cc0000;
+}
+
+#header p{
+	margin-bottom: 0;
+}
+
+#header #header-img{
+	width: 820px;
+	height: 330px;
+	background-image: url("../images/header2.jpg");
+	background-size: 820px;
+	
+}
+
+#header #logo-link
+{
+	top: 80px;
+	left: 10px;
+	position: relative;	
+}
+#header #logo-link #logo
+{
+	width: 250px;
+}
+
+#contact-form{
+
+}
+
+#contact-form .errors p{
+	color: #cc0000;
+}
+
+#contact-form .success{
+	color: #008000;
+}
+
+#contact-form h5{
+	color: #cc0000;
+	font-weight: normal;
+	margin-bottom: 15px;
+}
+
+#contact-form p{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #666666;
+	font-size: 93%;
+	margin-bottom: 0px;
+}
+
+#contact-form #robotest
+{
+}
+
+#contact-form #honeypot
+{
+	display: none;
+	position: absolute;
+	left: -999em;
+}
+
+#info{
+}
+
+#info img{
+	height: 90px;
+	width: 120px;
+	border: 1px solid black;
+	margin-top: 12px;
+	margin-bottom: 55px;
+}
+
+#info h5{
+	margin-bottom: 0;
+	color: #cc0000;
+	font-weight: normal;
+	width: 64%;
+}
+
+#info p{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #666666;
+	font-size: 93%;
+	text-align: justify;
+	width: 64%;
+}
+
+#info #dupont-link{
+
+}
+
+#youtube-link{
+	background-color: #87002f;
+	color: #FFFFFF;
+}
+
+#youtube-link #youtube-link-content{
+	padding: 10px 20px 10px 20px;
+}
+
+#youtube-link #youtube-link-content h5{
+	margin-bottom: 10px;
+	line-height: 20px;
+	font-weight: normal;
+}
+#youtube-link #youtube-link-content p{
+	text-align: left;
+}
+
+#youtube-link #youtube-link-content a{
+	font-size: 110%;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+#youtube-link #youtube-link-content a:link, a:visited{
+
+}
+
+#youtube-link #youtube-link-content a:hover, a:active{
+	text-decoration: underline;
+}
+
+#dupont-link{
+	text-align: ;
+}
+
+#dupont-link a{
+	color: #cc0000;
+}
+
+#pre-footer{
+	margin-top: 100px;
+	margin-bottom: 15px;
+}
+
+#pre-footer h3{
+	color: #cc0000;
+	margin-bottom: 10px;
+}
+
+#pre-footer #contact-info{
+	color: #808080;
+}
+
+#pre-footer #contact-info a{
+	color: #cc0000;
+}
+
+#pre-footer #logo{
+	text-align: right;
+}
+
+#footer #footer-content{
+	border-top: 1px solid black;
+	padding-top: 15px;
+}
+
+#footer p{
+	color: #808080
+}
+
+.success{
+	color: #008000;
+}
+
+.errors{
+	color: #cc0000;
+}
+*/

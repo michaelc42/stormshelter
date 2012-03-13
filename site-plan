@@ -1,0 +1,58 @@
+NOTES
+*Add a honeypot to prevent spammers on the contact form.
+
+
+controllers
+//a controller that controls authorized user access and authorized
+//user activities
+controller user
+{
+	function login
+	{
+		login_model->login($username, $password)
+	}
+	
+	function galleries
+	{
+		login_model->isloggedin()
+		gallery_model->getGalleries(all)
+	}
+	
+	function addGallery
+	{
+		login_model->isloggedin()
+		gallery_model->createGallery($title);
+	}
+	
+	function addPhotos
+	{
+		login_model->isloggedin()
+		gallery_model->addPhotos($gallery, array(photos));
+	}
+}
+
+//A controller that controls the public part of the site that is viewable
+//to any anonymouse user
+controller main
+{
+	index
+	
+	other site sections
+	
+	all galleries section
+	
+	specific gallery section
+}
+
+models
+//a gallery_model retrieves galleries, creates galleries, deletes galleryies
+//renames galleries, adds photos to galleries, deletes photos from galleries
+
+
+//a user model that verifies a user, and starts new session for the 
+//authorized user
+
+views
+
+
+Make a login page

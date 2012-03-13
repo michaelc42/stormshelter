@@ -1,0 +1,82 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Main_controller extends CI_Controller
+{
+	function index()
+	{
+		$data['errors'] = FALSE;
+		$data['success'] = FALSE;
+		$data['main_content'] = 'home_view';
+		
+		$this->load->view('includes/template', $data);
+	}
+	
+	public function message()
+	{
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('name', 'Name', 'required');		
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+		$this->form_validation->set_rules('areacode', 'Area Code', 'required|numeric');
+		$this->form_validation->set_rules('phone1', 'Phone', 'required|numeric');
+		$this->form_validation->set_rules('phone2', 'Phone', 'required|numeric');
+		$this->form_validation->set_rules('message', 'Message', 'required');
+		$this->form_validation->set_rules('robotest', '', 'callback_robot_check');
+
+		
+		$data['errors'] = FALSE;
+		$data['success'] = FALSE;
+		
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data['errors'] = validation_errors();
+			$data['main_content'] = 'home_view';		
+			$this->load->view('includes/template', $data);
+		}
+		else
+		{
+			$this->load->model('Contact_form_model');
+	
+			if( 
+				$this->Contact_form_model->sendMessage(
+					$this->input->post('email'),
+					$this->input->post('name'),
+					$this->input->post('areacode').$this->input->post('phone1').$this->input->post('phone2'),
+					$this->input->post('message')
+				)				
+			  )
+			{
+				$data['success'] = TRUE;
+				$data['main_content'] = 'home_view'; //load success page
+				$this->load->view('includes/template', $data);
+			}
+			else
+			{
+				$data['errors'] = 'Info could not be sent.  Please try again.';
+				$data['main_content'] = 'home_view';
+				$this->load->view('includes/template', $data);
+			}
+		}
+	}
+	
+	/* Form validation callback function */
+	function robot_check($robotest)
+	{
+		if($robotest)
+		{
+			$this->form_validation->set_message('robot_check', 'No bots allowed');
+			$this->load->model('Logger_model');
+			$this->Logger_model->ipLogger($this->input->ip_address());
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
+	}
+	
+	function pageNotFound()
+	{
+		echo 'Page not found.';
+	}
+}
