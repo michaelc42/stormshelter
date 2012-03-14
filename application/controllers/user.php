@@ -12,8 +12,10 @@ class User extends CI_Controller {
 	
 	function index()
 	{
-		echo 'Test';
-		print_r($this->session->all_userdata());
+		//echo 'Test';
+		//print_r($this->session->all_userdata());
+		$query = $this->db->get_where('galleries', array( 'title'=>'Mike',));
+		print_r($query);
 	}
 	
 	function login()
@@ -106,10 +108,14 @@ class User extends CI_Controller {
 		else
 		{
 			$this->load->model('Gallery_model');
-
-			if ($this->Gallery_model->addGallery($title, $description) === FALSE)
+			$ret = $this->Gallery_model->addGallery($title, $description);
+			if ($ret === FALSE)
 			{
 				$data['errors'] = "Gallery already exists.";
+			}
+			else
+			{
+				$data['errors'] = FALSE;
 			}
 		}	
 		

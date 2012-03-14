@@ -31,29 +31,38 @@ class Gallery_model extends CI_Model
 		
 		$url = './uploads/'.$titleclean;
 		//$exists = $this->galleryExists($title);//make sure gallery does not exists
+		
 		if($this->galleryExists($title) === FALSE)
 		{
-			mkdir($url);
-			$data = array(
-			   'directory_name' => $titleclean,
-			   'title' => $title,
-			   'description' => $description,
-			);
-			chmod($url, 0777);
-			
-			$this->db->insert('galleries', $data);
-			return TRUE;
+			return FALSE;
 		}
 		else
 		{
-			return FALSE;
+			if(mkdir($url))
+			{
+				$data = array(
+				   'directory_name' => $titleclean,
+				   'title' => $title,
+				   'description' => $description,
+				);
+				chmod($url, 0777);
+				
+				$this->db->insert('galleries', $data);
+				return TRUE;
+			}
+			else
+			{
+				return FALSE;
+			}
 		}
 	}
 	
 	function galleryExists($name)
 	{
-		if($this->db->get_where('galleries', 'title', $name)->num_rows() > 0)
+		$query = $this->db->get_where('galleries', array( 'title'=>'Mike',));
+		if( $query->num_rows() > 0)
 		{
+			
 			return TRUE;
 		}
 		else
