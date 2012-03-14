@@ -36,5 +36,5 @@ $data2 = array(
 	<?php echo form_close(); ?>
 </div>
 <div class="grid_16 errors">
-	<p><?php //echo $errors; ?></p>
+	<p><?php echo $errors; ?></p>
 </div>

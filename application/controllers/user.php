@@ -18,31 +18,34 @@ class User extends CI_Controller {
 	
 	function login()
 	{		
-		//load libraries
+		$data = FALSE;
 		
-		//test data
-		$name = 'mike42';
-		$pass = 'michael1';
+		$this->load->library('form_validation');
 		
-		//end test data
-		
-		$this->load->model('Login_model');
-
-		echo 'Login model loaded';
-		
-		$login = $this->Login_model->checkLogin($name, $pass);
-		
-		if ( $login === TRUE )
+		$this->form_validation->set_rules('username', 'Username', 'required');		
+		$this->form_validation->set_rules('password', 'Password', 'required');
+	
+		//If user is not logged in and did not fill out the form correctly echo validation errors
+		if(!($this->session->userdata('logged_in')) && $this->form_validation->run() === FALSE)
 		{
-			$this->Login_model->startSession($name);
-			print_r($this->session->all_userdata());
-			echo 'Session Started';
+			$data['errors'] = validation_errors();
 		}
-		else
+		else //else check to see if the username and pw are correct
 		{
-			//output any errors checkLogin returned
-			echo $login;
-		}
+			$this->load->model('Login_model');
+			//if name and pw are incorrect function returns an error message
+			$ret = $this->Login_model->checkLogin($this->input->post('username'), $this->input->post('password'));
+			
+			if ( $ret === TRUE )
+			{
+				$this->Login_model->startSession($this->input->post('username'));
+			}
+			else
+			{
+				$data['errors'] = $ret;
+			}
+		}		
+		$this->load->view('login_view', $data);
 	}
 	
 	function logout()
@@ -69,6 +72,11 @@ class User extends CI_Controller {
 		
 		$data['galleries'] = $this->Gallery_model->getGalleries();
 		
+		if ($data['galleries'] === FALSE)
+		{
+			$data['errors'] = 'Sorry, no galleries found.';
+		}
+		
 		//load gallery
 		$this->load->view('gallery_view', $data);
 	}
@@ -82,17 +90,30 @@ class User extends CI_Controller {
 			return;
 		}
 		
+		$data['errors'] = FALSE;
+		
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('gallery-name', 'Gallery Title', 'required');
+		
 		$title = $this->input->post('gallery-name');
 		$description = $this->input->post('gallery-description');
 		
-		if ($title)
+		if ($this->form_validation->run() === FALSE)
+		{
+			$data['errors'] = validation_errors();
+		}
+		else
 		{
 			$this->load->model('Gallery_model');
-		
-			$return = $this->Gallery_model->addGallery($title, $description);
+
+			if ($this->Gallery_model->addGallery($title, $description) === FALSE)
+			{
+				$data['errors'] = "Gallery already exists.";
+			}
 		}	
 		
-		$this->load->view('new_gallery_view');
+		$this->load->view('new_gallery_view', $data);
 		
 	}
 	

@@ -1,3 +1,4 @@
+<?php if (!($this->session->userdata('logged_in'))): ?>
 <?php 
 	$data = array(
 	  'name'        => 'username',
@@ -17,8 +18,8 @@
 		'style'       => 'width:100px',
 	);
 ?>
-<div class="grid_16" id="">		
-	<?php echo form_open('test/login'); //add the path ?>
+<div class="grid_16" id="">			
+	<?php echo form_open('user/login'); //add the path ?>
 	<?php echo form_input($data); ?>
 	<?php echo form_password($data2); ?>
 	<?php echo form_submit('submit', 'Login'); ?>
@@ -27,7 +28,8 @@
 <div class="grid_16 errors">
 	<p><?php echo $error = (!empty($errors)) ? $errors : ''; ?></p>
 </div>
+<?php endif; ?>
 
 <?php if ($this->session->userdata('logged_in') == 1): ?>
-<p><a href="<?php echo site_url(); ?>test/logout">logout</a></p>
+<p><?php echo $this->session->userdata('username'); ?> <a href="<?php echo site_url(); ?>user/logout">logout</a></p>
 <?php endif; ?>

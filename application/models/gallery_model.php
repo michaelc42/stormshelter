@@ -8,9 +8,17 @@ class Gallery_model extends CI_Model
 		
 		$galleries = array();
 		
-		foreach ($query->result() as $row)
+		if ($query->num_rows() >0)
 		{
-			$galleries[$row->directory_name] = $row->title;
+			foreach ($query->result() as $row)
+			{
+				$galleries[$row->directory_name] = $row->title;
+			}
+		}
+		else
+		{
+			//$galleries['errors'] = "Sorry, no galleries found.";
+			return FALSE;
 		}
 		
 		return $galleries;
@@ -19,12 +27,13 @@ class Gallery_model extends CI_Model
 	
 	function addGallery($title, $description)
 	{	
-		echo $titleclean = preg_replace("/[^A-Za-z0-9]/","_",$title);
+		$titleclean = preg_replace("/[^A-Za-z0-9]/","_",$title);
 		
 		$url = './uploads/'.$titleclean;
-		
-		if(mkdir($url))
+		//$exists = $this->galleryExists($title);//make sure gallery does not exists
+		if($this->galleryExists($title) === FALSE)
 		{
+			mkdir($url);
 			$data = array(
 			   'directory_name' => $titleclean,
 			   'title' => $title,
@@ -33,6 +42,18 @@ class Gallery_model extends CI_Model
 			chmod($url, 0777);
 			
 			$this->db->insert('galleries', $data);
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+	
+	function galleryExists($name)
+	{
+		if($this->db->get_where('galleries', 'title', $name)->num_rows() > 0)
+		{
 			return TRUE;
 		}
 		else
