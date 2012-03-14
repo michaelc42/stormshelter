@@ -32,7 +32,7 @@ class Gallery_model extends CI_Model
 		$url = './uploads/'.$titleclean;
 		//$exists = $this->galleryExists($title);//make sure gallery does not exists
 		
-		if($this->galleryExists($title) === FALSE)
+		if($this->galleryExists($title) === TRUE)
 		{
 			return FALSE;
 		}
@@ -59,7 +59,7 @@ class Gallery_model extends CI_Model
 	
 	function galleryExists($name)
 	{
-		$query = $this->db->get_where('galleries', array( 'title'=>'Mike',));
+		$query = $this->db->get_where('galleries', array( 'title'=>$name,));
 		if( $query->num_rows() > 0)
 		{
 			
@@ -69,5 +69,20 @@ class Gallery_model extends CI_Model
 		{
 			return FALSE;
 		}
+	}
+	
+	function addPhoto($gallery, $picture)
+	{
+		$config['upload_path'] = './uploads/' . $gallery;
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size'] = '111100';
+		$config['max_width'] = '1024';
+		$config['max_height'] = '768';
+			
+		$this->load->library('upload', $config);
+		
+		$this->upload->do_upload($picture);
+		$this->upload->display_errors();
+		$this->upload->data();
 	}
 }

@@ -10,6 +10,47 @@ class User extends CI_Controller {
 
 	}*/
 	
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->helper(array('form', 'url'));
+	}
+
+	function index()
+	{
+		$this->load->model('Gallery_model');
+		
+		$data['galleries'] = $this->Gallery_model->getGalleries();
+		$this->load->view('upload_form', $data);
+	}
+
+	function do_upload()
+	{
+		$path=$this->input->post('galleries');
+		
+		$config['upload_path'] = './uploads/'.$path.'/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '100';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload())
+		{
+			$error = array('error' => $this->upload->display_errors());
+
+			$this->load->view('upload_form', $error);
+		}
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+
+			$this->load->view('upload_success', $data);
+		}
+	}
+	
+	/*
 	function index()
 	{
 		//echo 'Test';
@@ -17,7 +58,7 @@ class User extends CI_Controller {
 		$query = $this->db->get_where('galleries', array( 'title'=>'Mike',));
 		print_r($query);
 	}
-	
+	*/
 	function login()
 	{		
 		$data = FALSE;
@@ -93,6 +134,7 @@ class User extends CI_Controller {
 		}
 		
 		$data['errors'] = FALSE;
+		$data['success'] = FALSE;
 		
 		$this->load->library('form_validation');
 		
@@ -116,6 +158,7 @@ class User extends CI_Controller {
 			else
 			{
 				$data['errors'] = FALSE;
+				$data['success'] = 'Gallery has been created.';
 			}
 		}	
 		
@@ -132,9 +175,27 @@ class User extends CI_Controller {
 			return;
 		}
 		
+		$gallery = $this->input->post('galleries');
+		
+		$picture = $this->input->post('picture');
+		
 		$this->load->model('Gallery_model');
 		
 		$data['galleries'] = $this->Gallery_model->getGalleries();
+		
+		//$this->Gallery_model->addPhoto($gallery, $picture);
+		
+		$config['upload_path'] = './uploads/' . $gallery;
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size'] = '111100';
+		$config['max_width'] = '1024';
+		$config['max_height'] = '768';
+			
+		$this->load->library('upload', $config);
+		
+		$this->upload->do_upload($picture);
+		$this->upload->display_errors();
+		$this->upload->data();	
 		
 		//load gallery
 		$this->load->view('add_photo_view', $data);

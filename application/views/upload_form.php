@@ -4,30 +4,19 @@
 </head>
 <body>
 
-<a href="new_gallery"><p>Create a new gallery.</p></a>
+<?php //echo $error;?>
 
-<?php
-	$data3 = array(
-		'name' => 'picture',
-		'id' => 'picture',
-		'value' => '',
-		'maxlength' => '100',
-		'size' => '4000',
-		'style' => 'width: 50%',
-	);
-?>	
-	
-<?php echo form_open_multipart('test/do_upload'); ?>
-<?php echo form_dropdown('Galleries', $galleries); ?>
-<?php echo form_upload('picture', $data3); ?>
-<?php echo form_submit('submit', 'Upload'); ?>
-<?php form_close(); ?>
-	
-	
-					
-<div class="grid_16 errors">
-	<p><?php print_r( $errors); ?></p>
-</div>
+<?php echo form_open_multipart('user/do_upload');?>
+
+<input type="file" name="userfile" size="20" />
+
+<?php echo form_dropdown('galleries', $galleries); ?>
+
+<br /><br />
+
+<input type="submit" value="upload" />
+
+</form>
 
 </body>
 </html>
