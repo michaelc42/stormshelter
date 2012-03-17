@@ -18,15 +18,23 @@ class User extends CI_Controller {
 
 	function index()
 	{
+		$this->authorized();
+		
+		$galleries = array();
 		$this->load->model('Gallery_model');
 		
-		$data['galleries'] = $this->Gallery_model->getGalleries();
+		$data['galleries'] = $this->Gallery_model->getGalleriesList();
+		
 		$this->load->view('upload_form', $data);
 	}
+	
 
 	function do_upload()
 	{
+		$this->authorized();
+		
 		$path=$this->input->post('galleries');
+		$file = $this->input->post('userfile');
 		
 		$config['upload_path'] = './uploads/'.$path.'/';
 		$config['allowed_types'] = 'gif|jpg|png';
@@ -45,6 +53,9 @@ class User extends CI_Controller {
 		else
 		{
 			$data = array('upload_data' => $this->upload->data());
+			$this->load->model('Gallery_model');
+			//when the picture upload is successful insert data into db
+			$this->Gallery_model->insertPicture($path, $this->upload->data());
 
 			$this->load->view('upload_success', $data);
 		}
@@ -104,16 +115,15 @@ class User extends CI_Controller {
 	
 	function galleries()
 	{
-		if ( $this->session->userdata('logged_in') === FALSE)
-		{
-			//redirect to login page
-			echo 'Not authorized';
-			return;
-		}
+		$this->authorized();
+		
+		$data['errors'] = FALSE;
 		
 		$this->load->model('Gallery_model');
 		
-		$data['galleries'] = $this->Gallery_model->getGalleries();
+		$galleries = $this->Gallery_model->getGalleriesList();
+	
+		$data['galleries'] = $galleries;
 		
 		if ($data['galleries'] === FALSE)
 		{
@@ -126,12 +136,7 @@ class User extends CI_Controller {
 	
 	function addGallery()
 	{
-		if ( $this->session->userdata('logged_in') === FALSE)
-		{
-			//redirect to login page
-			echo 'Not authorized';
-			return;
-		}
+		$this->authorized();
 		
 		$data['errors'] = FALSE;
 		$data['success'] = FALSE;
@@ -165,15 +170,10 @@ class User extends CI_Controller {
 		$this->load->view('new_gallery_view', $data);
 		
 	}
-	
+/*	
 	function addPhoto()
 	{
-		if ( $this->session->userdata('logged_in') === FALSE)
-		{
-			//redirect to login page
-			echo 'Not authorized';
-			return;
-		}
+		$this->authorized();
 		
 		$gallery = $this->input->post('galleries');
 		
@@ -199,5 +199,16 @@ class User extends CI_Controller {
 		
 		//load gallery
 		$this->load->view('add_photo_view', $data);
+	}
+*/
+
+	function authorized()
+	{
+		if ( $this->session->userdata('logged_in') === FALSE)
+		{
+			//redirect to login page
+			echo 'Not authorized';
+			break;
+		}
 	}
 }

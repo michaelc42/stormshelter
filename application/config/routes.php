@@ -42,6 +42,8 @@ $route['default_controller'] = 'main_controller';
 $route['404_override'] = 'filenotfound_controller';
 $route['message'] = 'main_controller/message';
 $route['message\#contact-form'] = 'main_controller/message#contact-form';
+$route['galleries/(:any)'] = 'main_controller/galleries/$1';
+$route['galleries'] = 'main_controller/galleries';
 //$route['user'] = 'user';
 //$route['user/login'] = 'user/login';
 

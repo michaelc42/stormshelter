@@ -15,6 +15,8 @@
 	
 <?php echo form_open_multipart('user/addPhoto'); ?>
 <?php echo form_dropdown('galleries', $galleries); ?>
+
+
 <?php echo form_upload('picture');//, $data3); ?>
 <?php echo form_submit('submit', 'Upload'); ?>
 <?php form_close(); ?>

@@ -79,4 +79,54 @@ class Main_controller extends CI_Controller
 	{
 		echo 'Page not found.';
 	}
+	
+	function galleries($gallery = NULL)
+	{	
+		if( $gallery == NULL ) 
+		{ 
+			//load all galleries 
+			//$this->load->view('galleries_view');
+			echo 'All galleries loaded';
+			$this->load->model('Gallery_model');
+			$data['galleries'] = $this->Gallery_model->getGalleries();
+			
+			$data['galleries'];
+		}
+		else
+		{
+			$this->load->model('Gallery_model');
+			//returns gallery data if gallery exists else false
+			$ret = $this->Gallery_model->doesGalleryExist($gallery);
+			if( $ret === FALSE )
+			{
+				echo 'Gallery not found.';
+			}
+			else
+			{
+				// get pictures
+				//$this->load->view('gallery_view');
+				//get all pictures that have a gallery_id of $ret->id
+				$pics = $this->Gallery_model->getPictures($ret[0]->id);
+				
+				if( $pics === FALSE )
+				{
+					echo 'This gallery contains no pictures';
+				}
+				else
+				{
+					foreach( $pics as $pic )
+					{
+						echo '<img src="http://localhost/stormshelter/uploads/'.$ret[0]->directory_name.'/'.$pic->title.'" /><br />';
+					}
+				}
+			}
+		}
+		
+		
+		//if $gallery == null display all the galleries
+		
+		//if $gallery == existing gallery, load the gallery's pictures
+		
+		//if $gallery does not exists load a gallery not found view.
+	}
 }
