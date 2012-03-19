@@ -1,7 +1,7 @@
 <html>
 
 <body>
-	<?php if ($errors === FALSE): ?>
+	<?php if (!$errors): ?>
 		<?php foreach ($pics as $pic): ?>
 		<?php
 		$pieces = explode('.', $pic->title);
@@ -13,8 +13,8 @@
 		<?php endforeach; ?>
 	<?php endif; ?>	
 	
-	<?php echo $this->pagination->create_links(); ?>	
-					
+	<?php echo $this->pagination->create_links(); ?>
+						
 <div class="grid_16 errors">
 	<?php echo $errors; ?>
 </div>
