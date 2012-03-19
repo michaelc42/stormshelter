@@ -80,8 +80,12 @@ class Main_controller extends CI_Controller
 		echo 'Page not found.';
 	}
 	
-	function galleries($gallery = NULL)
-	{	
+	function galleries($gallery = NULL, $off = 0)
+	{	$limit = 5;
+		$offset = $off;
+		$data = array();
+		$data['errors'] = NULL;
+		
 		if( $gallery == NULL ) 
 		{ 
 			//load all galleries 
@@ -90,7 +94,6 @@ class Main_controller extends CI_Controller
 			$this->load->model('Gallery_model');
 			$data['galleries'] = $this->Gallery_model->getGalleries();
 			
-			$data['galleries'];
 		}
 		else
 		{
@@ -102,24 +105,43 @@ class Main_controller extends CI_Controller
 				echo 'Gallery not found.';
 			}
 			else
-			{
+			{ 
 				// get pictures
 				//$this->load->view('gallery_view');
 				//get all pictures that have a gallery_id of $ret->id
-				$pics = $this->Gallery_model->getPictures($ret[0]->id);
+				$totalPics = $this->Gallery_model->getPictures($ret[0]->id, NULL, $offset);
+				$pics = $this->Gallery_model->getPictures($ret[0]->id, $limit, $offset);
 				
 				if( $pics === FALSE )
 				{
+					$data['errors'] = 'This gallery contains no pictures.';
 					echo 'This gallery contains no pictures';
 				}
 				else
 				{
+						
+					$this->load->library('pagination');
+					$config['base_url'] = 'http://localhost/stormshelter/galleries/'.$ret[0]->directory_name.'/';
+					$config['total_rows'] = count($totalPics);
+					$config['per_page'] = $limit;
+				
+					$this->pagination->initialize($config);
+					$data['pics'] = $pics;
+					$data['ret'] = $ret;
+					/*
 					foreach( $pics as $pic )
 					{
-						echo '<img src="http://localhost/stormshelter/uploads/'.$ret[0]->directory_name.'/'.$pic->title.'" /><br />';
+						$pieces = explode('.', $pic->title);
+						$pieces[0] .= '_thumb.';
+						$thumb = $pieces[0] . $pieces[1];
+						
+						echo '<a href="http://localhost/stormshelter/uploads/'.$ret[0]->directory_name.'/'.$pic->title.'"/>
+							<img src="http://localhost/stormshelter/uploads/'.$ret[0]->directory_name.'/thumbs/'.$thumb.'" /></a><br />';
 					}
+					*/
 				}
 			}
+			$this->load->view('gallery_view', $data);
 		}
 		
 		

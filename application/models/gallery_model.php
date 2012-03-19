@@ -87,12 +87,15 @@ class Gallery_model extends CI_Model
 		{
 			if(mkdir($url))
 			{
+				//make the thumbnail directory
+				mkdir($url . '/thumbs');
 				$data = array(
 				   'directory_name' => $titleclean,
 				   'title' => $title,
 				   'description' => $description,
 				);
 				chmod($url, 0777);
+				chmod($url.'/thumbs', 0777);
 				
 				$this->db->insert('galleries', $data);
 				return TRUE;
@@ -168,9 +171,9 @@ class Gallery_model extends CI_Model
 		}
 	}
 	
-	function getPictures($id)
+	function getPictures($id, $limit, $offset)
 	{	
-		$query = $this->db->get_where('pictures', array('gallery_id'=>$id,));
+		$query = $this->db->get_where('pictures', array('gallery_id'=>$id,), $limit, $offset);
 		
 		if( $query->num_rows() > 0 )
 		{
