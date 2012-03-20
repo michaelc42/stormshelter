@@ -1,17 +1,16 @@
-<title>F5 Stormrooms - Home</title>
 
 <div id="container" class="grid_14 prefix_1 suffix_1">
 
 <div id="header" class="grid_14 alpha">
 	<p>
 	<a id ="dupont-home" class="" 
-		href="http://www2.dupont.com/Kevlar/en_US/products/stormroom_kevlar.html" id="dupont-home">
+		href="http://www2.dupont.com/Kevlar/en_US/products/stormroom_kevlar.html">
 		DuPont Home</a>
 	</p>
 	
 	<div id="header-img">
 		<a id="logo-link" href="http://www.f5stormrooms.com/">
-			<img id="logo" class="" src="<?php echo base_url();?>images/logo3.png" alt="F5 Stormrooms Logo"/>
+			<img id="main-logo" class="" src="<?php echo base_url();?>images/logo3.png" alt="F5 Stormrooms Logo"/>
 		</a>
 	</div>
 </div>	

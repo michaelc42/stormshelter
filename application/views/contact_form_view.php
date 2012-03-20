@@ -1,4 +1,4 @@
-<div id="contact-form" class="grid_3 alpha" name="contact-form">
+<div id="contact-form" class="grid_3 alpha" >
 		<h5>Contact Form</h5>
 			<?php 
 				$emailData = array(

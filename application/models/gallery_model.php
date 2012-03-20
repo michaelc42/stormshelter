@@ -128,7 +128,7 @@ class Gallery_model extends CI_Model
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size'] = '111100';
 		$config['max_width'] = '1024';
-		$config['max_height'] = '768';
+		$config['max_height'] = '1024';
 			
 		$this->load->library('upload', $config);
 		

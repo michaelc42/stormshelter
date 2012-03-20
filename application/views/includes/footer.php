@@ -5,6 +5,14 @@
 			all products denoted with &#174; or &#8482; are registered trademarks or trademarks of E. I. du Pont de Nemours and Company 
 			or its affiliates. 
 		</p>
+		<p id="login">
+			<?php if ($this->session->userdata('username')): ?>
+				Logged in as <?php echo $this->session->userdata('username').' '; ?>
+				<a href="user">admin</a> <a href="user/logout">logout</a>
+			<?php else: ?>
+				<a href="user/login">login</a>
+			<?php endif; ?>
+		</p>
 	</div>
 </div>
 

@@ -38,9 +38,9 @@ class User extends CI_Controller {
 		
 		$config['upload_path'] = './uploads/'.$path.'/';
 		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '100';
+		$config['max_size']	= '4000';
 		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
+		$config['max_height']  = '1024';
 
 		$this->load->library('upload', $config);
 
@@ -209,6 +209,21 @@ class User extends CI_Controller {
 			//redirect to login page
 			echo 'Not authorized';
 			break;
+		}
+	}
+	
+	function robot_check($robotest)
+	{
+		if($robotest)
+		{
+			$this->form_validation->set_message('robot_check', 'No bots allowed');
+			$this->load->model('Logger_model');
+			$this->Logger_model->ipLogger($this->input->ip_address());
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
 		}
 	}
 }

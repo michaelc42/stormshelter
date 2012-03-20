@@ -28,7 +28,7 @@ left:10px;
 position:relative;
 }
 
-#header #logo-link #logo {
+#header #logo-link #main-logo {
 width:250px;
 }
 
@@ -117,9 +117,21 @@ margin-bottom:10px;
 text-align:right;
 }
 
+#footer{
+	margin-bottom: 20px;
+}
+
 #footer #footer-content {
 border-top:1px solid #000;
 padding-top:15px;
+}
+
+#footer #footer-content p {
+	margin-bottom: 0px;
+}
+
+#footer #footer-content #login {
+	text-align: right;
 }
 
 #header #dupont-home a:link,a:visited,a:hover,a:active,#contact-form .errors p,#dupont-link a,#pre-footer #contact-info a,.errors {

@@ -81,7 +81,7 @@ class Main_controller extends CI_Controller
 	}
 	
 	function galleries($gallery = NULL, $off = 0)
-	{	$limit = 5;
+	{	$limit = 8;
 		$offset = $off;
 		$data = array();
 		$data['errors'] = NULL;
@@ -118,8 +118,7 @@ class Main_controller extends CI_Controller
 					echo 'This gallery contains no pictures';
 				}
 				else
-				{
-						
+				{		
 					$this->load->library('pagination');
 					$config['base_url'] = 'http://localhost/stormshelter/galleries/'.$ret[0]->directory_name.'/';
 					$config['total_rows'] = count($totalPics);
@@ -128,17 +127,6 @@ class Main_controller extends CI_Controller
 					$this->pagination->initialize($config);
 					$data['pics'] = $pics;
 					$data['ret'] = $ret;
-					/*
-					foreach( $pics as $pic )
-					{
-						$pieces = explode('.', $pic->title);
-						$pieces[0] .= '_thumb.';
-						$thumb = $pieces[0] . $pieces[1];
-						
-						echo '<a href="http://localhost/stormshelter/uploads/'.$ret[0]->directory_name.'/'.$pic->title.'"/>
-							<img src="http://localhost/stormshelter/uploads/'.$ret[0]->directory_name.'/thumbs/'.$thumb.'" /></a><br />';
-					}
-					*/
 				}
 			}
 			$this->load->view('gallery_view', $data);
