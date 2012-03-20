@@ -1,4 +1,4 @@
-<div id="footer">
+<div id="footer" class="grid_14 alpha">
 	<div id="footer-content" class="grid_14 alpha">
 		<p>						
 			Copyright &#169; 2011 DuPont. All rights reserved. The DuPont Oval Logo, DuPont&#8482;, The miracles of science&#8482; and 
@@ -8,9 +8,9 @@
 		<p id="login">
 			<?php if ($this->session->userdata('username')): ?>
 				Logged in as <?php echo $this->session->userdata('username').' '; ?>
-				<a href="user">admin</a> <a href="user/logout">logout</a>
+				<a href="user/admin">admin</a> <a href="user/logout">logout</a>
 			<?php else: ?>
-				<a href="user/login">login</a>
+				<a href="user/login">admin</a>
 			<?php endif; ?>
 		</p>
 	</div>

@@ -61,6 +61,13 @@ class User extends CI_Controller {
 		}
 	}
 	
+	function admin()
+	{
+		$this->authorized();
+		
+		$this->load->view('admin_view');
+	}
+	
 	/*
 	function index()
 	{
