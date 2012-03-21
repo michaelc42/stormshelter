@@ -33,8 +33,9 @@ class User extends CI_Controller {
 	{
 		$this->authorized();
 		
-		$path=$this->input->post('galleries');
+		$path = $this->input->post('galleries');
 		$file = $this->input->post('userfile');
+		$desc = $this->input->post('description');
 		
 		$config['upload_path'] = './uploads/'.$path.'/';
 		$config['allowed_types'] = 'gif|jpg|png';
@@ -55,7 +56,7 @@ class User extends CI_Controller {
 			$data = array('upload_data' => $this->upload->data());
 			$this->load->model('Gallery_model');
 			//when the picture upload is successful insert data into db
-			$this->Gallery_model->insertPicture($path, $this->upload->data());
+			$this->Gallery_model->insertPicture($path, $this->upload->data(), $desc);
 
 			$this->load->view('upload_success', $data);
 		}
@@ -120,6 +121,7 @@ class User extends CI_Controller {
 		echo 'Not logged in';
 	}
 	
+	/*
 	function galleries()
 	{
 		$this->authorized();
@@ -140,7 +142,7 @@ class User extends CI_Controller {
 		//load gallery
 		$this->load->view('gallery_view', $data);
 	}
-	
+	*/
 	function addGallery()
 	{
 		$this->authorized();

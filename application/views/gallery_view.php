@@ -18,27 +18,27 @@
 <body class="container_16">
 
 <body>
+	<?php if ( !$errors ) : ?>
 	<div id="pictures" class="grid_16">
 		<h2><?php echo $ret[0]->title; ?></h2>
-		<?php if (!$errors): ?>
-			<?php foreach ($pics as $pic): ?>
+		<?php foreach ($pics as $pic): ?>
 			<?php
 			$pieces = explode('.', $pic->title);
 			$pieces[0] .= '_thumb.';
 			$thumb = $pieces[0] . $pieces[1];
 			?>
 			
-			<a href="http://localhost/stormshelter/uploads/<?php echo $ret[0]->directory_name.'/'.$pic->title ?>"/>
-				<img src="http://localhost/stormshelter/uploads/<?php echo $ret[0]->directory_name?>/thumbs/<?php echo $thumb ?>" class="grid_4 alpha" />
-			</a>
-			
-			<?php endforeach; ?>
-		<?php endif; ?>	
+			<!-- <a href="http://localhost/stormshelter/uploads/<?php echo $ret[0]->directory_name.'/'.$pic->title ?>"/> -->
+			<a href="<?php echo site_url().'photo/'.$pic->id ?>"/>
+				<img src="<?php echo site_url().'uploads/'.$ret[0]->directory_name?>/thumbs/<?php echo $thumb ?>" class="grid_4 alpha" />
+			</a>		
+		<?php endforeach; ?>
 		
 		<div id="pagination" class="grid_16">
 			<?php echo $this->pagination->create_links(); ?>
 		</div>
 	</div> <!--End div pictures -->
+	<?php endif; ?>
 						
 <div class="grid_16 errors">
 	<?php echo $errors; ?>

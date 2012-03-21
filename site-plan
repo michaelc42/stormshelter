@@ -55,4 +55,12 @@ models
 views
 
 
-Make a login page
+*Make a login page
+
+
+Create a gallery view to display all the galleries, with one picture for each
+gallery
+	create a db query to do this
+
+Create a way to delete photos and galleries
+	to delete galleries create a confirmation page

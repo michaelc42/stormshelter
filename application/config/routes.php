@@ -44,6 +44,8 @@ $route['message'] = 'main_controller/message';
 $route['message\#contact-form'] = 'main_controller/message#contact-form';
 $route['galleries/(:any)'] = 'main_controller/galleries/$1';
 $route['galleries'] = 'main_controller/galleries';
+$route['photo/(:any)'] = 'main_controller/photo/$1';
+$route['photo'] = 'main_controller/photo';
 //$route['user'] = 'user';
 //$route['user/login'] = 'user/login';
 

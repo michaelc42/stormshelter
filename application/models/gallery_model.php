@@ -9,20 +9,14 @@ class Gallery_model extends CI_Model
 		parent::__construct();
 		$this->galleryPath = realpath(APPPATH . '../uploads');
 	}
+	
 	function getGalleries()
 	{
 		$query = $this->db->get('galleries');
 		
-		//$galleries = array();
-		
 		if ($query->num_rows() >0)
 		{
 			return $query->result();
-			/*foreach ($query->result() as $row)
-			{
-				$galleries[$row->directory_name] = $row->title;//array(, $row->id);
-			}
-			*/
 		}
 		else
 		{
@@ -56,10 +50,15 @@ class Gallery_model extends CI_Model
 		return $this->db->get_where('galleries', array('directory_name'=>$path,));
 	}
 	
-	/* Returns a result if gallery exists */
-	function doesGalleryExist($name)
+	function getGalleryById( $id )
 	{
-		$query = $this->db->get_where('galleries', array('title'=>$name,));
+		return $this->db->get_where('galleries', array('id'=>$id,))->result();
+	}
+	
+	/* Returns a result if gallery exists */
+	function doesGalleryExist($id)
+	{
+		$query = $this->db->get_where('galleries', array('id'=>$id,));
 		
 		if( $query->num_rows() == 1 )
 		{
@@ -137,7 +136,7 @@ class Gallery_model extends CI_Model
 		$this->upload->data();
 	}
 	
-	function insertPicture($path, $file)
+	function insertPicture($path, $file, $desc)
 	{
 		$ret = $this->getGallery($path);
 		
@@ -146,6 +145,7 @@ class Gallery_model extends CI_Model
 		$data = array(
 		   'gallery_id' => $ret->id,
 		   'title' =>  $file['file_name'],
+		   'description' => $desc,
 		   
 		);
 
@@ -156,12 +156,12 @@ class Gallery_model extends CI_Model
 	
 	function createThumb($path, $file)
 	{
-		echo $config['source_image'] = $file;//'./uploads/'.$path.'/'.$file['file_name'].'/';
+		$config['source_image'] = $file;//'./uploads/'.$path.'/'.$file['file_name'].'/';
 		$config['create_thumb'] = TRUE;
 		$config['maintain_ratio'] = TRUE;
 		$config['width'] = 200;
 		$config['height'] = 200;
-		echo $config['new_image'] = $this->galleryPath.'/'.$path.'/thumbs';//'./uploads/'.$path.'/thumbs/tb_'.$file['file_name'].'/';
+		$config['new_image'] = $this->galleryPath.'/'.$path.'/thumbs';//'./uploads/'.$path.'/thumbs/tb_'.$file['file_name'].'/';
 
 		$this->load->library('image_lib');
 		$this->image_lib->initialize($config); 
@@ -171,11 +171,26 @@ class Gallery_model extends CI_Model
 		}
 	}
 	
+	//retrieves all photos in a gallery
 	function getPictures($id, $limit, $offset)
 	{	
 		$query = $this->db->get_where('pictures', array('gallery_id'=>$id,), $limit, $offset);
 		
 		if( $query->num_rows() > 0 )
+		{
+			return $query->result();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+	
+	//Retrieves a single photo
+	function getPhoto($id)
+	{
+		$query = $this->db->get_where('pictures', array('id' => $id,));
+		if( $query->num_rows() == 1 )
 		{
 			return $query->result();
 		}
