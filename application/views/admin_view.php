@@ -1,7 +1,7 @@
 <h1>Admin Panel</h1>
 <div>
 	<p>
-		<a href="">View Galleries</a>
+		<a href="galleries">View Galleries</a>
 	</p>
 	<p>
 		<a href="addGallery">Add Gallery</a>

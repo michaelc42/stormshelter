@@ -125,7 +125,7 @@ class Main_controller extends CI_Controller
 				else
 				{		
 					$this->load->library('pagination');
-					$config['base_url'] = 'http://localhost/stormshelter/galleries/'.$ret[0]->directory_name.'/';
+					$config['base_url'] = site_url().'galleries/'.$ret[0]->id.'/';//'http://localhost/stormshelter/galleries/'.$ret[0]->id.'/';
 					$config['total_rows'] = count($totalPics);
 					$config['per_page'] = $limit;
 				

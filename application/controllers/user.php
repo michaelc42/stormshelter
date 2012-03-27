@@ -130,7 +130,7 @@ class User extends CI_Controller {
 		
 		$this->load->model('Gallery_model');
 		
-		$galleries = $this->Gallery_model->getGalleriesList();
+		$galleries = $this->Gallery_model->getGalleries();
 	
 		$data['galleries'] = $galleries;
 		
@@ -140,9 +140,97 @@ class User extends CI_Controller {
 		}
 		
 		//load gallery
-		$this->load->view('gallery_view', $data);
+		$this->load->view('user_galleries_view', $data);
 	}
 	*/
+	
+	function galleries($gallery = NULL, $off = 0)
+	{	
+		$limit = 8;
+		$offset = $off;
+		//$data = array();
+		$data['errors'] = NULL;
+		$data['ret'] = NULL;
+		$data['pics'] = NULL;
+		
+		if( $gallery == NULL ) 
+		{ 
+			//load all galleries 
+			$this->load->model('Gallery_model');
+			$data['galleries'] = $this->Gallery_model->getGalleries();
+			
+			$this->load->view('user_galleries_view', $data);
+			
+		}
+		else
+		{
+			$this->load->model('Gallery_model');
+			//returns gallery data if gallery exists else false
+			$ret = $this->Gallery_model->doesGalleryExist($gallery);
+			if( $ret === FALSE )
+			{
+				$data['errors'] = 'Gallery not found.';
+			}
+			else
+			{ 
+				// get pictures
+				//get all pictures that have a gallery_id of $ret->id
+				$totalPics = $this->Gallery_model->getPictures($ret[0]->id, NULL, $offset);
+				$pics = $this->Gallery_model->getPictures($ret[0]->id, $limit, $offset);
+				
+				if( $pics === FALSE )
+				{
+					$data['errors'] = 'This gallery contains no pictures.';
+					echo 'This gallery contains no pictures';
+				}
+				else
+				{		
+					$this->load->library('pagination');
+					$config['base_url'] = site_url('user/galleries').'/'.$ret[0]->id.'/';
+					$config['total_rows'] = count($totalPics);
+					$config['per_page'] = $limit;
+					$config['uri_segment'] = 2;
+				
+					$this->pagination->initialize($config);
+					$data['pics'] = $pics;
+					$data['ret'] = $ret;
+				}
+			}
+			$this->load->view('user_gallery_view', $data);
+		}
+	}
+	
+	function photo($id = NULL)
+	{
+		$data['errors'] = NULL;
+		if ( $id )
+		{
+			$this->load->model('Gallery_model');
+			$pic = $this->Gallery_model->getPhoto($id);
+			if( $pic )
+			{	
+				$gallery = $this->Gallery_model->getGalleryById( $pic[0]->gallery_id );
+				
+				$data['path'] = site_url().'uploads/'.$gallery[0]->title.'/'.$pic[0]->title;
+				$data['picTitle'] = $pic[0]->title;
+				$data['picDesc'] = $pic[0]->description;
+				$data['picID'] = $pic[0]->id;
+				
+			}
+			else
+			{
+				$data['errors'] = 'No photo found.';
+			}
+		}
+		else
+		{
+			$data['errors'] = 'No ID given.';
+		}
+		
+		$this->load->view('user_photo_view', $data);
+		
+	}
+
 	function addGallery()
 	{
 		$this->authorized();
@@ -178,6 +266,11 @@ class User extends CI_Controller {
 		
 		$this->load->view('new_gallery_view', $data);
 		
+	}
+	
+	function deleteGallery( $id )
+	{
+		echo $id;
 	}
 /*	
 	function addPhoto()

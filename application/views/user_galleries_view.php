@@ -4,7 +4,7 @@
 	<div class="gallery">
 		<h3><?php echo $gallery->title; ?></h3>
 		<p>
-			<a href="<?php echo site_url().'galleries/'.$gallery->id; ?>">
+			<a href="<?php echo site_url().'user/galleries/'.$gallery->id; ?>">
 				<?php if ( $gallery->front_image ) : ?>
 					<img src="<?php echo site_url().'uploads/'.$gallery->title.'/thumbs/'.$gallery->front_image;?>" />
 				<?php else: ?>					
@@ -14,6 +14,10 @@
 		</p>
 		<p>
 			<?php echo $gallery->description; ?>	
+		</p>
+		
+		<p>
+			<a href="deleteGallery/<?php echo $gallery->id; ?>">delete</a>
 		</p>
 	</div> 
 <?php endforeach; ?>
