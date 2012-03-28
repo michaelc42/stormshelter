@@ -1,4 +1,12 @@
 <div id="contact-form" class="grid_3 alpha" >
+	<div id="contact-info" class="grid_3 alpha">
+		<h5>Contact Us</h5>
+		<strong>F5 Stormrooms</strong><br />
+		Eureka, IL 61616<br />
+		Phone: (877)436-8559<br />
+		Fax: (877)436-8559<br />
+		<a href="mailto:f5stormrooms@yahoo.com">f5stormrooms@yahoo.com</a><br />
+	</div>
 		<h5>Contact Form</h5>
 			<?php 
 				$emailData = array(

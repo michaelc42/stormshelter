@@ -16,7 +16,7 @@
 </div>	
 
 <div id="content" class="grid_14 alpha">
-	
+		
 	<?php $this->load->view('contact_form_view'); ?>
 
 	<div id="info" class="grid_7">
@@ -58,13 +58,15 @@ to the bullet resistant material used to protect police and military personnel.<
 		</div>
 	</div>
 	
-	
+	<!--
 	<div id="dupont-link" class="grid_11 prefix_3">
 		<p class="">Visit the <a href="http://www2.dupont.com/Kevlar/en_US/products/stormroom_kevlar.html">DuPont&#8482; website</a> for more information and to find a dealer near you.</p>
 	</div>
+	-->
 </div>
 
 <div id="pre-footer" class="grid_14 alpha">
+	<!--
 	<div id="contact-info" class="grid_7 alpha">
 		<h3>Contact Us</h3>
 		F5 Stormrooms<br />
@@ -73,8 +75,9 @@ to the bullet resistant material used to protect police and military personnel.<
 		Fax: (877)436-8559<br />
 		<a href="mailto:f5stormrooms@yahoo.com">f5stormrooms@yahoo.com</a><br />
 	</div>
+	-->
 	
-	<div id="logo" class="grid_7 alpha">
+	<div id="logo" class="grid_14 alpha">
 		<img src="<?php echo base_url();?>images/image001.jpg" alt="Dupont StormRooms Logo"/>
 	</div>
 </div>

@@ -2,8 +2,16 @@
 margin-top:10px;
 }
 
+a:link, a:visited{
+	color:#c00;
+}
+
+a:hover, a:active{
+	color:#c00;
+}
+
 #header {
-margin-bottom:30px;
+margin-bottom:20px;
 }
 
 #header #dupont-home {
@@ -104,7 +112,7 @@ text-decoration:underline;
 }
 
 #pre-footer {
-margin-top:100px;
+margin-top:20px;
 margin-bottom:15px;
 }
 
@@ -144,6 +152,16 @@ color:green;
 
 #pre-footer #contact-info,#footer p {
 color:gray;
+}
+
+#contact-info{
+	color: gray;
+	padding-bottom: 20px;
+}
+
+#contact-info h5{
+	color: #c00;
+	padding-bottom: 0;
 }
 
 /*
