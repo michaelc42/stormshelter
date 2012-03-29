@@ -17,7 +17,7 @@
 		</p>
 		
 		<p>
-			<a href="deleteGallery/<?php echo $gallery->id; ?>">delete</a>
+			<a href="confirmDelete/<?php echo $gallery->id; ?>">delete</a>
 		</p>
 	</div> 
 <?php endforeach; ?>

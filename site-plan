@@ -64,3 +64,11 @@ gallery
 
 Create a way to delete photos and galleries
 	to delete galleries create a confirmation page
+
+
+*For the delete Gallery section make a page where the user is asked to verify
+*there want to delete the gallery, If yes then delete if no redirect back to gallery
+
+FIX the user authorized gallery.  The pagination is not working.
+
+Crop pictures that are taller than a set height.

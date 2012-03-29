@@ -144,6 +144,10 @@ class User extends CI_Controller {
 	}
 	*/
 	
+	/* 
+	 * If no galleryid is given, load all galleries
+	 * else load the gallery with the id, and the offset it is given 
+	 */
 	function galleries($gallery = NULL, $off = 0)
 	{	
 		$limit = 8;
@@ -189,7 +193,8 @@ class User extends CI_Controller {
 					$config['base_url'] = site_url('user/galleries').'/'.$ret[0]->id.'/';
 					$config['total_rows'] = count($totalPics);
 					$config['per_page'] = $limit;
-					$config['uri_segment'] = 2;
+					//user controller needs uri_segment of four because 'url/user/gall.../id/offset'
+					$config['uri_segment'] = 4;
 				
 					$this->pagination->initialize($config);
 					$data['pics'] = $pics;
@@ -268,9 +273,64 @@ class User extends CI_Controller {
 		
 	}
 	
-	function deleteGallery( $id )
+	function deleteGallery( $id = NULL )
 	{
-		echo $id;
+		$this->authorized();
+		
+		$data['errors'] = '';
+	
+		if ( $id )
+		{
+			$this->load->model('Gallery_model');
+			
+			if ( $ret = $this->Gallery_model->doesGalleryExist($id) )
+			{
+				if ( $this->Gallery_model->deleteGallery($id, $ret[0]->directory_name) )
+				{
+					$data['errors'] = 'Gallery could not be deleted.';
+				}
+			}
+			else
+			{
+				$data['errors'] = 'Gallery does not exists';
+			}
+		}
+		else
+		{
+			$data['errors'] = 'No gallery given.';
+		}
+		
+		//$this->load->view('user_delete_confirm');
+		$this->load->view('user_delete_gallery_view', $data);		
+	}
+	
+	function confirmDelete($id)
+	{
+		$this->authorized();
+		$data['id'] = $id;
+		$this->load->view('user_confirm_delete_view', $data);
+	}
+	
+	function deletePhoto($id = NULL)
+	{
+		$this->authorized();
+		
+		$data['errors'] = '';
+		
+		if( $id )
+		{
+			$this->load->model('Gallery_model');
+			
+			if ( $ret = $this->Gallery_model->deletePhoto( $id ) )
+			{
+				$data['errors'] = $ret;
+			}
+		}
+		else
+		{
+			$data['errors'] = 'No ID given.';
+		}
+		
 	}
 /*	
 	function addPhoto()

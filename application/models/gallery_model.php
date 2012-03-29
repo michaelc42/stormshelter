@@ -106,6 +106,18 @@ class Gallery_model extends CI_Model
 		}
 	}
 	
+	function deleteGallery ( $id, $dir )
+	{
+		//delete everything in the gallery database
+		$this->db->where('gallery_id', $id)->delete('pictures');
+		$this->db->where('id', $id)->delete('galleries');
+		
+		//Use this function to delete any objects within the folders and delete
+		//the directories
+		$this->rrmdir( './uploads/'.$dir.'/thumbs/');
+		$this->rrmdir( './uploads/'.$dir);
+	}
+	
 	/* Returns TRUE or FALSE if Gallery exists */
 	function galleryExists($name)
 	{
@@ -186,6 +198,40 @@ class Gallery_model extends CI_Model
 		}
 	}
 	
+	function deletePhoto( $id )
+	{
+		$ret = $this->getPhoto( $id );
+		
+		//get galleryid
+		if ( $ret === FALSE )
+		{
+			return 'Picture not in database.';
+		}
+		
+		$filename = $ret[0]->title;
+		
+		$pieces = explode('.', $filename);
+		$pieces[0] .= '_thumb.';
+		$thumb = $pieces[0] . $pieces[1];
+		
+		//get directory of gallery
+		$ret = $this->doesGalleryExist( $ret[0]->gallery_id );
+		
+		//delete picture in file system
+		if ( unlink( './uploads/'.$ret[0]->directory_name.'/'.$filename ) === FALSE ||
+			 unlink( './uploads/'.$ret[0]->directory_name.'/thumbs/'.$thumb ) === FALSE )
+		{
+			return 'Picture could not be deleted from file system.';
+		}
+		
+		//delete picture in database
+		if ( $this->db->where('id', $id)->delete('pictures') === FALSE )
+		{
+			return 'Picture could not be removed from the database.';
+		}
+		
+	}
+	
 	//Retrieves a single photo
 	function getPhoto($id)
 	{
@@ -197,6 +243,23 @@ class Gallery_model extends CI_Model
 		else
 		{
 			return FALSE;
+		}
+	}
+	
+	function rrmdir($dir) 
+	{
+		if (is_dir($dir)) 
+		{
+			$objects = scandir($dir);
+			foreach ($objects as $object) 
+			{
+				if ($object != "." && $object != "..") 
+				{
+					if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+				}
+			}
+		reset($objects);
+		rmdir($dir);
 		}
 	}
 }
