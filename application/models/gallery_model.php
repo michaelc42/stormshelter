@@ -198,6 +198,20 @@ class Gallery_model extends CI_Model
 		}
 	}
 	
+	//Retrieves a single photo
+	function getPhoto($id)
+	{
+		$query = $this->db->get_where('pictures', array('id' => $id,));
+		if( $query->num_rows() == 1 )
+		{
+			return $query->result();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+	
 	function deletePhoto( $id )
 	{
 		$ret = $this->getPhoto( $id );
@@ -217,11 +231,24 @@ class Gallery_model extends CI_Model
 		//get directory of gallery
 		$ret = $this->doesGalleryExist( $ret[0]->gallery_id );
 		
-		//delete picture in file system
-		if ( unlink( './uploads/'.$ret[0]->directory_name.'/'.$filename ) === FALSE ||
-			 unlink( './uploads/'.$ret[0]->directory_name.'/thumbs/'.$thumb ) === FALSE )
+		if ( $ret === FALSE )
 		{
-			return 'Picture could not be deleted from file system.';
+			return 'Gallery does not exist.';
+		}
+		
+		//delete picture in file system
+		if ( file_exists( './uploads/'.$ret[0]->directory_name.'/'.$filename ) &&
+			 file_exists( './uploads/'.$ret[0]->directory_name.'/thumbs/'.$thumb ) )
+		{
+			if ( unlink( './uploads/'.$ret[0]->directory_name.'/'.$filename ) === FALSE ||
+				 unlink( './uploads/'.$ret[0]->directory_name.'/thumbs/'.$thumb ) === FALSE )
+			{
+				return 'Picture could not be deleted from file system.';
+			}
+		}
+		else
+		{
+			return 'Picture not found in file system.';
 		}
 		
 		//delete picture in database
@@ -230,20 +257,6 @@ class Gallery_model extends CI_Model
 			return 'Picture could not be removed from the database.';
 		}
 		
-	}
-	
-	//Retrieves a single photo
-	function getPhoto($id)
-	{
-		$query = $this->db->get_where('pictures', array('id' => $id,));
-		if( $query->num_rows() == 1 )
-		{
-			return $query->result();
-		}
-		else
-		{
-			return FALSE;
-		}
 	}
 	
 	function rrmdir($dir) 

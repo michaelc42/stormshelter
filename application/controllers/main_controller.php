@@ -7,7 +7,7 @@ class Main_controller extends CI_Controller
 		$data['errors'] = FALSE;
 		$data['success'] = FALSE;
 		$data['main_content'] = 'home_view';
-		
+	
 		$this->load->view('includes/template', $data);
 	}
 	
