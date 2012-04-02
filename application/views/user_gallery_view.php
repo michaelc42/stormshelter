@@ -19,9 +19,10 @@
 <body class="container_16">
 
 <body>
+	
+	<h2><?php echo $ret[0]->title; ?></h2>
 	<?php if ( !$errors ) : ?>
 	<div id="pictures" class="grid_16 alpha">
-		<h2><?php echo $ret[0]->title; ?></h2>
 		<?php foreach ($pics as $pic): ?>
 			<div class="picture grid_4 omega">
 				<?php

@@ -185,7 +185,8 @@ class User extends CI_Controller {
 				if( $pics === FALSE )
 				{
 					$data['errors'] = 'This gallery contains no pictures.';
-					echo 'This gallery contains no pictures';
+					//Pass gallery info anyways
+					$data['ret'] = $ret;
 				}
 				else
 				{		
@@ -330,6 +331,8 @@ class User extends CI_Controller {
 		{
 			$data['errors'] = 'No ID given.';
 		}
+		
+		echo 'You have deleted the photo with the id '.$id;
 		
 	}
 /*	
