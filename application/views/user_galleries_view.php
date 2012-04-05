@@ -17,6 +17,8 @@
 		</p>
 		
 		<p>
+			
+			<a href="<?php echo site_url().'user/index/'.$gallery->directory_name; ?>">Add Photo</a>
 			<a href="confirmDelete/<?php echo $gallery->id; ?>">delete</a>
 		</p>
 	</div> 

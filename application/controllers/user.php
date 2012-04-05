@@ -16,7 +16,7 @@ class User extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 	}
 
-	function index()
+	function index( $selected = NULL)
 	{
 		$this->authorized();
 		
@@ -24,6 +24,7 @@ class User extends CI_Controller {
 		$this->load->model('Gallery_model');
 		
 		$data['galleries'] = $this->Gallery_model->getGalleriesList();
+		$data['selected'] = $selected;
 		
 		$this->load->view('upload_form', $data);
 	}

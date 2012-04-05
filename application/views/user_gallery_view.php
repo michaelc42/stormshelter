@@ -38,7 +38,7 @@
 				<br />
 				
 				<p>
-					<a href="<?php echo site_url().'user/deletePhoto/'.$pic->id; ?>">delete</a>
+					<a href="<?php echo site_url().'user/deletePhoto/'.$pic->id; ?>">delete</a>					
 				</p>
 			</div>
 		<?php endforeach; ?>

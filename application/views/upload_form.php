@@ -13,7 +13,7 @@
 
 Photo: <input type="file" name="userfile" size="20" />
 
-Gallery: <?php echo form_dropdown('galleries', $galleries); ?>
+Gallery: <?php echo form_dropdown('galleries', $galleries, $selected); ?>
 
 </p>
 <p>
