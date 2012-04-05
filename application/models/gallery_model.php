@@ -1,4 +1,8 @@
 <?php
+/** Gallery_model
+ * @author Michael W. Casey 
+ * @link www.f5stormrooms.com
+ */
 
 class Gallery_model extends CI_Model
 {
@@ -296,3 +300,6 @@ class Gallery_model extends CI_Model
 		}
 	}
 }
+
+/* End of file gallery_model.php */ 
+/* Location: ./application/models/gallery_model.php */

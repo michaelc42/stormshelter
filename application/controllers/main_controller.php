@@ -169,3 +169,6 @@ class Main_controller extends CI_Controller
 		
 	}
 }
+
+/* End of file main_controller.php */ 
+/* Location: ./application/controllers/main_controller.php */

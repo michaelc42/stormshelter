@@ -1,15 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/** * User
+ * @author Michael W. Casey 
+ * @link www.f5stormrooms.com
+ */
 /*****************************************
  * This controller limits access to
  * all specialized site activies
  * user must be logged in and authorized.
  *****************************************/ 
 class User extends CI_Controller {
-	/*function __contruct(){
-		parent::__construct();
-
-	}*/
-	
 	function __construct()
 	{
 		parent::__construct();
@@ -76,15 +75,6 @@ class User extends CI_Controller {
 		$this->load->view('admin_view');
 	}
 	
-	/*
-	function index()
-	{
-		//echo 'Test';
-		//print_r($this->session->all_userdata());
-		$query = $this->db->get_where('galleries', array( 'title'=>'Mike',));
-		print_r($query);
-	}
-	*/
 	function login()
 	{		
 		$data = FALSE;
@@ -127,29 +117,6 @@ class User extends CI_Controller {
 		}
 		echo 'Not logged in';
 	}
-	
-	/*
-	function galleries()
-	{
-		$this->authorized();
-		
-		$data['errors'] = FALSE;
-		
-		$this->load->model('Gallery_model');
-		
-		$galleries = $this->Gallery_model->getGalleries();
-	
-		$data['galleries'] = $galleries;
-		
-		if ($data['galleries'] === FALSE)
-		{
-			$data['errors'] = 'Sorry, no galleries found.';
-		}
-		
-		//load gallery
-		$this->load->view('user_galleries_view', $data);
-	}
-	*/
 	
 	/* 
 	 * If no galleryid is given, load all galleries
@@ -365,37 +332,6 @@ class User extends CI_Controller {
 		echo 'You have deleted the photo with the id '.$id;
 		
 	}
-/*	
-	function addPhoto()
-	{
-		$this->authorized();
-		
-		$gallery = $this->input->post('galleries');
-		
-		$picture = $this->input->post('picture');
-		
-		$this->load->model('Gallery_model');
-		
-		$data['galleries'] = $this->Gallery_model->getGalleries();
-		
-		//$this->Gallery_model->addPhoto($gallery, $picture);
-		
-		$config['upload_path'] = './uploads/' . $gallery;
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size'] = '111100';
-		$config['max_width'] = '1024';
-		$config['max_height'] = '768';
-			
-		$this->load->library('upload', $config);
-		
-		$this->upload->do_upload($picture);
-		$this->upload->display_errors();
-		$this->upload->data();	
-		
-		//load gallery
-		$this->load->view('add_photo_view', $data);
-	}
-*/
 
 	function authorized()
 	{
@@ -422,3 +358,6 @@ class User extends CI_Controller {
 		}
 	}
 }
+
+/* End of file user.php */ 
+/* Location: ./application/controllers/user.php */
