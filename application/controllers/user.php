@@ -16,8 +16,14 @@ class User extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 	}
 
-	function index( $selected = NULL)
+	function index()
 	{
+		$this->admin();
+	}
+	
+	function addPhoto( $selected = NULL )
+	{
+		
 		$this->authorized();
 		
 		$galleries = array();
