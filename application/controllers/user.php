@@ -222,6 +222,29 @@ class User extends CI_Controller {
 				$data['picTitle'] = $pic[0]->title;
 				$data['picDesc'] = $pic[0]->description;
 				$data['picID'] = $pic[0]->id;
+				$data['saved'] = 0;
+				
+				$titleInput = $this->input->post('title');
+				$descInput = $this->input->post('description');
+				
+				if ( $descInput != NULL  ) { $data['saved'] = 1; }
+				
+				//update info if it changed
+				if ( is_string( $descInput ) && $pic[0]->description != $descInput )
+				{
+					if ( $this->Gallery_model->updatePicture( 
+						$pic[0]->id,
+						$pic[0]->gallery_id,
+						$pic[0]->title,
+						$descInput))
+					{
+						$data['picDesc'] = $descInput;
+					}
+					else
+					{
+						$data['errors'] = 'Data could not be updated';
+					}
+				}
 				
 			}
 			else

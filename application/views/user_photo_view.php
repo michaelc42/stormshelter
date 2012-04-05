@@ -2,10 +2,13 @@
 <?php if ( $errors ) : ?>
 	<?php echo $errors; ?>
 <?php endif; ?>
-<?php echo form_open(); ?>
+<?php if ( $saved ) : ?>
+	<p>Saved!</p>
+<?php endif; ?>
+<?php echo form_open(current_url()); ?>
 Title: 
 <br />
-<?php echo form_input('title', $picTitle); ?>
+<?php echo $picTitle; ?>
 <p><img src="<?php echo $path; ?>" /></p>
 Description: 
 <br />

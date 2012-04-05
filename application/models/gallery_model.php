@@ -166,6 +166,26 @@ class Gallery_model extends CI_Model
 		$this->createThumb($path, $file['full_path']);
 	}
 	
+	function updatePicture( $id, $gallery_id, $title, $desc )
+	{
+		$data = array(
+			'id' => $id,
+			'gallery_id' => $gallery_id,
+			'title' => $title,
+			'description' => $desc,
+		);
+		
+		$this->db->where('id', $id);
+		if ( $this->db->update('pictures', $data) )
+		{ 
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;	
+		}
+	}
+	
 	function createThumb($path, $file)
 	{
 		$config['source_image'] = $file;//'./uploads/'.$path.'/'.$file['file_name'].'/';
