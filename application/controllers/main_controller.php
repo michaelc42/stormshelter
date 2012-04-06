@@ -95,7 +95,22 @@ class Main_controller extends CI_Controller
 		{ 
 			//load all galleries 
 			$this->load->model('Gallery_model');
-			$data['galleries'] = $this->Gallery_model->getGalleries();
+			
+			$ret = $this->Gallery_model->getGalleries();
+			
+			foreach( $ret as $gallery )
+			{
+				$pic = $this->Gallery_model->getPhoto( $gallery->front_image );
+				
+				if( $pic ) 
+				{ 
+					$thumb = $this->Gallery_model->get_thumb( $pic->title );
+					
+					$gallery->front_image = $thumb; 
+				}
+				
+			}
+			$data['galleries'] = $ret;
 			
 			$this->load->view('all_galleries_view', $data);
 			
