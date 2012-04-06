@@ -190,6 +190,23 @@ class Gallery_model extends CI_Model
 		}
 	}
 	
+	function update_gallery( $id, $front_image )
+	{
+		$data = array(
+			'front_image' => $front_image,
+		);
+		
+		$this->db->where( 'id', $id );
+		if ( $this->db->update( 'galleries', $data ) )
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+	
 	function createThumb($path, $file)
 	{
 		$config['source_image'] = $file;//'./uploads/'.$path.'/'.$file['file_name'].'/';
@@ -228,7 +245,8 @@ class Gallery_model extends CI_Model
 		$query = $this->db->get_where('pictures', array('id' => $id,));
 		if( $query->num_rows() == 1 )
 		{
-			return $query->result();
+			//return $query->result();
+			return $query->row();
 		}
 		else
 		{
@@ -281,6 +299,13 @@ class Gallery_model extends CI_Model
 			return 'Picture could not be removed from the database.';
 		}
 		
+	}
+	
+	function get_thumb( $pic )
+	{
+		$pieces = explode('.', $pic);
+		$pieces[0] .= '_thumb.';
+		return $thumb = $pieces[0] . $pieces[1];
 	}
 	
 	function rrmdir($dir) 

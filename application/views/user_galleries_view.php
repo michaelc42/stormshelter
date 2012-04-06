@@ -6,7 +6,7 @@
 		<p>
 			<a href="<?php echo site_url().'user/galleries/'.$gallery->id; ?>">
 				<?php if ( $gallery->front_image ) : ?>
-					<img src="<?php echo site_url().'uploads/'.$gallery->title.'/thumbs/'.$gallery->front_image;?>" />
+					<img src="<?php echo site_url().'uploads/'.$gallery->directory_name.'/thumbs/'.$gallery->front_image;?>" />
 				<?php else: ?>					
 					<img src="<?php echo site_url().'uploads/default_image.gif'; ?>" />
 				<?php endif; ?>
@@ -18,7 +18,7 @@
 		
 		<p>
 			
-			<a href="<?php echo site_url().'user/index/'.$gallery->directory_name; ?>">Add Photo</a>
+			<a href="<?php echo site_url().'user/addphoto/'.$gallery->directory_name; ?>">Add Photo</a>
 			<a href="confirmDelete/<?php echo $gallery->id; ?>">delete</a>
 		</p>
 	</div> 

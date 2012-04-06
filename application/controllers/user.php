@@ -130,12 +130,29 @@ class User extends CI_Controller {
 		$data['errors'] = NULL;
 		$data['ret'] = NULL;
 		$data['pics'] = NULL;
+		$data['front_image'] = NULL;
 		
 		if( $gallery == NULL ) 
 		{ 
 			//load all galleries 
 			$this->load->model('Gallery_model');
-			$data['galleries'] = $this->Gallery_model->getGalleries();
+			//go through each gallery and replace the front_image(s) with the url to the thumbnails
+			$ret = $this->Gallery_model->getGalleries();
+			
+			foreach( $ret as $gallery )
+			{
+				$pic = $this->Gallery_model->getPhoto( $gallery->front_image );
+				
+				if( $pic ) 
+				{ 
+					$thumb = $this->Gallery_model->get_thumb( $pic->title );
+					
+					$gallery->front_image = $thumb; 
+				}
+				
+			}
+			
+			$data['galleries'] = $ret;
 			
 			$this->load->view('user_galleries_view', $data);
 			
@@ -143,7 +160,7 @@ class User extends CI_Controller {
 		else
 		{
 			$this->load->model('Gallery_model');
-			//returns gallery data if gallery exists else false
+			//returns gallery data if gallery exists, else false
 			$ret = $this->Gallery_model->doesGalleryExist($gallery);
 			if( $ret === FALSE )
 			{
@@ -164,6 +181,7 @@ class User extends CI_Controller {
 				}
 				else
 				{		
+					//run this if there are pictures for the gallery
 					$this->load->library('pagination');
 					$config['base_url'] = site_url('user/galleries').'/'.$ret[0]->id.'/';
 					$config['total_rows'] = count($totalPics);
@@ -174,6 +192,22 @@ class User extends CI_Controller {
 					$this->pagination->initialize($config);
 					$data['pics'] = $pics;
 					$data['ret'] = $ret;
+					$data['front_image'] = $ret[0]->front_image;
+					
+					//if checkbox input exists update the gallery with the front image
+					if ( $this->input->post('front_image') )
+					{
+						//update table and input the id for the front_picture
+						if ( $this->Gallery_model->update_gallery( $gallery, $this->input->post('front_image')) == FALSE )
+						{
+							$data['errors'] = 'Could not set front image.';
+						}
+						else
+						{
+							$data['front_image'] = $this->input->post('front_image');
+						}
+					}
+					
 				}
 			}
 			$this->load->view('user_gallery_view', $data);

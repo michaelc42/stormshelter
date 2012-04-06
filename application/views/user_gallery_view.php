@@ -19,10 +19,10 @@
 <body class="container_16">
 
 <body>
-	
 	<h2><?php echo $ret[0]->title; ?></h2>
 	<?php if ( !$errors ) : ?>
 	<div id="pictures" class="grid_16 alpha">
+		<?php echo form_open(current_url()); ?>
 		<?php foreach ($pics as $pic): ?>
 			<div class="picture grid_4 omega">
 				<?php
@@ -36,7 +36,9 @@
 					<img src="<?php echo site_url().'uploads/'.$ret[0]->directory_name?>/thumbs/<?php echo $thumb ?>" class="grid_4 alpha" />
 				</a>
 				<br />
-				
+				<p>
+					<?php echo form_radio( 'front_image', $pic->id, ( $pic->id == $front_image ) ? TRUE : FALSE ); ?>
+				</p>
 				<p>
 					<a href="<?php echo site_url().'user/deletePhoto/'.$pic->id; ?>">delete</a>					
 				</p>
@@ -47,6 +49,9 @@
 			<?php echo $this->pagination->create_links(); ?>
 		</div>
 	</div> <!--End div pictures -->
+	<?php echo form_submit('submit', 'save'); ?>
+	<?php form_close(); ?>
+		
 	<?php endif; ?>
 						
 <div class="grid_16 errors">
