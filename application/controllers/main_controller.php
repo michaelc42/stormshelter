@@ -162,12 +162,12 @@ class Main_controller extends CI_Controller
 			$pic = $this->Gallery_model->getPhoto($id);
 			if( $pic )
 			{	
-				$gallery = $this->Gallery_model->getGalleryById( $pic[0]->gallery_id );
+				$gallery = $this->Gallery_model->getGalleryById( $pic->gallery_id );
 				
-				$data['path'] = site_url().'uploads/'.$gallery[0]->title.'/'.$pic[0]->title;
-				$data['picTitle'] = $pic[0]->title;
-				$data['picDesc'] = $pic[0]->description;
-				$data['picID'] = $pic[0]->id;
+				$data['path'] = site_url().'uploads/'.$gallery[0]->title.'/'.$pic->title;
+				$data['picTitle'] = $pic->title;
+				$data['picDesc'] = $pic->description;
+				$data['picID'] = $pic->id;
 				
 			}
 			else
