@@ -124,6 +124,8 @@ class User extends CI_Controller {
 	 */
 	function galleries($gallery = NULL, $off = 0)
 	{	
+		$this->authorized();
+		
 		$limit = 8;
 		$offset = $off;
 		//$data = array();
@@ -216,6 +218,8 @@ class User extends CI_Controller {
 	
 	function photo($id = NULL)
 	{
+		$this->authorized();
+		
 		$data['errors'] = NULL;
 		if ( $id )
 		{
@@ -377,7 +381,7 @@ class User extends CI_Controller {
 		}
 	}
 	
-	function robot_check($robotest)
+	private function robot_check($robotest)
 	{
 		if($robotest)
 		{

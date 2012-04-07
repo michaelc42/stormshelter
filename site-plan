@@ -72,3 +72,37 @@ Create a way to delete photos and galleries
 FIX the user authorized gallery.  The pagination is not working.
 
 Crop pictures that are taller than a set height.
+
+
+USER CONTROLLER TEMPLATE
+LOGIN PAGE
+&&
+ADMIN PAGE
+&&
+NOT AUTHORIZED PAGE
+-have same style sheet 'authorized.css'
+
+ALL GALLERIES PAGE
+&&
+SINGLE GALLERY PAGE
+&&
+SINGLE PHOTO PAGE
+-have same style sheet 'gallery.css'
+
+UPLOAD PAGE
+
+UPLOAD SUCCESS PAGE
+
+ADD NEW GALLERY PAGE
+
+CONFIRM DELETE GALLERY PAGE
+
+INCLUDES
+header
+-HTML VALIDATION
+-STYLESHEETS
+	-960 grid sheets
+-JAVASCRIPT Include
+footer
+-COPYRIGHT
+-LOGIN STATUS

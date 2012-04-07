@@ -14,17 +14,19 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/text.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/960.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/gallery.css" />
+
 </head>
 
 <body class="container_16">
 
 <body>
 	<h2><?php echo $ret[0]->title; ?></h2>
+	<p>Click image to edit details.</p>
 	<?php if ( !$errors ) : ?>
 	<div id="pictures" class="grid_16 alpha">
 		<?php echo form_open(current_url()); ?>
 		<?php foreach ($pics as $pic): ?>
-			<div class="picture grid_4 omega">
+			<div class="picture grid_4 alpha">
 				<?php
 				$pieces = explode('.', $pic->title);
 				$pieces[0] .= '_thumb.';
@@ -32,12 +34,15 @@
 				?>
 				
 				<!-- <a href="http://localhost/stormshelter/uploads/<?php echo $ret[0]->directory_name.'/'.$pic->title; ?>"/> -->
+				<div id="image">
 				<a href="<?php echo site_url().'user/photo/'.$pic->id; ?>"/>
 					<img src="<?php echo site_url().'uploads/'.$ret[0]->directory_name;?>/thumbs/<?php echo $thumb; ?>" class="grid_4 alpha" />
 				</a>
+				</div>
 				<br />
-				<p>set default: 
+				<p>
 					<?php echo form_radio( 'front_image', $pic->id, ( $pic->id == $front_image ) ? TRUE : FALSE ); ?>
+					set default
 				</p>
 				<p>
 					<a href="<?php echo site_url().'user/deletePhoto/'.$pic->id; ?>">delete</a>					

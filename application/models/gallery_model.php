@@ -212,7 +212,7 @@ class Gallery_model extends CI_Model
 		$config['source_image'] = $file;//'./uploads/'.$path.'/'.$file['file_name'].'/';
 		$config['create_thumb'] = TRUE;
 		$config['maintain_ratio'] = TRUE;
-		$config['width'] = 200;
+		$config['width'] = 220;
 		$config['height'] = 200;
 		$config['new_image'] = $this->galleryPath.'/'.$path.'/thumbs';//'./uploads/'.$path.'/thumbs/tb_'.$file['file_name'].'/';
 

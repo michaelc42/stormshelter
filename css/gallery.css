@@ -3,5 +3,10 @@
 }
 
 #pictures img{
-	margin-top: 20px;
+	max-height: 200px;
+}
+
+.picture #image{
+	
+	height: 150px;
 }
