@@ -13,6 +13,9 @@ class User extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->helper(array('form', 'url'));
+		
+		//delete fater debugging
+		$this->output->enable_profiler(TRUE);
 	}
 
 	function index()
@@ -22,7 +25,6 @@ class User extends CI_Controller {
 	
 	function addPhoto( $selected = NULL )
 	{
-		
 		$this->authorized();
 		
 		$galleries = array();
@@ -30,14 +32,18 @@ class User extends CI_Controller {
 		
 		$data['galleries'] = $this->Gallery_model->getGalleriesList();
 		$data['selected'] = $selected;
+		$data['main_content'] = 'upload_form';
+		$data['css'] = 'style.css';
 		
-		$this->load->view('upload_form', $data);
+		$this->load->view('includes/template', $data);
 	}
 	
 
 	function do_upload()
 	{
 		$this->authorized();
+		
+		$data['css'] = 'style.css';
 		
 		$path = $this->input->post('galleries');
 		$file = $this->input->post('userfile');
@@ -54,17 +60,27 @@ class User extends CI_Controller {
 		if ( ! $this->upload->do_upload())
 		{
 			$error = array('error' => $this->upload->display_errors());
-
-			$this->load->view('upload_form', $error);
+			//$this->load->view('upload_form', $error);
+			
+			//test code, delete and uncomment previous line to revert	
+			$data['error'] = $error;
+			$data['main_content'] = 'upload_form';
+			$this->load->view('includes/template', $data);
 		}
 		else
 		{
-			$data = array('upload_data' => $this->upload->data());
+			//$data = array('upload_data' => $this->upload->data());
+			$data['upload_data'] = $this->upload->data();
 			$this->load->model('Gallery_model');
 			//when the picture upload is successful insert data into db
 			$this->Gallery_model->insertPicture($path, $this->upload->data(), $desc);
-
-			$this->load->view('upload_success', $data);
+		
+			$data['main_content'] = 'upload_success';
+			
+			//$this->load->view('upload_success', $data);
+			
+			//delete next line and uncomment previous to revert
+			$this->load->view('includes/template', $data);
 		}
 	}
 	
@@ -129,6 +145,12 @@ class User extends CI_Controller {
 		$limit = 8;
 		$offset = $off;
 		//$data = array();
+		
+		//next two lines test line
+		//template variables
+		$data['css'] = 'gallery.css';
+		$data['main_content'] = 'user_galleries_view';
+		
 		$data['errors'] = NULL;
 		$data['ret'] = NULL;
 		$data['pics'] = NULL;
@@ -156,7 +178,10 @@ class User extends CI_Controller {
 			
 			$data['galleries'] = $ret;
 			
-			$this->load->view('user_galleries_view', $data);
+			//$this->load->view('user_galleries_view', $data);
+			
+			//to revert delete line under this line, and uncomment previous
+			$this->load->view('includes/template', $data);
 			
 		}
 		else
@@ -212,7 +237,12 @@ class User extends CI_Controller {
 					
 				}
 			}
-			$this->load->view('user_gallery_view', $data);
+			
+			//$this->load->view('user_gallery_view', $data);
+			
+			//To revert uncomment previous line and delete next line
+			$data['main_content'] = 'user_gallery_view';
+			$this->load->view('includes/template', $data);
 		}
 	}
 	
@@ -268,7 +298,12 @@ class User extends CI_Controller {
 			$data['errors'] = 'No ID given.';
 		}
 		
-		$this->load->view('user_photo_view', $data);
+		//$this->load->view('user_photo_view', $data);
+		
+		//delete below, uncom previous to revert
+		$data['main_content'] = 'user_photo_view';
+		$data['css'] = 'style.css';
+		$this->load->view('includes/template', $data);
 		
 	}
 
@@ -352,6 +387,7 @@ class User extends CI_Controller {
 		$this->authorized();
 		
 		$data['errors'] = '';
+		$data['id'] = $id;
 		
 		if( $id )
 		{
@@ -368,6 +404,8 @@ class User extends CI_Controller {
 		}
 		
 		echo 'You have deleted the photo with the id '.$id;
+		
+		$this->load->view('includes/template', $data);
 		
 	}
 

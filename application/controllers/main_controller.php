@@ -7,6 +7,7 @@ class Main_controller extends CI_Controller
 		$data['errors'] = FALSE;
 		$data['success'] = FALSE;
 		$data['main_content'] = 'home_view';
+		$data['css'] = 'style.css';
 	
 		$this->load->view('includes/template', $data);
 	}
@@ -26,11 +27,12 @@ class Main_controller extends CI_Controller
 		
 		$data['errors'] = FALSE;
 		$data['success'] = FALSE;
+		$data['css'] = 'style.css';
 		
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['errors'] = validation_errors();
-			$data['main_content'] = 'home_view';		
+			$data['main_content'] = 'home_view';
 			$this->load->view('includes/template', $data);
 		}
 		else

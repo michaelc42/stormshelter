@@ -264,18 +264,21 @@ class Gallery_model extends CI_Model
 			return 'Picture not in database.';
 		}
 		
-		$filename = $ret[0]->title;
+		$filename = $ret->title;
 		
+		/*
 		$pieces = explode('.', $filename);
 		$pieces[0] .= '_thumb.';
 		$thumb = $pieces[0] . $pieces[1];
+		*/
+		$thumb = $this->get_thumb( $filename );
 		
 		//get directory of gallery
-		$ret = $this->doesGalleryExist( $ret[0]->gallery_id );
+		$ret = $this->doesGalleryExist( $ret->gallery_id );
 		
 		if ( $ret === FALSE )
 		{
-			return 'Gallery does not exist.';
+			return 'Gallery in which the photo is in does not exist.';
 		}
 		
 		//delete picture in file system
@@ -298,7 +301,6 @@ class Gallery_model extends CI_Model
 		{
 			return 'Picture could not be removed from the database.';
 		}
-		
 	}
 	
 	function get_thumb( $pic )
