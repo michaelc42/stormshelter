@@ -8,6 +8,7 @@ class Main_controller extends CI_Controller
 		$data['success'] = FALSE;
 		$data['main_content'] = 'home_view';
 		$data['css'] = 'style.css';
+		$data['title'] = 'Home';
 	
 		$this->load->view('includes/template', $data);
 	}
@@ -28,6 +29,7 @@ class Main_controller extends CI_Controller
 		$data['errors'] = FALSE;
 		$data['success'] = FALSE;
 		$data['css'] = 'style.css';
+		$data['title'] = 'Home';
 		
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -92,6 +94,9 @@ class Main_controller extends CI_Controller
 		$data['errors'] = NULL;
 		$data['ret'] = NULL;
 		$data['pics'] = NULL;
+
+		$data['css'] = 'style.css';
+		$data['title'] = 'Gallery';
 		
 		if( $gallery == NULL ) 
 		{ 
@@ -113,8 +118,8 @@ class Main_controller extends CI_Controller
 				
 			}
 			$data['galleries'] = $ret;
-			
-			$this->load->view('all_galleries_view', $data);
+			$data['main_content'] = 'all_galleries_view';
+			$this->load->view('includes/template', $data);
 			
 		}
 		else
@@ -151,13 +156,18 @@ class Main_controller extends CI_Controller
 					$data['ret'] = $ret;
 				}
 			}
-			$this->load->view('gallery_view', $data);
+			
+			$data['main_content'] = 'gallery_view';
+			$this->load->view('includes/template', $data);
 		}
 	}
 	
 	function photo($id = NULL)
 	{
 		$data['errors'] = NULL;
+		$data['title'] = 'Photo';
+		$data['main_content'] = 'photo_view';
+		$data['css'] = 'style.css';
 		if ( $id )
 		{
 			$this->load->model('Gallery_model');
@@ -182,7 +192,7 @@ class Main_controller extends CI_Controller
 			$data['errors'] = 'No ID given.';
 		}
 		
-		$this->load->view('photo_view', $data);
+		$this->load->view('includes/template', $data);
 		
 	}
 }

@@ -74,6 +74,8 @@ FIX the user authorized gallery.  The pagination is not working.
 Crop pictures that are taller than a set height.
 
 
+
+*ADD TITLE VARIABLE TO ALL PAGES
 USER CONTROLLER TEMPLATE
 LOGIN PAGE
 &&
@@ -103,4 +105,8 @@ footer
 -COPYRIGHT
 -LOGIN STATUS
 
-FIX PHOTO DELETE
+FIX PHOTO DELETE - done
+
+REDO HOW CODE MAKES THUMBNAILS 
+
+ADD A NOT AUTHORIZED VIEW

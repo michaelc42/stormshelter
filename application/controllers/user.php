@@ -14,8 +14,8 @@ class User extends CI_Controller {
 		parent::__construct();
 		$this->load->helper(array('form', 'url'));
 		
-		//delete fater debugging
-		$this->output->enable_profiler(TRUE);
+		//delete after debugging
+		//$this->output->enable_profiler(TRUE);
 	}
 
 	function index()
@@ -33,6 +33,7 @@ class User extends CI_Controller {
 		$data['galleries'] = $this->Gallery_model->getGalleriesList();
 		$data['selected'] = $selected;
 		$data['main_content'] = 'upload_form';
+		$data['title'] = 'Add a Photo';
 		$data['css'] = 'style.css';
 		
 		$this->load->view('includes/template', $data);
@@ -44,6 +45,7 @@ class User extends CI_Controller {
 		$this->authorized();
 		
 		$data['css'] = 'style.css';
+		$data['title'] = 'Uploading';
 		
 		$path = $this->input->post('galleries');
 		$file = $this->input->post('userfile');
@@ -150,6 +152,7 @@ class User extends CI_Controller {
 		//template variables
 		$data['css'] = 'gallery.css';
 		$data['main_content'] = 'user_galleries_view';
+		$data['title'] = 'Galleries';
 		
 		$data['errors'] = NULL;
 		$data['ret'] = NULL;
@@ -238,9 +241,6 @@ class User extends CI_Controller {
 				}
 			}
 			
-			//$this->load->view('user_gallery_view', $data);
-			
-			//To revert uncomment previous line and delete next line
 			$data['main_content'] = 'user_gallery_view';
 			$this->load->view('includes/template', $data);
 		}
@@ -298,11 +298,9 @@ class User extends CI_Controller {
 			$data['errors'] = 'No ID given.';
 		}
 		
-		//$this->load->view('user_photo_view', $data);
-		
-		//delete below, uncom previous to revert
 		$data['main_content'] = 'user_photo_view';
 		$data['css'] = 'style.css';
+		$data['title'] = 'Photo';
 		$this->load->view('includes/template', $data);
 		
 	}
@@ -313,6 +311,10 @@ class User extends CI_Controller {
 		
 		$data['errors'] = FALSE;
 		$data['success'] = FALSE;
+		$data['css'] = 'style.css';
+		$data['title'] = 'Add New Gallery';
+		$data['main_content'] = 'new_gallery_view';
+		
 		
 		$this->load->library('form_validation');
 		
@@ -340,7 +342,7 @@ class User extends CI_Controller {
 			}
 		}	
 		
-		$this->load->view('new_gallery_view', $data);
+		$this->load->view('includes/template', $data);
 		
 	}
 	
@@ -389,6 +391,10 @@ class User extends CI_Controller {
 		$data['errors'] = '';
 		$data['id'] = $id;
 		
+		//$data['main_content'] =
+		//$data['css'] = 'style.css'; 
+		//$data['title'] = 'Delete Photo';
+		
 		if( $id )
 		{
 			$this->load->model('Gallery_model');
@@ -405,7 +411,7 @@ class User extends CI_Controller {
 		
 		echo 'You have deleted the photo with the id '.$id;
 		
-		$this->load->view('includes/template', $data);
+		//$this->load->view('includes/template', $data);
 		
 	}
 

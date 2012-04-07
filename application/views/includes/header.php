@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/960.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url().'css/'.$css;?>"/>
 
-<title>F5 Stormrooms - Home</title>
+<title>F5 Stormrooms - <?php echo $title; ?></title>
 
 
 </head>
