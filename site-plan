@@ -1,5 +1,5 @@
 NOTES
-*Add a honeypot to prevent spammers on the contact form.
+*Add a honeypot to prevent spammers on the contact form. -done
 
 
 controllers
@@ -32,7 +32,7 @@ controller user
 }
 
 //A controller that controls the public part of the site that is viewable
-//to any anonymouse user
+//to any anonymous user
 controller main
 {
 	index
@@ -110,3 +110,8 @@ FIX PHOTO DELETE - done
 REDO HOW CODE MAKES THUMBNAILS 
 
 ADD A NOT AUTHORIZED VIEW
+
+ADD PAGINATION TO ALL GALLERIES VIEW
+
+FIX WHEN PHOTO ID IS NOT FOUND ERROR - done
+FIX WHEN GALLERY ID IS NOT FOUND ERROR - done

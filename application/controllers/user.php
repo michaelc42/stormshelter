@@ -89,8 +89,12 @@ class User extends CI_Controller {
 	function admin()
 	{
 		$this->authorized();
+	
+		$data['main_content'] = 'admin_view';
+		$data['title'] = 'Admin Panel';
+		$data['css'] = 'style.css';
 		
-		$this->load->view('admin_view');
+		$this->load->view('includes/template', $data);
 	}
 	
 	function login()
@@ -122,7 +126,11 @@ class User extends CI_Controller {
 				$data['errors'] = $ret;
 			}
 		}		
-		$this->load->view('login_view', $data);
+		$data['main_content'] = 'login_view';
+		$data['title'] = 'Login';
+		$data['css'] = 'style.css';
+		
+		$this->load->view('includes/template', $data);
 	}
 	
 	function logout()
@@ -181,9 +189,6 @@ class User extends CI_Controller {
 			
 			$data['galleries'] = $ret;
 			
-			//$this->load->view('user_galleries_view', $data);
-			
-			//to revert delete line under this line, and uncomment previous
 			$this->load->view('includes/template', $data);
 			
 		}
@@ -195,6 +200,8 @@ class User extends CI_Controller {
 			if( $ret === FALSE )
 			{
 				$data['errors'] = 'Gallery not found.';
+				//show_404();
+				//return;
 			}
 			else
 			{ 
@@ -246,11 +253,85 @@ class User extends CI_Controller {
 		}
 	}
 	
-	function photo($id = NULL)
+	
+	/*
+	 * Load a single gallery.
+	 */
+	 function gallery( $gallery, $off = NULL )
+	 {
+		 
+		$limit = 8;
+		$offset = $off;
+		$data['errors'] = NULL;
+		 
+		 $this->load->model('Gallery_model');
+			//returns gallery data if gallery exists, else false
+			$ret = $this->Gallery_model->doesGalleryExist($gallery);
+			if( $ret === FALSE )
+			{
+				$data['errors'] = 'Gallery not found.';
+				//show_404();
+				//return;
+			}
+			else
+			{ 
+				// get pictures
+				//get all pictures that have a gallery_id of $ret->id
+				$totalPics = $this->Gallery_model->getPictures($ret[0]->id, NULL, $offset);
+				$pics = $this->Gallery_model->getPictures($ret[0]->id, $limit, $offset);
+				
+				if( $pics === FALSE )
+				{
+					$data['errors'] = 'This gallery contains no pictures.';
+					//Pass gallery info anyways
+					$data['ret'] = $ret;
+				}
+				else
+				{		
+					//run this if there are pictures for the gallery
+					$this->load->library('pagination');
+					$config['base_url'] = site_url('user/gallery').'/'.$ret[0]->id.'/';
+					$config['total_rows'] = count($totalPics);
+					$config['per_page'] = $limit;
+					//user controller needs uri_segment of four because 'url/user/gall.../id/offset'
+					$config['uri_segment'] = 4;
+				
+					$this->pagination->initialize($config);
+					$data['pics'] = $pics;
+					$data['ret'] = $ret;
+					$data['front_image'] = $ret[0]->front_image;
+					
+					//if checkbox input exists update the gallery with the front image
+					if ( $this->input->post('front_image') )
+					{
+						//update table and input the id for the front_picture
+						if ( $this->Gallery_model->update_gallery( $gallery, $this->input->post('front_image')) == FALSE )
+						{
+							$data['errors'] = 'Could not set front image.';
+						}
+						else
+						{
+							$data['front_image'] = $this->input->post('front_image');
+						}
+					}
+					
+				}
+			}
+			
+			
+			$data['main_content'] = 'user_gallery_view';
+			$data['css'] = 'gallery.css';
+			$data['title'] = 'Gallery';
+			$this->load->view('includes/template', $data);
+	 }
+	 
+	
+	function photo( $id = NULL )
 	{
 		$this->authorized();
 		
 		$data['errors'] = NULL;
+		
 		if ( $id )
 		{
 			$this->load->model('Gallery_model');

@@ -7,6 +7,6 @@
 		<a href="addGallery">Add Gallery</a>
 	</p>
 	<p>
-		<a href="index">Add Photo</a>
+		<a href="addphoto">Add Photo</a>
 	</p>
 </div>

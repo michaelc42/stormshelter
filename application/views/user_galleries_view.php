@@ -19,7 +19,7 @@
 		<p>
 			
 			<a href="<?php echo site_url().'user/addphoto/'.$gallery->directory_name; ?>">Add Photo</a>
-			<a href="confirmDelete/<?php echo $gallery->id; ?>">delete</a>
+			<a href="../confirmDelete/<?php echo $gallery->id; ?>">delete</a>
 		</p>
 	</div> 
 <?php endforeach; ?>
