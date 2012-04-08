@@ -42,10 +42,11 @@ $route['default_controller'] = 'main_controller';
 $route['404_override'] = 'filenotfound_controller';
 $route['message'] = 'main_controller/message';
 $route['message\#contact-form'] = 'main_controller/message#contact-form';
-$route['galleries/(:any)'] = 'main_controller/galleries/$1';
+//$route['galleries/(:any)'] = 'main_controller/galleries/$1';
 $route['galleries'] = 'main_controller/galleries';
 $route['photo/(:any)'] = 'main_controller/photo/$1';
 $route['photo'] = 'main_controller/photo';
+$route['gallery/(:any)'] = 'main_controller/gallery/$1';
 //$route['user'] = 'user';
 //$route['user/login'] = 'user/login';
 

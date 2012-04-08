@@ -192,6 +192,7 @@ class User extends CI_Controller {
 			$this->load->view('includes/template', $data);
 			
 		}
+		/*
 		else
 		{
 			$this->load->model('Gallery_model');
@@ -250,7 +251,9 @@ class User extends CI_Controller {
 			
 			$data['main_content'] = 'user_gallery_view';
 			$this->load->view('includes/template', $data);
+			
 		}
+		*/
 	}
 	
 	
@@ -506,7 +509,7 @@ class User extends CI_Controller {
 		}
 	}
 	
-	private function robot_check($robotest)
+	function robot_check($robotest)
 	{
 		if($robotest)
 		{

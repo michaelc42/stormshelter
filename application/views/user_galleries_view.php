@@ -4,7 +4,7 @@
 	<div class="gallery">
 		<h3><?php echo $gallery->title; ?></h3>
 		<p>
-			<a href="<?php echo site_url().'user/galleries/'.$gallery->id; ?>">
+			<a href="<?php echo site_url().'user/gallery/'.$gallery->id; ?>">
 				<?php if ( $gallery->front_image ) : ?>
 					<img src="<?php echo site_url().'uploads/'.$gallery->directory_name.'/thumbs/'.$gallery->front_image;?>" />
 				<?php else: ?>					

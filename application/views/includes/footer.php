@@ -8,9 +8,9 @@
 		<p id="login">
 			<?php if ($this->session->userdata('username')): ?>
 				Logged in as <?php echo $this->session->userdata('username').' '; ?>
-				<a href="user/admin">admin</a> <a href="user/logout">logout</a>
+				<a href="<?php echo site_url(); ?>user/admin">admin</a> <a href="<?php echo site_url(); ?>user/logout">logout</a>
 			<?php else: ?>
-				<a href="user/login">admin</a>
+				<a href="<?php echo site_url(); ?>user/login">admin</a>
 			<?php endif; ?>
 		</p>
 	</div>
