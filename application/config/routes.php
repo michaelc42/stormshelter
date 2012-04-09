@@ -47,6 +47,7 @@ $route['galleries'] = 'main_controller/galleries';
 $route['photo/(:any)'] = 'main_controller/photo/$1';
 $route['photo'] = 'main_controller/photo';
 $route['gallery/(:any)'] = 'main_controller/gallery/$1';
+$route['galleries/(:any)'] = 'main_controller/galleries/$1';
 //$route['user'] = 'user';
 //$route['user/login'] = 'user/login';
 

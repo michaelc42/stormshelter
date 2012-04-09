@@ -148,17 +148,17 @@ class User extends CI_Controller {
 	 * If no galleryid is given, load all galleries
 	 * else load the gallery with the id, and the offset it is given 
 	 */
-	function galleries($gallery = NULL, $off = 0)
+	function galleries($off = 0)//($gallery = NULL, $off = 0)
 	{	
 		$this->authorized();
 		
-		$limit = 8;
+		$limit = 4;
 		$offset = $off;
-		//$data = array();
+		//$data = array();		
 		
 		//next two lines test line
 		//template variables
-		$data['css'] = 'gallery.css';
+		$data['css'] = 'admin_gallery.css';
 		$data['main_content'] = 'user_galleries_view';
 		$data['title'] = 'Galleries';
 		
@@ -167,14 +167,15 @@ class User extends CI_Controller {
 		$data['pics'] = NULL;
 		$data['front_image'] = NULL;
 		
-		if( $gallery == NULL ) 
+		if( TRUE )//$gallery == NULL ) 
 		{ 
 			//load all galleries 
 			$this->load->model('Gallery_model');
 			//go through each gallery and replace the front_image(s) with the url to the thumbnails
-			$ret = $this->Gallery_model->getGalleries();
+			$total_galleries = $this->Gallery_model->getGalleries();
+			$limited_galleries = $this->Gallery_model->getGalleries($limit, $offset);
 			
-			foreach( $ret as $gallery )
+			foreach( $limited_galleries as $gallery )
 			{
 				$pic = $this->Gallery_model->getPhoto( $gallery->front_image );
 				
@@ -184,10 +185,18 @@ class User extends CI_Controller {
 					
 					$gallery->front_image = $thumb; 
 				}
-				
 			}
 			
-			$data['galleries'] = $ret;
+			$this->load->library('pagination');
+			$config['base_url'] = site_url('user/galleries');
+			$config['total_rows'] = count($total_galleries);
+			$config['per_page'] = $limit;
+			//user controller needs uri_segment of 3 because 'url/user/galleries/offset'
+			$config['uri_segment'] = 3;
+
+			$this->pagination->initialize($config);
+			
+			$data['galleries'] = $limited_galleries;
 			
 			$this->load->view('includes/template', $data);
 			
@@ -333,7 +342,13 @@ class User extends CI_Controller {
 	{
 		$this->authorized();
 		
+		// Prime Variables
 		$data['errors'] = NULL;
+		
+		$data['path'] = '';
+		$data['picTitle'] = '';
+		$data['picDesc'] = '';
+		$data['picID'] = '';
 		
 		if ( $id )
 		{

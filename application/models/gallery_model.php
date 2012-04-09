@@ -14,9 +14,9 @@ class Gallery_model extends CI_Model
 		$this->galleryPath = realpath(APPPATH . '../uploads');
 	}
 	
-	function getGalleries()
+	function getGalleries($limit = NULL, $offset = NULL)
 	{
-		$query = $this->db->get('galleries');
+		$query = $this->db->get('galleries', $limit, $offset);
 		
 		if ($query->num_rows() >0)
 		{

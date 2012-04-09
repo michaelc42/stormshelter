@@ -87,21 +87,25 @@ class Main_controller extends CI_Controller
 	/*
 	 * Functions pertaining to the gallery 
 	 */
-	function galleries($gallery = NULL, $off = 0)
-	{	$limit = 8;
+	function galleries( $off = 0 )
+	{	$limit = 4;
 		$offset = $off;
 		$data = array();
 		$data['errors'] = NULL;
 		$data['ret'] = NULL;
 		$data['pics'] = NULL;
-
-		$data['css'] = 'style.css';
+		
+		$data['main_content'] = 'all_galleries_view';
+		$data['css'] = 'admin_galleries.css';
 		$data['title'] = 'Gallery';
 		
-		if( $gallery == NULL ) 
+		if( TRUE ) 
 		{ 
 			//load all galleries 
 			$this->load->model('Gallery_model');
+			
+			$total_galleries = $this->Gallery_model->getGalleries();
+			$limited_galleries = $this->Gallery_model->getGalleries( $limit, $offset );
 			
 			$ret = $this->Gallery_model->getGalleries();
 			
@@ -117,8 +121,19 @@ class Main_controller extends CI_Controller
 				}
 				
 			}
-			$data['galleries'] = $ret;
-			$data['main_content'] = 'all_galleries_view';
+			
+			$this->load->library('pagination');
+			$config['base_url'] = site_url('galleries');
+			$config['total_rows'] = count($total_galleries);
+			$config['per_page'] = $limit;
+			//user controller needs uri_segment of 3 because 'url/user/galleries/offset'
+			$config['uri_segment'] = 2;
+
+			$this->pagination->initialize($config);
+			
+			$data['galleries'] = $limited_galleries;
+			
+			//$data['galleries'] = $ret;
 			$this->load->view('includes/template', $data);
 			
 		}
@@ -238,6 +253,14 @@ class Main_controller extends CI_Controller
 		$data['title'] = 'Photo';
 		$data['main_content'] = 'photo_view';
 		$data['css'] = 'style.css';
+		
+		//test
+		$data['path'] = '';
+		$data['picTitle'] = '';
+		$data['picDesc'] = '';
+		$data['picID'] = '';
+		//test
+		
 		if ( $id )
 		{
 			$this->load->model('Gallery_model');
