@@ -120,6 +120,8 @@ class User extends CI_Controller {
 			if ( $ret === TRUE )
 			{
 				$this->Login_model->startSession($this->input->post('username'));
+				//redirect to admin page if user is validated
+				redirect(site_url('user/admin'));
 			}
 			else
 			{
@@ -135,13 +137,17 @@ class User extends CI_Controller {
 	
 	function logout()
 	{
-		if ( $this->session->userdata('logged_in') === TRUE)
+		if ( $this->authorized() )
 		{
 			$this->session->sess_destroy();
 			echo 'Session Destroyed';
+			redirect( site_url() );
 			return;
 		}
-		echo 'Not logged in';
+		else
+		{
+			echo 'Not logged in';
+		}
 	}
 	
 	/* 
@@ -521,6 +527,10 @@ class User extends CI_Controller {
 			//redirect to login page
 			echo 'Not authorized';
 			break;
+		}
+		else
+		{
+			return TRUE;
 		}
 	}
 	

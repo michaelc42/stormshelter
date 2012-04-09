@@ -1,3 +1,4 @@
+<div id="container" class="grid_16 alpha omega">
 <h1>Admin Panel</h1>
 <div>
 	<p>

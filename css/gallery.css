@@ -1,9 +1,19 @@
-#pictures{
+body{
 	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#pictures{
+	margin-bottom: 20px;
 }
 
 #pictures img{
 	max-height: 200px;
+}
+
+
+.picture {
+	margin-bottom: 30px;
 }
 
 .picture #image{

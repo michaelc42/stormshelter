@@ -1,3 +1,5 @@
+<div id="container" class="grid_16 alpha omega">
+
 <h2>All galleries loaded</h2>
 
 <div class="all_galleries grid_16 alpha omega">
@@ -7,9 +9,9 @@
 		<p>
 			<a href="<?php echo site_url().'user/gallery/'.$gallery->id; ?>">
 				<?php if ( $gallery->front_image ) : ?>
-					<img src="<?php echo site_url().'uploads/'.$gallery->directory_name.'/thumbs/'.$gallery->front_image;?>" />
+					<img src="<?php echo site_url().'uploads/'.$gallery->directory_name.'/thumbs/'.$gallery->front_image;?>" alt="image"/>
 				<?php else: ?>					
-					<img src="<?php echo site_url().'uploads/default_image.gif'; ?>" />
+					<img src="<?php echo site_url().'uploads/default_image.gif'; ?>" alt="image"/>
 				<?php endif; ?>
 			</a>
 		</p>

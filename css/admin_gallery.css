@@ -1,0 +1,17 @@
+#pictures{
+	margin-top: 20px;
+}
+
+#pictures img{
+	max-height: 200px;
+}
+
+.picture #image{
+	
+	height: 150px;
+	margin-bottom: 100px;
+}
+
+.picture {
+	margin-bottom: 100px;
+}

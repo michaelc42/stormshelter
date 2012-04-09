@@ -107,9 +107,9 @@ class Main_controller extends CI_Controller
 			$total_galleries = $this->Gallery_model->getGalleries();
 			$limited_galleries = $this->Gallery_model->getGalleries( $limit, $offset );
 			
-			$ret = $this->Gallery_model->getGalleries();
+			//$ret = $this->Gallery_model->getGalleries();
 			
-			foreach( $ret as $gallery )
+			foreach( $limited_galleries as $gallery )
 			{
 				$pic = $this->Gallery_model->getPhoto( $gallery->front_image );
 				

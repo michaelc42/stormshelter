@@ -1,15 +1,17 @@
+<div id="container" class="grid_16 alpha omega">
+
 <h2>All galleries loaded</h2>
 
 <div class="galleries grid_16 alpha omega">
 <?php foreach ($galleries as $gallery) : ?>
-	<div class="gallery grid_4 omega">
+	<div class="gallery	 grid_4 alpha">
 		<h3><?php echo $gallery->title; ?></h3>
 		<p>
 			<a href="<?php echo site_url().'gallery/'.$gallery->id; ?>">
 				<?php if ( $gallery->front_image ) : ?>
-					<img src="<?php echo site_url().'uploads/'.$gallery->directory_name.'/thumbs/'.$gallery->front_image;?>" />
+					<img src="<?php echo site_url().'uploads/'.$gallery->directory_name.'/thumbs/'.$gallery->front_image;?>" alt="image" />
 				<?php else: ?>					
-					<img src="<?php echo site_url().'uploads/default_image.gif'; ?>" />
+					<img src="<?php echo site_url().'uploads/default_image.gif'; ?>" alt="img"/>
 				<?php endif; ?>
 			</a>
 		</p>

@@ -1,3 +1,5 @@
+<div id="container" class="grid_16 alpha omega">
+<h1>Create A New Gallery</h1>
 <?php
 
 
@@ -21,18 +23,23 @@ $data2 = array(
 	);
 ?>
 					
-<div class="grid_16" id="">		
+<div class="grid_16 alpha" id="form">		
 	<?php echo form_open('user/addGallery'); //add the path ?>
-	<label>Gallery Title:</label>
-	<br />
-	<?php echo form_input($data); ?>
-	<br />
-	<label>Description:</label>
-	<br />
-	<?php echo form_textarea($data2); ?>
-	<br />
-	<?php echo form_submit('submit', 'Create New Gallery'); ?>
-	<br />
+	<p>
+		Gallery Title:
+	</p>
+	<p>
+		<?php echo form_input($data); ?>
+	</p>
+	<p>
+		Description:
+	</p>
+	<p>
+		<?php echo form_textarea($data2); ?>
+	</p>
+	<p>
+		<?php echo form_submit('submit', 'Create New Gallery'); ?>
+	</p>
 	<?php echo form_close(); ?>
 </div>
 <div class="grid_16 success">
