@@ -97,8 +97,10 @@ class Gallery_model extends CI_Model
 				   'title' => $title,
 				   'description' => $description,
 				);
-				chmod($url, 0777);
-				chmod($url.'/thumbs', 0777);
+				
+				//worked with 0777
+				chmod($url, 0705);
+				chmod($url.'/thumbs', 0705);
 				
 				$this->db->insert('galleries', $data);
 				return TRUE;

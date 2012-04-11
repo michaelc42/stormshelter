@@ -1,10 +1,10 @@
 <div id="contact-form" class="grid_3 alpha" >
 	<div id="contact-info" class="grid_3 alpha">
 		<h5>Contact Us</h5>
-		<strong>F5 Stormrooms</strong><br />
-		Eureka, IL 61616<br />
-		Phone: (877)436-8559<br />
-		Fax: (877)436-8559<br />
+		<span id="company-name"><strong>F5 Stormrooms</strong><br /></span>
+		Eureka, IL 61530<br />
+		Phone: 877-436-8559<br />
+		Fax: 877-437-8554<br />
 		<a href="mailto:f5stormrooms@yahoo.com">f5stormrooms@yahoo.com</a><br />
 	</div>
 		<h5>Contact Form</h5>
@@ -70,8 +70,8 @@
 			<p><?php echo form_input($emailData); ?></p>
 			<p>Phone:</p>
 			<p>
-				(<?php echo form_input($phoneData1); ?>)
-				<?php echo form_input($phoneData2); ?>-
+				<?php echo form_input($phoneData1); ?>
+				<?php echo form_input($phoneData2); ?>
 				<?php echo form_input($phoneData3); ?>
 			</p>
 			<p>Message:</p>

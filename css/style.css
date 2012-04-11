@@ -41,7 +41,7 @@ width:250px;
 }
 
 #contact-form h5 {
-color:#c00;
+color: #c00;
 font-weight:400;
 margin-bottom:15px;
 }
@@ -162,6 +162,11 @@ color:gray;
 #contact-info h5{
 	color: #c00;
 	padding-bottom: 0;
+}
+
+#contact-info span{
+	color: black;
+	font-size: 120%;
 }
 
 /*
