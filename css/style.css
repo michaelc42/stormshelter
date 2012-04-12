@@ -36,9 +36,11 @@ left:10px;
 position:relative;
 }
 
+/*
 #header #logo-link #main-logo {
 width:250px;
 }
+*/
 
 #contact-form h5 {
 color: #c00;
@@ -167,6 +169,17 @@ color:gray;
 #contact-info span{
 	color: black;
 	font-size: 120%;
+}
+
+/* Admin Style Section */
+#admin-header{
+	margin-bottom: 20px;
+}
+#admin-header #main-logo{
+	width: 175px;
+}
+#admin-header #admin-menu{
+	padding-top: 75px;
 }
 
 /*
