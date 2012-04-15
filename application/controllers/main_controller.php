@@ -7,7 +7,7 @@
  * This controller is the public access for
  * visitors.  All areas of the site that
  * are available to non-registered viewers
- * may be viewed.
+ * may be viewed
  *****************************************/ 
 class Main_controller extends CI_Controller
 {
