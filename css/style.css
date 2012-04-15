@@ -182,6 +182,10 @@ color:gray;
 	padding-top: 75px;
 }
 
+#admin-header a{
+	text-decoration: none;
+}
+
 /*
 
 #container{

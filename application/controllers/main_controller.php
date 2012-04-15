@@ -1,5 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/** * Main_controller
+ * @author Michael W. Casey 
+ * @link www.f5stormrooms.com
+ */
+/*****************************************
+ * This controller is the public access for
+ * visitors.  All areas of the site that
+ * are available to non-registered viewers
+ * may be viewed.
+ *****************************************/ 
 class Main_controller extends CI_Controller
 {
 	function index()
@@ -137,46 +146,6 @@ class Main_controller extends CI_Controller
 			$this->load->view('includes/template', $data);
 			
 		}
-		/*
-		else
-		{
-			$this->load->model('Gallery_model');
-			//returns gallery data if gallery exists else false
-			$ret = $this->Gallery_model->doesGalleryExist($gallery);
-			if( $ret === FALSE )
-			{
-				$data['errors'] = 'Gallery not found.';
-			}
-			else
-			{ 
-				// get pictures
-				//$this->load->view('gallery_view');
-				//get all pictures that have a gallery_id of $ret->id
-				$totalPics = $this->Gallery_model->getPictures($ret[0]->id, NULL, $offset);
-				$pics = $this->Gallery_model->getPictures($ret[0]->id, $limit, $offset);
-				
-				if( $pics === FALSE )
-				{
-					$data['errors'] = 'This gallery contains no pictures.';
-					echo 'This gallery contains no pictures';
-				}
-				else
-				{		
-					$this->load->library('pagination');
-					$config['base_url'] = site_url().'galleries/'.$ret[0]->id.'/';//'http://localhost/stormshelter/galleries/'.$ret[0]->id.'/';
-					$config['total_rows'] = count($totalPics);
-					$config['per_page'] = $limit;
-				
-					$this->pagination->initialize($config);
-					$data['pics'] = $pics;
-					$data['ret'] = $ret;
-				}
-			}
-			
-			$data['main_content'] = 'gallery_view';
-			$this->load->view('includes/template', $data);
-		}
-		*/
 	}
 	
 	function gallery( $gallery, $off = NULL )
@@ -269,7 +238,7 @@ class Main_controller extends CI_Controller
 			{	
 				$gallery = $this->Gallery_model->getGalleryById( $pic->gallery_id );
 				
-				$data['path'] = site_url().'uploads/'.$gallery[0]->title.'/'.$pic->title;
+				$data['path'] = site_url().'uploads/'.$gallery[0]->directory_name.'/'.$pic->title;
 				$data['picTitle'] = $pic->title;
 				$data['picDesc'] = $pic->description;
 				$data['picID'] = $pic->id;

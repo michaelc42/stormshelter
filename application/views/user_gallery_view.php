@@ -1,9 +1,10 @@
-
+<div id="container" class="grid_16 alpha omega">
 	<?php if ( !$errors ) : ?>
 	<h2><?php echo $ret[0]->title; ?></h2>
 	<p>Click image to edit details.</p>
+	<?php echo form_open(current_url()); ?>
 	<div id="pictures" class="grid_16 alpha">
-		<?php echo form_open(current_url()); ?>
+		
 		<?php foreach ($pics as $pic): ?>
 			<div class="picture grid_4 alpha">
 				<?php
@@ -12,10 +13,10 @@
 				$thumb = $pieces[0] . $pieces[1];
 				?>
 				
-				<!-- <a href="http://localhost/stormshelter/uploads/<?php echo $ret[0]->directory_name.'/'.$pic->title; ?>"/> -->
-				<div id="image">
-				<a href="<?php echo site_url().'user/photo/'.$pic->id; ?>"/>
-					<img src="<?php echo site_url().'uploads/'.$ret[0]->directory_name;?>/thumbs/<?php echo $thumb; ?>" class="grid_4 alpha" />
+				<!-- <a href="http://localhost/stormshelter/uploads/<?php //echo $ret[0]->directory_name.'/'.$pic->title; ?>"/> -->
+				<div class="image">
+				<a href="<?php echo site_url().'user/photo/'.$pic->id; ?>">
+					<img src="<?php echo site_url().'uploads/'.$ret[0]->directory_name;?>/thumbs/<?php echo $thumb; ?>" class="grid_4 alpha" alt="image"/>
 				</a>
 				</div>
 				<br />
@@ -40,7 +41,7 @@
 		</div>
 	</div> <!--End div pictures -->
 
-	<?php form_close(); ?>
+	<?php echo form_close(); ?>
 		
 <?php else: ?>
 						

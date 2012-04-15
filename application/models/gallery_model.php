@@ -14,6 +14,9 @@ class Gallery_model extends CI_Model
 		$this->galleryPath = realpath(APPPATH . '../uploads');
 	}
 	
+	/*
+	 * Get all galleries for pagination.
+	 */
 	function getGalleries($limit = NULL, $offset = NULL)
 	{
 		$query = $this->db->get('galleries', $limit, $offset);
@@ -30,6 +33,10 @@ class Gallery_model extends CI_Model
 		//return $galleries;
 	}
 	
+	/*
+	 * This function is used to retrieve the data for the dropdown list
+	 * on the 'Add a Photo' page.
+	 */
 	function getGalleriesList()
 	{
 		$query = $this->getGalleries();
@@ -80,7 +87,6 @@ class Gallery_model extends CI_Model
 		$titleclean = preg_replace("/[^A-Za-z0-9]/","_",$title);
 		
 		$url = './uploads/'.$titleclean;
-		//$exists = $this->galleryExists($title);//make sure gallery does not exists
 		
 		if($this->galleryExists($title) === TRUE)
 		{
@@ -99,6 +105,7 @@ class Gallery_model extends CI_Model
 				);
 				
 				//worked with 0777
+				//should work with 0755
 				chmod($url, 0705);
 				chmod($url.'/thumbs', 0705);
 				
@@ -142,10 +149,10 @@ class Gallery_model extends CI_Model
 	function addPhoto($gallery, $picture)
 	{
 		$config['upload_path'] = './uploads/' . $gallery;
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size'] = '111100';
-		$config['max_width'] = '1024';
-		$config['max_height'] = '1024';
+		$config['allowed_types'] = 'gif|jpg|jpeg|png';
+		$config['max_size'] = '2048';
+		$config['max_width'] = '2048';
+		$config['max_height'] = '2048';
 			
 		$this->load->library('upload', $config);
 		
@@ -211,12 +218,12 @@ class Gallery_model extends CI_Model
 	
 	function createThumb($path, $file)
 	{
-		$config['source_image'] = $file;//'./uploads/'.$path.'/'.$file['file_name'].'/';
+		$config['source_image'] = $file;
 		$config['create_thumb'] = TRUE;
 		$config['maintain_ratio'] = TRUE;
 		$config['width'] = 220;
 		$config['height'] = 200;
-		$config['new_image'] = $this->galleryPath.'/'.$path.'/thumbs';//'./uploads/'.$path.'/thumbs/tb_'.$file['file_name'].'/';
+		$config['new_image'] = $this->galleryPath.'/'.$path.'/thumbs';
 
 		$this->load->library('image_lib');
 		$this->image_lib->initialize($config); 
@@ -247,7 +254,6 @@ class Gallery_model extends CI_Model
 		$query = $this->db->get_where('pictures', array('id' => $id,));
 		if( $query->num_rows() == 1 )
 		{
-			//return $query->result();
 			return $query->row();
 		}
 		else
@@ -268,11 +274,6 @@ class Gallery_model extends CI_Model
 		
 		$filename = $ret->title;
 		
-		/*
-		$pieces = explode('.', $filename);
-		$pieces[0] .= '_thumb.';
-		$thumb = $pieces[0] . $pieces[1];
-		*/
 		$thumb = $this->get_thumb( $filename );
 		
 		//get directory of gallery
@@ -305,6 +306,10 @@ class Gallery_model extends CI_Model
 		}
 	}
 	
+	/*
+	 * Function used to create the filename for the thumbnails
+	 * image01 becomes image01_thumb.jpg for example
+	 */
 	function get_thumb( $pic )
 	{
 		$pieces = explode('.', $pic);
@@ -312,6 +317,10 @@ class Gallery_model extends CI_Model
 		return $thumb = $pieces[0] . $pieces[1];
 	}
 	
+	/*
+	 * Function used when deleting a gallery.  Deletes all the files and
+	 * folders that were created with the directory.
+	 */
 	function rrmdir($dir) 
 	{
 		if (is_dir($dir)) 
