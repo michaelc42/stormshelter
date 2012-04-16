@@ -50,13 +50,21 @@ to the bullet resistant material used to protect police and military personnel.<
 	
 	</div>
 	
-	<div id="youtube-link" class="grid_4 omega">
-		<div id="youtube-link-content">
+	<div class="grid_4 omega news-link">
+		<div class="news-link-content">
 			<h5>As Seen on ABC's Extreme Makeover: Home Edition</h5>
 
 			<p>DuPont™ StormRoom™ with KEVLAR® was featured on ABC"s Extreme Makeover: 
 			Home Edition in the Rebuilding Joplin, MO episode. </p>
 			<a href="http://www.youtube.com/watch?v=8gqK5TV7zP8">&#187; Click to Watch a Clip From the Episode</a>
+		</div>
+	</div>
+	
+	<div class="grid_4 omega news-link">
+		<div class="news-link-content">
+			<h5>Fox News Report</h5>
+			<p>Fox News reports on a Joplin, Missouri resident who survived a devastating tornado by seeking shelter in her DuPont™ Stormroom™ with KEVLAR®.</p>
+			<a href="http://www.foxnews.com/us/2011/06/01/kevlar-bunker-provides-safehouse-tornado-survivor/?cmpid=cmty_email_Gigya_Kevlar_Bunker_Provides_Safe_House_for_Tornado_Survivor">&#187; Click Here to Read the Full Story</a>
 		</div>
 	</div>
 	

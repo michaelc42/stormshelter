@@ -84,32 +84,33 @@ text-align:justify;
 width:64%;
 }
 
-#youtube-link {
+.news-link {
 background-color:#87002f;
 color:#FFF;
+margin-bottom: 10px;
 }
 
-#youtube-link #youtube-link-content {
+.news-link .news-link-content {
 padding:10px 20px;
 }
 
-#youtube-link #youtube-link-content h5 {
+.news-link .news-link-content h5 {
 margin-bottom:10px;
 line-height:20px;
 font-weight:400;
 }
 
-#youtube-link #youtube-link-content p {
+.news-link .news-link-content p {
 text-align:left;
 }
 
-#youtube-link #youtube-link-content a {
+.news-link .news-link-content a {
 font-size:110%;
 color:#FFF;
 text-decoration:none;
 }
 
-#youtube-link #youtube-link-content a:hover,a:active {
+.news-link .news-link-content a:hover,a:active {
 text-decoration:underline;
 }
 

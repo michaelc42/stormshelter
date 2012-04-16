@@ -36,24 +36,53 @@ class User extends CI_Controller {
 		$data['main_content'] = 'upload_form';
 		$data['title'] = 'Add a Photo';
 		$data['css'] = 'style.css';
-		$data['errors'] = 0;
-		$data['success'] = 0;
+		$data['errors'] = FALSE;
 		
-		//Form Validation
-		$this->load->library('form_validation');	
-		$this->form_validation->set_rules('userfile', 'File', 'required');		
-		$this->form_validation->set_rules('galleries', 'Gallery', 'required');
+		$path = $this->input->post('galleries');
+		$file = $this->input->post('userfile');
+		$desc = $this->input->post('description');
+
+		//Upload settings
+		$config['upload_path'] = './uploads/'.$path.'/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '4000';
+		$config['max_width']  = '2048';
+		$config['max_height']  = '2048';
 		
-		if ( $this->form_validation->run() == FALSE )
+		
+		$this->load->library('upload', $config);
+		
+		if ( ! $this->upload->do_upload() )
+		{	
+			//test code, delete and uncomment previous line to revert	
+			$data['errors'] = $this->upload->display_errors();//array('error' => $this->upload->display_errors());
+			
+		}
+		else
+		{
+			$data['upload_data'] = $this->upload->data();
+			//when the picture upload is successful insert data into db
+			$this->Gallery_model->insertPicture($path, $this->upload->data(), $desc);
+			
+			//$data['main_content'] = 'upload_success_view';		
+					
+			//$this->load->view('includes/admin-template', $data);
+		}	
+		//end test code
+		
+		/*
+		if ( $this->form_validation->run() === FALSE )
 		{
 			$data['errors'] = validation_errors();
 		}
-		else
+		elseif ( $this->input->post('galleries') === TRUE &&
+				 $this->input->post('userfile') === TRUE &&
+				 $this->input->post('description') === TRUE )
 		{				
 			$path = $this->input->post('galleries');
 			$file = $this->input->post('userfile');
 			$desc = $this->input->post('description');
-			
+	
 			//Upload settings
 			$config['upload_path'] = './uploads/'.$path.'/';
 			$config['allowed_types'] = 'gif|jpg|png';
@@ -63,22 +92,25 @@ class User extends CI_Controller {
 
 			$this->load->library('upload', $config);
 			
-			if ( ! $this->upload->do_upload())
+			if ( ! $this->upload->do_upload() )
 			{	
 				//test code, delete and uncomment previous line to revert	
 				$data['errors'] = $this->upload->display_errors();//array('error' => $this->upload->display_errors());
+				
 			}
 			else
 			{
 				$data['upload_data'] = $this->upload->data();
 				//when the picture upload is successful insert data into db
 				$this->Gallery_model->insertPicture($path, $this->upload->data(), $desc);
-				$data['success'] = 1;
-				$data['main_content'] = 'upload_success_view';		
+				$data['success'] = 1;				
+				
+				//$data['main_content'] = 'upload_success_view';		
 						
-				$this->load->view('includes/admin-template', $data);
+				//$this->load->view('includes/admin-template', $data);
 			}
 		}
+		*/
 		
 		$this->load->view('includes/admin-template', $data);	
 	}
