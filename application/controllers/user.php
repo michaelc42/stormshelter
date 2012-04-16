@@ -23,6 +23,68 @@ class User extends CI_Controller {
 		$this->admin();
 	}
 	
+	//new code
+	function add_photo( $selected = NULL )
+	{
+		$this->authorized();
+		
+		//$galleries = array();
+		$this->load->model('Gallery_model');
+		
+		$data['galleries'] = $this->Gallery_model->getGalleriesList();
+		$data['selected'] = $selected;
+		$data['main_content'] = 'upload_form';
+		$data['title'] = 'Add a Photo';
+		$data['css'] = 'style.css';
+		$data['errors'] = 0;
+		$data['success'] = 0;
+		
+		//Form Validation
+		$this->load->library('form_validation');	
+		$this->form_validation->set_rules('userfile', 'File', 'required');		
+		$this->form_validation->set_rules('galleries', 'Gallery', 'required');
+		
+		if ( $this->form_validation->run() == FALSE )
+		{
+			$data['errors'] = validation_errors();
+		}
+		else
+		{				
+			$path = $this->input->post('galleries');
+			$file = $this->input->post('userfile');
+			$desc = $this->input->post('description');
+			
+			//Upload settings
+			$config['upload_path'] = './uploads/'.$path.'/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size']	= '4000';
+			$config['max_width']  = '2048';
+			$config['max_height']  = '2048';
+
+			$this->load->library('upload', $config);
+			
+			if ( ! $this->upload->do_upload())
+			{	
+				//test code, delete and uncomment previous line to revert	
+				$data['errors'] = $this->upload->display_errors();//array('error' => $this->upload->display_errors());
+			}
+			else
+			{
+				$data['upload_data'] = $this->upload->data();
+				//when the picture upload is successful insert data into db
+				$this->Gallery_model->insertPicture($path, $this->upload->data(), $desc);
+				$data['success'] = 1;
+				$data['main_content'] = 'upload_success_view';		
+						
+				$this->load->view('includes/admin-template', $data);
+			}
+		}
+		
+		$this->load->view('includes/admin-template', $data);	
+	}
+	//end new code
+	
+	/*
 	function addPhoto( $selected = NULL )
 	{
 		$this->authorized();
@@ -59,6 +121,18 @@ class User extends CI_Controller {
 
 		$this->load->library('upload', $config);
 
+
+		//Form Validation
+		$this->load->library('form_validation');	
+		$this->form_validation->set_rules('userfile', 'File', 'required');		
+		$this->form_validation->set_rules('galleries', 'Gallery', 'required');
+		
+		if (  !( $this->form_validation->run() ) )
+		{
+			$data['errors'] = validation_errors();
+		}
+		//new code ^
+
 		if ( ! $this->upload->do_upload())
 		{
 			$error = array('error' => $this->upload->display_errors());
@@ -66,25 +140,27 @@ class User extends CI_Controller {
 			
 			//test code, delete and uncomment previous line to revert	
 			$data['error'] = $error;
-			$data['main_content'] = 'upload_form';
-			$this->load->view('includes/admin-template', $data);
+			//$data['main_content'] = 'upload_success'; //upload_form
+			//$this->load->view('includes/admin-template', $data);
 		}
 		else
 		{
-			//$data = array('upload_data' => $this->upload->data());
 			$data['upload_data'] = $this->upload->data();
 			$this->load->model('Gallery_model');
 			//when the picture upload is successful insert data into db
 			$this->Gallery_model->insertPicture($path, $this->upload->data(), $desc);
 		
-			$data['main_content'] = 'upload_success';
+			//$data['main_content'] = 'upload_success';
 			
-			//$this->load->view('upload_success', $data);
-			
-			//delete next line and uncomment previous to revert
-			$this->load->view('includes/admin-template', $data);
+			//$this->load->view('includes/admin-template', $data);
 		}
+		
+		//new code
+		$data['main_content'] = 'upload_success';
+		
+		$this->load->view('includes/admin-template', $data);
 	}
+	*/
 	
 	function admin()
 	{

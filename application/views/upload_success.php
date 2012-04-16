@@ -14,5 +14,12 @@
 
 <p><?php echo anchor('index', 'Upload Another File!'); ?></p>
 
+<p>
+<?php if ( $errors ): ?>
+<?php echo $errors; ?>
+<?php endif; ?>
+
+</p>
+
 </body>
 </html>
