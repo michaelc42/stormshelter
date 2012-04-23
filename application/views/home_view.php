@@ -14,6 +14,13 @@
 			<img id="main-logo" class="" src="<?php echo base_url();?>images/logo3.png" alt="F5 Stormrooms Logo"/>
 		</a>
 		-->
+		<div id="navigation">
+			<ul>
+				<a href="<?php echo site_url(); ?>" id="first-nav-link"><li>Home</li></a>
+				<a href="product_info"><li>Product Info</li></a>
+				<a href="#"><li>FAQs</li></a>
+			</ul>
+		</div>
 	</div>
 </div>	
 
@@ -40,7 +47,7 @@ Available in a variety of rectangular configurations,
 the DuPont&#8482; StormRoom&#8482; can be easily incorporated into a new building design or added to 
 an existing home without disrupting the building process or your daily routine. </p>
 		</div>
-		<div class="grid_7 omega">
+		<div class="grid_7 omega" id="<!--[if lt IE 9]>provenbyscienceIE <![end if]-->">
 			<img class="grid_3 alpha" src="<?php echo base_url();?>images/pic3.jpg" alt="F5 Stormrooms Image Three"/>
 			<h5 class="grid_4 alpha omega">Proven by Science</h5>
 			<p class="grid_4 alpha omega">Proven by Science

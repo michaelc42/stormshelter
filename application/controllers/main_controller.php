@@ -11,6 +11,10 @@
  *****************************************/ 
 class Main_controller extends CI_Controller
 {
+	function test_gallery()
+	{
+		$this->load->view('test_view');
+	}
 	function index()
 	{
 		$data['errors'] = FALSE;
@@ -256,6 +260,36 @@ class Main_controller extends CI_Controller
 		
 		$this->load->view('includes/template', $data);
 		
+	}
+	
+	function product_info()
+	{
+		$data = NULL;
+		$data['main_content'] = 'product_info_view';
+		$data['active'] = 'product_info';
+		$data['title'] = 'Product Information';
+		$data['css'] = 'alt_style.css';
+		$this->load->view('includes/alt-template', $data);
+	}
+	
+	function proven_by_science()
+	{
+		$data = NULL;
+		$data['main_content'] = 'proven_by_science_view';
+		$data['active'] = 'proven_by_science';
+		$data['title'] = 'Proven By Science';
+		$data['css'] = 'alt_style.css';
+		$this->load->view('includes/alt-template', $data);
+	}
+	
+	function exceeding_standards()
+	{
+		$data = NULL;
+		$data['main_content'] = 'exceeding_standards_view';
+		$data['active'] = 'exceeding_standards';
+		$data['title'] = 'Meeting and Exceeding Standards';
+		$data['css'] = 'alt_style.css';
+		$this->load->view('includes/alt-template', $data);
 	}
 }
 

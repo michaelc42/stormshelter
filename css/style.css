@@ -24,11 +24,57 @@ margin-bottom:0;
 }
 
 #header #header-img {
-width:820px;
 height:330px;
-background-image:url("../images/header2.jpg");
+background-image:url("../images/header2-820.jpg");
+background-repeat: no-repeat;
 background-size:820px;
 }
+
+/*Navigation Bar */
+#header #navigation {
+	padding-top: 293px;
+	padding-left: 0px;
+}
+
+#header #navigation ul{
+	list-style-type: none;
+}
+
+
+#header #navigation li{
+	display: inline;
+	margin: 0;
+	padding: 0;
+	padding-top: 12px;
+	padding-bottom: 11px;
+	padding-right: 20px;
+	padding-left: 20px;
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+	border-left: solid 1px;
+	text-align: center;
+	margin-right: -5px; /*gets rid of small margin to the right of each link element */
+}
+
+#header #navigation #first-nav-link li{
+	border-left: 0;
+}
+
+#header #navigation li:hover{
+	background-color: #a60a22;
+}
+
+#header #navigation a{
+	text-decoration: none;
+}
+
+#header #navigation a:link, a:visited {
+}
+
+#header #navigation a:hover, a:active {
+}
+/* End navigation bar */
 
 #header #logo-link {
 top:80px;
@@ -59,6 +105,11 @@ margin-bottom:0;
 display:none;
 position:absolute;
 left:-999em;
+}
+
+#info #provenbyscienceIE{
+	padding-top: 50px;
+	padding-bottom:20px;
 }
 
 #info img {

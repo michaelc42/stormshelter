@@ -39,6 +39,7 @@
 */
 
 $route['default_controller'] = 'main_controller';
+$route['index'] = 'main_controller';
 $route['404_override'] = 'filenotfound_controller';
 $route['message'] = 'main_controller/message';
 $route['message\#contact-form'] = 'main_controller/message#contact-form';
@@ -48,6 +49,9 @@ $route['photo/(:any)'] = 'main_controller/photo/$1';
 $route['photo'] = 'main_controller/photo';
 $route['gallery/(:any)'] = 'main_controller/gallery/$1';
 $route['galleries/(:any)'] = 'main_controller/galleries/$1';
+$route['product_info'] = 'main_controller/product_info';
+$route['proven_by_science'] = 'main_controller/proven_by_science';
+$route['exceeding_standards'] = 'main_controller/exceeding_standards';
 //$route['user'] = 'user';
 //$route['user/login'] = 'user/login';
 

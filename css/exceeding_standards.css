@@ -1,0 +1,110 @@
+
+html{
+font-family:Verdana, Arial, Helvetica, sans-serif;\
+}
+
+body{
+	margin-top: 30px;
+	color:#808080;
+}
+
+h1, h2, h3, h4, h5, h6{
+	color: #87002f;
+}
+
+/* Navigation Section on pages other than homepage */
+#alt-nav{
+	text-decoration: none;
+	padding-left: 10px;
+}
+#alt-nav ul{
+	list-style-type: none;
+}
+
+#alt-nav ul li{
+	padding: 0;
+	margin: 0;
+	font-size: 15px;
+}
+
+#alt-nav li a {
+	display: block; /* Makes whole li a link */
+}
+
+#alt-nav a {
+	text-decoration: none;
+	color: #cc0000;
+}
+
+#alt-nav a:link, a:visited{
+
+}
+
+#alt-nav a:hover, a:active{
+	background-color: #cc0000;
+	color: white;
+}
+
+/* Product Information Page */
+#container #product-info-page{
+
+}
+
+#container #product-info-page p {
+	width: 400px; 
+	text-align: justify;
+}
+
+#container #info-section {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+#container #main {
+	padding: 10px;
+	padding-right: 0;
+	padding-left: 0;
+}
+
+#tornado-image{
+	height: 200px;
+}
+
+/* Footer Style */
+#footer{
+	margin-bottom: 30px;
+}
+
+#footer #footer-content {
+border-top:1px solid #000;
+padding-top:15px;
+}
+
+#footer #footer-content p {
+	margin-bottom: 0px;
+}
+
+#footer #footer-content #login {
+	text-align: right;
+}
+/* End Footer Style */
+
+/* Classes */
+.shadow {
+  -moz-box-shadow:    -1px -2px 3px 2px #ccc;
+  -webkit-box-shadow: -1px -2px 3px 2px #ccc;
+  box-shadow:         -1px -2px 3px 2px #ccc;
+}
+
+.justify{
+	text-align: justify;
+}
+
+.image-padding-left{
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	float: right;
+}
+/* End Classes */
+
