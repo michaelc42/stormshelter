@@ -269,6 +269,7 @@ class Main_controller extends CI_Controller
 		$data['active'] = 'product_info';
 		$data['title'] = 'Product Information';
 		$data['css'] = 'alt_style.css';
+		$data['header_image'] = 'prod_info_banner.jpg';
 		$this->load->view('includes/alt-template', $data);
 	}
 	
@@ -279,6 +280,7 @@ class Main_controller extends CI_Controller
 		$data['active'] = 'proven_by_science';
 		$data['title'] = 'Proven By Science';
 		$data['css'] = 'alt_style.css';
+		$data['header_image'] = 'prod_info_banner.jpg';
 		$this->load->view('includes/alt-template', $data);
 	}
 	
@@ -289,6 +291,40 @@ class Main_controller extends CI_Controller
 		$data['active'] = 'exceeding_standards';
 		$data['title'] = 'Meeting and Exceeding Standards';
 		$data['css'] = 'alt_style.css';
+		$data['header_image'] = 'prod_info_banner.jpg';
+		$this->load->view('includes/alt-template', $data);
+	}
+	
+	function using_product()
+	{
+		$data = NULL;
+		$data['main_content'] = 'using_product_view';
+		$data['active'] = 'using_product';
+		$data['title'] = 'Using the Product';
+		$data['css'] = 'alt_style.css';
+		$data['header_image'] = 'using_product_banner.jpg';
+		$this->load->view('includes/alt-template', $data);
+	}
+	
+	function frequently_asked_questions()
+	{
+		$data = NULL;
+		$data['main_content'] = 'faqs_view';
+		$data['active'] = 'FAQs';
+		$data['title'] = 'Frequently Asked Questions';
+		$data['css'] = 'alt_style.css';
+		$data['header_image'] = 'using_product_banner.jpg';
+		$this->load->view('includes/alt-template', $data);
+	}
+	
+	function architectural_details()
+	{
+		$data = NULL;
+		$data['main_content'] = 'architectural_details_view';
+		$data['active'] = 'architectural_details';
+		$data['title'] = 'Architectural Details';
+		$data['css'] = 'alt_style.css';
+		$data['header_image'] = 'using_product_banner.jpg';
 		$this->load->view('includes/alt-template', $data);
 	}
 }

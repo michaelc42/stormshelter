@@ -1,7 +1,6 @@
 		<h4>The only in-home shelter reinforced with DuPont™ KEVLAR®</h4>
-		<p>
+		<p class="grid_11 alpha">
 			Being prepared for severe weather conditions goes beyond buying batteries and stocking up on bottled 
-			<img src="<?php echo site_url('images/prod_info_tornado.jpg');?>" class="image-padding-left" id="tornado-image" alt="Tornado"/>
 			water during storm season. It starts right within the home. During a hurricane or tornado, windborne debris
 			ranging from broken building materials to common household items can become dangerous flying missiles. 
 			Unfortunately, masonry, framing and sheet rock alone are not designed to stop this kind of threat. If a tornado 
@@ -13,6 +12,6 @@
 			in new building designs. Families feel protected in their own home and builders feel confident that their houses offer 
 			reliable storm protection. Houses can be rebuilt, but families are irreplaceable.
 		</p>
-		</div><!--Close justify -->
-	</div><!--End info-section -->
-</div><!--End main -->
+		<p class="grid_3 omega" id="image-div">
+			<img src="<?php echo site_url('images/prod_info_tornado.jpg');?>" class="" id="tornado-image" alt="Tornado"/>
+		</p>

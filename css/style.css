@@ -31,48 +31,66 @@ background-size:820px;
 }
 
 /*Navigation Bar */
-#header #navigation {
-	padding-top: 293px;
-	padding-left: 0px;
+#navigation{
+	position: relative;
+	top: 283px;
+	font-size: 16px;
 }
-
-#header #navigation ul{
-	list-style-type: none;
-}
-
-
-#header #navigation li{
-	display: inline;
-	margin: 0;
-	padding: 0;
-	padding-top: 12px;
-	padding-bottom: 11px;
-	padding-right: 20px;
-	padding-left: 20px;
+#navigation *{
 	color: white;
-	font-size: 15px;
-	font-weight: bold;
-	border-left: solid 1px;
-	text-align: center;
-	margin-right: -5px; /*gets rid of small margin to the right of each link element */
 }
-
-#header #navigation #first-nav-link li{
-	border-left: 0;
-}
-
-#header #navigation li:hover{
-	background-color: #a60a22;
-}
-
-#header #navigation a{
+#navigation a{
 	text-decoration: none;
 }
-
-#header #navigation a:link, a:visited {
+#navigation ul, ul li,ul li ul li{
+	list-style-type: none;
+	margin:0;
+	padding: 0;
+}
+#navigation ul li ul:first-child{
+	float: left;
+}
+#navigation ul li ul li:first-child{
+	border-right: 1px solid white;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+#navigation ul li{
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
-#header #navigation a:hover, a:active {
+#navigation #home-link{
+	padding-left: 0px;
+}	
+#navigation #prod-info-link ul{
+	width: 106px;
+}
+#navigation #using-prod-link ul{
+	width: 148px;
+}
+
+#navigation #prod-info-link .dropdown{
+	width: 153px;
+}
+
+#navigation #using-prod-link .dropdown{
+	width: 143px;
+}
+
+#navigation .dropdown{
+	position: relative;
+	left: -10000px;
+}
+#navigation .dropdown, ul li ul:hover{
+	background: #87002f;
+}
+#navigation ul li ul li:hover{
+	background: #c52f48;
+}
+
+#navigation .menu:hover li{
+	left: 0;
 }
 /* End navigation bar */
 

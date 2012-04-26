@@ -1,3 +1,7 @@
+
+		</div><!--Close justify -->
+	</div><!--End info-section -->
+</div><!--End main -->
 <div id="footer" class="grid_14 alpha">
 	<div id="footer-content" class="grid_14 alpha">
 		<p>						

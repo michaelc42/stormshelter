@@ -10,7 +10,18 @@ body{
 
 h1, h2, h3, h4, h5, h6{
 	color: #87002f;
+	margin-bottom: 10px;
 }
+
+a{
+	color: #cc0000;
+}
+
+/* Header Titles */
+#f5stormrooms-header{
+	color: black;
+}
+/* End Header Titles */
 
 /*Header Image*/
 #header-image{
@@ -26,8 +37,12 @@ h1, h2, h3, h4, h5, h6{
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
+
+#alt-nav a{
+	text-decoration: none;
+}
 #alt-nav .active{
-	background-color: red;
+	background-color: #87002f;
 	display: block;
 }
 
@@ -42,12 +57,12 @@ h1, h2, h3, h4, h5, h6{
 
 #alt-nav ul li ul:first-child{
 	float:left;
-	padding-left: 0px;
+	padding-left: 5px;
 	
 }
 
 #alt-nav ul li ul li:hover{
-	background-color: blue;
+	background-color: #666666;
 }
 
 #alt-nav ul li ul li{
@@ -68,9 +83,10 @@ h1, h2, h3, h4, h5, h6{
 #alt-nav a{
 	color: white;
 	text-decoration: none;
+	display: block;
 }
 
-#alt-nav .dropdown{/*#product-info-dropdown {*/
+#alt-nav .dropdown{
 	position: relative;
 	margin-left: 0px;
 	left:-10000px;
@@ -78,16 +94,26 @@ h1, h2, h3, h4, h5, h6{
 	display: block;
 	width: 140px;
 }
-#alt-nav #product-info-item:hover div{
+
+
+#alt-nav .dropdown:hover div{
 	left: 0px;
 }
 
-#alt-nav #using-product-item:hover div{
+#alt-nav .dropdown:hover div{
+	left: 0px;
+}
+
+#alt-nav #product-info-item:hover li{
+	left: 0px;
+}
+
+#alt-nav #using-product-item:hover li{
 	left: 0px;
 }
 #alt-nav #using-product-item ul
 {
-	width: 145px;
+	width: 140px;
 }
 
 #alt-nav #gallery-item ul li{
@@ -115,9 +141,25 @@ h1, h2, h3, h4, h5, h6{
 }
 
 #tornado-image{
-	height: 200px;
+ width: 160px;
 }
 
+/* Using Product Page */
+#container .using_product_image{
+	width: 160px;
+	margin-right: 20px;
+
+}
+/* End Using Product Page */
+#faq-links{
+	margin-bottom: 20px;
+}
+#faq-links p{
+	margin-bottom: 0px;
+}
+/* FAQs page */
+
+/* End FAQs */
 /* Footer Style */
 #footer{
 	margin-bottom: 30px;
@@ -149,7 +191,7 @@ padding-top:15px;
 }
 
 .image-padding-left{
-	padding-left: 5px;
+	padding-left: 15px;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	float: right;

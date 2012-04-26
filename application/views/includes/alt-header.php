@@ -1,7 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
@@ -28,7 +27,7 @@
 			DuPont&#8482; StormRoom&#8482; with Kevlar&#174;
 		</h4>
 	</div><!-- End names div -->
-	<img id="header-image" src="<?php echo site_url('images/prod_info_banner.jpg')?>" alt="Product Information"/>
+	<img id="header-image" src="<?php echo site_url('images/'.$header_image)?>" alt="Product Information"/>
 	<div class="grid_14 alpha" id="alt-nav">	
 		<ul>
 			
@@ -47,31 +46,27 @@
 						<li class="<?php echo ( $active == 'product_info' ? 'active' : '' ); ?>">
 							<a href="product_info">Product Info</a>
 						</li>
-						<div id="product-info-dropdown" class="dropdown">								
-							<li class="<?php echo ( $active == 'proven_by_science' ? 'active' : '' ); ?>">
+							<li class="dropdown <?php echo ( $active == 'proven_by_science' ? 'active' : '' ); ?>">
 								<a href="proven_by_science">Proven by Science</a>
 							</li>
-							<li class="<?php echo ( $active == 'exceeding_standards' ? 'active' : ''); ?>">
+							<li class="dropdown <?php echo ( $active == 'exceeding_standards' ? 'active' : ''); ?>">
 								<a href="exceeding_standards">Exceeding Standards</a>
 							</li>
-						</div>
-					</ul>
+						</ul>
 				</div>
 			</li>
 			<li>
 				<div id="using-product-item">
 					<ul>
 						<li  class="<?php echo ( $active == 'using_product' ? 'active' : '' ); ?>">
-							<a href="product_info">Using the Product</a>
+							<a href="using_product">Using the Product</a>
 						</li>
-						<div id="using-product-dropdown" class="dropdown">								
-							<li class="<?php echo ( $active == 'faqs' ? 'active' : '' ); ?>">
-								<a href="FAQs">FAQs</a>
-							</li>
-							<li class="<?php echo ( $active == 'architectural_details' ? 'active' : ''); ?>">
-								<a href="architectural_details">Architectural Details</a>
-							</li>
-						</div>
+						<li class="dropdown <?php echo ( $active == 'faqs' ? 'active' : '' ); ?>">
+							<a href="frequently_asked_questions">FAQs</a>
+						</li>
+						<li class="dropdown <?php echo ( $active == 'architectural_details' ? 'active' : ''); ?>">
+							<a href="architectural_details">Architectural Details</a>
+						</li>
 					</ul>
 				</div>
 			</li>
@@ -84,5 +79,5 @@
 			</li>
 		</ul>
 	</div> <!--Close alt-nav-->
-	<div class="grid_11 alpha omega" id="info-section">
-	<div class="grid_11 alpha omega justify">
+	<div class="grid_14 alpha omega beta" id="info-section">
+	<div class="grid_14 alpha omega beta justify">

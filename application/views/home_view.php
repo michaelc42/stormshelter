@@ -16,9 +16,51 @@
 		-->
 		<div id="navigation">
 			<ul>
-				<a href="<?php echo site_url(); ?>" id="first-nav-link"><li>Home</li></a>
-				<a href="product_info"><li>Product Info</li></a>
-				<a href="#"><li>FAQs</li></a>
+				<li id="home-link">
+					<ul>
+						<li>
+							<a href="<? echo site_url();?>">Home</a>
+						</li>
+					</ul>
+				</li>
+				<li id="prod-info-link">	
+					<div class="menu">
+						<ul>
+							<li>
+								<a href="<? echo site_url('product_info');?>">Product Info</a>
+							</li>
+							<li class="dropdown">
+								<a href="<? echo site_url('proven_by_science');?>">Proven by Science</a>
+							</li>
+							<li class="dropdown">
+								<a href="<? echo site_url('exceeding_standards');?>">Exceeding Standards</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				
+				<li id="using-prod-link">
+					<div class="menu">
+					<ul>
+						<li>
+							<a href="<? echo site_url('using_product');?>">Using the Product</a>
+						</li>
+						<li class="dropdown">
+							<a href="<? echo site_url('frequently_asked_questions');?>">FAQs</a>
+						</li>
+						<li class="dropdown">
+							<a href="<? echo site_url('architectural_details');?>">Architectural Details</a>
+						</li>
+					</ul>
+					</div>
+				</li>
+				<li id="galleries-link">
+					<ul>
+						<li>
+							<a href="<? echo site_url('galleries');?>">Gallery</a>	
+						</li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -47,7 +89,7 @@ Available in a variety of rectangular configurations,
 the DuPont&#8482; StormRoom&#8482; can be easily incorporated into a new building design or added to 
 an existing home without disrupting the building process or your daily routine. </p>
 		</div>
-		<div class="grid_7 omega" id="<!--[if lt IE 9]>provenbyscienceIE <![end if]-->">
+		<div class="grid_7 omega" id="<!--[if lt IE 9]>provenbyscienceIE<![end if]-->">
 			<img class="grid_3 alpha" src="<?php echo base_url();?>images/pic3.jpg" alt="F5 Stormrooms Image Three"/>
 			<h5 class="grid_4 alpha omega">Proven by Science</h5>
 			<p class="grid_4 alpha omega">Proven by Science
