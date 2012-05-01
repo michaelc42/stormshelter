@@ -1,7 +1,4 @@
 <div id="container" class="grid_16 alpha omega">
-
-<h2>All galleries loaded</h2>
-
 <div class="galleries grid_16 alpha omega">
 <?php foreach ($galleries as $gallery) : ?>
 	<div class="gallery	 grid_4 alpha">
@@ -22,7 +19,7 @@
 <?php endforeach; ?>
 </div>
 
-<div id="pagination" class="grid_16">
+<div id="pagination" class="grid_16 alpha">
 	<p>
 		<?php echo $this->pagination->create_links(); ?>
 	</p>

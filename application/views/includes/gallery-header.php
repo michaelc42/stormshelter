@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/reset.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/text.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/960.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/overall-style.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url().'css/'.$css;?>"/>
 
 <title>F5 Stormrooms - <?php echo $title; ?></title>
@@ -19,6 +20,5 @@
 </head>
 
 <body class="container_16">
-<!--[if lte IE 7]>
-<h3>To view this website with full styling, please upgrade your browser.</h3>
-<![endif]-->
+<div id="container" class="grid_16 alpha omega">
+<h1>F5 Stormrooms</h1>

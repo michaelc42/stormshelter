@@ -55,6 +55,7 @@ $route['exceeding_standards'] = 'main_controller/exceeding_standards';
 $route['using_product'] = 'main_controller/using_product';
 $route['frequently_asked_questions'] = 'main_controller/frequently_asked_questions';
 $route['architectural_details'] = 'main_controller/architectural_details';
+$route['build_locations'] = 'main_controller/build_locations';
 //$route['user'] = 'user';
 //$route['user/login'] = 'user/login';
 

@@ -1,0 +1,55 @@
+body{
+	margin-top: 20px;
+}
+
+/*Pagination styling*/
+#pagination{
+	font-size: 15px;
+	/*Fixes space problem with pagination*/
+	position: relative;
+	left: -5px;
+}
+
+#pagination strong{
+	background: green;
+}
+
+#pagination a, strong{
+	background: blue;
+	text-decoration: none;
+	padding: 10px;
+	color: white;
+}
+
+#pagination a:hover{
+	background: red;
+}
+
+/*End Pagination Style*/
+
+/*Footer*/
+#footer{
+	margin-bottom: 30px;
+}
+
+#footer #footer-content {
+border-top:1px solid #000;
+padding-top:15px;
+}
+
+#footer #footer-content p {
+	margin-bottom: 0px;
+}
+
+#footer #footer-content #login {
+	text-align: right;
+}
+/*End Footer*/
+
+
+/*Test Section*/
+#photo img{
+max-width: 900px;
+max-height: 500px;
+}
+/* End Test */

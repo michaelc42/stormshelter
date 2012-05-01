@@ -1,5 +1,4 @@
-<div id="container" class="grid_16 alpha omega">
-	<h1>Gallery</h1>
+<p><a href="<?php echo site_url('galleries');?>">Back to Galleries</a></p>
 	<?php if ( !$errors ) : ?>
 	<div id="pictures" class="grid_16 alpha omega">
 		<h2><?php echo $ret[0]->title; ?></h2>
@@ -10,7 +9,7 @@
 			$pieces[0] .= '_thumb.';
 			$thumb = $pieces[0] . $pieces[1];
 			?>
-			<a href="<?php echo site_url().'photo/'.$pic->id ?>">
+			<a href="<?php echo site_url().'photo/'.$pic->id ?>/#photo">
 				<img src="<?php echo site_url().'uploads/'.$ret[0]->directory_name?>/thumbs/<?php echo $thumb ?>" class="grid_4 alpha" alt="image" />
 			</a>
 		</div><!-- end PICTURE div -->

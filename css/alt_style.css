@@ -1,6 +1,6 @@
 
 html{
-font-family:Verdana, Arial, Helvetica, sans-serif;\
+font-family:Verdana, Arial, Helvetica, sans-serif;
 }
 
 body{
@@ -30,93 +30,80 @@ a{
 /* End Header Image */
 
 /* Navigation Section on pages other than homepage */
-#alt-nav{
-	margin-bottom: 0px;
-	background: #cc0000;
-	height: 20px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
 
+#alt-nav{
+	position: relative;
+	font-size: 100%;/*1.2em;*/
+	background:#b2031f;
+	font-weight: bold;
+	height: 36px;
+}
+#alt-nav *{
+	color: white;
+}
 #alt-nav a{
 	text-decoration: none;
-}
-#alt-nav .active{
-	background-color: #87002f;
 	display: block;
 }
-
-#alt-nav *{
-	padding:0;
-	margin:0;
-}
-
-#alt-nav ul li{
+#alt-nav ul, #alt-nav ul li, #alt-nav ul li ul li{
 	list-style-type: none;
+	margin:0;
+	padding: 0;
 }
 
 #alt-nav ul li ul:first-child{
-	float:left;
-	padding-left: 5px;
-	
+	float: left;
 }
-
-#alt-nav ul li ul li:hover{
-	background-color: #666666;
+#alt-nav ul li ul:first-child li:first-child{
+	padding-top: 8px;
+	padding-bottom: 8px;
 }
 
 #alt-nav ul li ul li{
-	padding-left: 5px;
-}
-
-#alt-nav #home-link{
-	width: 70px;
+	padding-right: 10px;
+	padding-left: 10px;
 }
 
 #alt-nav ul li ul{
-	width: 110px;
+ width: 4em;
 }
 
-#alt-nav li{
-	background-color: #cc0000;
+#alt-nav #prod-info-link ul:first-child{
+	width: 12.5%;
 }
-#alt-nav a{
-	color: white;
-	text-decoration: none;
-	display: block;
+#alt-nav #prod-info-link .dropdown{
+	width: 130%;
 }
+#alt-nav #using-prod-link ul:first-child{
+	width: 18%;
+}
+#alt-nav #using-prod-link .dropdown{
+	width: 91%;
+}
+
 
 #alt-nav .dropdown{
 	position: relative;
-	margin-left: 0px;
-	left:-10000px;
-	float:none;
-	display: block;
-	width: 140px;
+	left: -10000px;
+}
+#alt-nav .dropdown, ul li ul:hover{
+	background: #b2031f;
 }
 
-
-#alt-nav .dropdown:hover div{
-	left: 0px;
+#alt-nav .dropdown{
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+#alt-nav ul li ul li:hover{
+	background: #7d001d;
 }
 
-#alt-nav .dropdown:hover div{
-	left: 0px;
+#alt-nav .menu:hover li{
+	left: 0;
 }
 
-#alt-nav #product-info-item:hover li{
-	left: 0px;
-}
-
-#alt-nav #using-product-item:hover li{
-	left: 0px;
-}
-#alt-nav #using-product-item ul
-{
-	width: 140px;
-}
-
-#alt-nav #gallery-item ul li{
+#alt-nav .active{
+	background: #7d001d;
 }
 
 /* Product Information Page */
@@ -180,11 +167,13 @@ padding-top:15px;
 /* End Footer Style */
 
 /* Classes */
+/*
 .shadow {
   -moz-box-shadow:    -1px -2px 3px 2px #ccc;
   -webkit-box-shadow: -1px -2px 3px 2px #ccc;
   box-shadow:         -1px -2px 3px 2px #ccc;
 }
+*/
 
 .justify{
 	text-align: justify;

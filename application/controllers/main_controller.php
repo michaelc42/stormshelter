@@ -147,7 +147,7 @@ class Main_controller extends CI_Controller
 			$data['galleries'] = $limited_galleries;
 			
 			//$data['galleries'] = $ret;
-			$this->load->view('includes/template', $data);
+			$this->load->view('includes/gallery-template', $data);
 			
 		}
 	}
@@ -217,7 +217,7 @@ class Main_controller extends CI_Controller
 			$data['main_content'] = 'gallery_view';
 			$data['css'] = 'gallery.css';
 			$data['title'] = 'Gallery';
-			$this->load->view('includes/template', $data);
+			$this->load->view('includes/gallery-template', $data);
 	 }
 	
 	function photo($id = NULL)
@@ -246,6 +246,7 @@ class Main_controller extends CI_Controller
 				$data['picTitle'] = $pic->title;
 				$data['picDesc'] = $pic->description;
 				$data['picID'] = $pic->id;
+				$data['picGallery'] = $pic->gallery_id;
 				
 			}
 			else
@@ -258,7 +259,7 @@ class Main_controller extends CI_Controller
 			$data['errors'] = 'No ID given.';
 		}
 		
-		$this->load->view('includes/template', $data);
+		$this->load->view('includes/gallery-template', $data);
 		
 	}
 	
@@ -310,7 +311,7 @@ class Main_controller extends CI_Controller
 	{
 		$data = NULL;
 		$data['main_content'] = 'faqs_view';
-		$data['active'] = 'FAQs';
+		$data['active'] = 'faqs';
 		$data['title'] = 'Frequently Asked Questions';
 		$data['css'] = 'alt_style.css';
 		$data['header_image'] = 'using_product_banner.jpg';
@@ -326,6 +327,40 @@ class Main_controller extends CI_Controller
 		$data['css'] = 'alt_style.css';
 		$data['header_image'] = 'using_product_banner.jpg';
 		$this->load->view('includes/alt-template', $data);
+	}
+	
+	function build_locations()
+	{
+		$data['locations'] = array();
+		$data['main_content'] = 'build_locations_view';
+		$data['active'] = 'build_locations';
+		$data['title'] = 'Build Locations';
+		$data['css'] = 'alt_style.css';
+		$data['header_image'] = 'using_product_banner.jpg';
+		$this->load->view('includes/alt-template', $data);
+	}
+	
+	function bcrypt()
+	{
+		$password = 'michael1';
+		$actualPassword = 'michael1';
+		$this->load->library('PasswordHash');
+		$pHash = new PasswordHash();
+		
+		echo $hashedPass = $pHash->HashPassword($actualPassword);
+		echo '<br />';
+		//check the user input unhased password with the hashed
+		//password retrieved from the database
+		$check = $pHash->CheckPassword($password, $hashedPass);
+		
+		if( $check )
+		{
+			echo 'Password Correct!';
+		}
+		else
+		{
+			echo 'Password Wrong!';
+		}
 	}
 }
 
