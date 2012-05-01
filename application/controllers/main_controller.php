@@ -331,12 +331,28 @@ class Main_controller extends CI_Controller
 	
 	function build_locations()
 	{
-		$data['locations'] = array();
+		$data['locations'] = FALSE;
 		$data['main_content'] = 'build_locations_view';
 		$data['active'] = 'build_locations';
 		$data['title'] = 'Build Locations';
 		$data['css'] = 'alt_style.css';
-		$data['header_image'] = 'using_product_banner.jpg';
+		$data['header_image'] = 'prod_info_banner.jpg';
+		
+		$data['errors'] = FALSE;
+		$data['locations'] = FALSE;
+		
+		
+		$query = $this->db->get('build_locations');
+		
+		if ( $query )
+		{
+			$data['locations'] = $query->result();
+		}
+		else
+		{
+			$data['errors'] = 'There was an error.';
+		}
+		
 		$this->load->view('includes/alt-template', $data);
 	}
 	

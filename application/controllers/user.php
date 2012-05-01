@@ -565,6 +565,53 @@ class User extends CI_Controller {
 		//$this->load->view('includes/admin-template', $data);
 		
 	}
+	
+	
+	function add_build_locations()
+	{
+		$this->load->library('form_validation');
+		$data['errors'] = '';
+		$data['success'] = '';
+		
+		$this->form_validation->set_rules('location', 'Location', 'required');
+		
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data['errors'] = validation_errors();
+		}
+		elseif ( $this->input->post('location'))
+		{
+			//Get Geocode
+			$this->load->model('Google_geocoder_model');
+			//Get coords returns false if there is an error
+			$coords = $this->Google_geocoder_model->get_coords( $this->input->post('location') );
+				
+			if( $coords )
+			{
+				//Insert into database
+				$array = array(
+					'name'=>$this->input->post('location'),
+					'latlong'=>$coords,
+					'zindex'=>1,
+				);
+				$query = $this->db->insert( 'build_locations', $array );
+				if( $query )
+				{
+					$data['success'] = 'Location: '.$this->input->post('location').' has been added.';
+				}
+			}
+			else
+			{
+				$data['errors'] = 'Could not retrieve the information.';
+			}
+		}
+		
+		
+		$data['main_content'] = 'add_build_locations_view';
+		$data['title'] = 'Add Build Locations';
+		$data['css'] = 'admin_style.css';
+		$this->load->view('includes/admin-template', $data);
+	}
 
 	function authorized()
 	{

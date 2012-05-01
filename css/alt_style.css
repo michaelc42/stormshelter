@@ -147,6 +147,20 @@ a{
 /* FAQs page */
 
 /* End FAQs */
+
+/* Map Page */
+#map{
+	float: left;
+	width: 500px;
+	height: 400px;
+}
+#maplinks{
+	float: left;
+}
+#maplinks ul{
+	list-style-type: none;
+}
+/* End Map Page */
 /* Footer Style */
 #footer{
 	margin-bottom: 30px;
