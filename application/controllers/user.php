@@ -15,7 +15,7 @@ class User extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		
 		//delete after debugging
-		//$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(TRUE);
 	}
 
 	function index()
@@ -45,9 +45,9 @@ class User extends CI_Controller {
 		//Upload settings
 		$config['upload_path'] = './uploads/'.$path.'/';
 		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '4000';
-		$config['max_width']  = '2048';
-		$config['max_height']  = '2048';
+		$config['max_size']	= '4096';
+		$config['max_width']  = '4096';
+		$config['max_height']  = '4096';
 		
 		
 		$this->load->library('upload', $config);
@@ -569,11 +569,25 @@ class User extends CI_Controller {
 	
 	function add_build_locations()
 	{
+		$this->authorized();
+		
 		$this->load->library('form_validation');
 		$data['errors'] = '';
 		$data['success'] = '';
+		$data['locations'] = '';
 		
 		$this->form_validation->set_rules('location', 'Location', 'required');
+		
+		//Get locations to show them to admin user
+		if ( $query = $this->db->get('build_locations') )
+		{
+			$data['locations'] = $query->result();
+		}
+		else
+		{
+			$data['errors'] = 'Could not retrieve locations from database.';
+		}
+		
 		
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -611,6 +625,29 @@ class User extends CI_Controller {
 		$data['title'] = 'Add Build Locations';
 		$data['css'] = 'admin_style.css';
 		$this->load->view('includes/admin-template', $data);
+	}
+	
+	function delete_location( $id = FALSE )
+	{
+		$this->authorized();
+		
+		if( $id )
+		{
+			$this->db->delete('build_locations', array('id'=>$id));
+			echo 'Location deleted.';
+		}
+		else
+		{
+			echo 'No data given to delete.';
+		}
+		
+		echo '<br />You will be redirected shortly.';
+		echo header('Refresh: 2; URL='.site_url('user/add_build_locations'));
+	}
+	
+	function edit_location( $id = FALSE )
+	{
+		$this->authorized();
 	}
 
 	function authorized()

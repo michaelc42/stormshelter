@@ -151,8 +151,8 @@ class Gallery_model extends CI_Model
 		$config['upload_path'] = './uploads/' . $gallery;
 		$config['allowed_types'] = 'gif|jpg|jpeg|png';
 		$config['max_size'] = '2048';
-		$config['max_width'] = '2048';
-		$config['max_height'] = '2048';
+		$config['max_width'] = '4096';
+		$config['max_height'] = '4096';
 			
 		$this->load->library('upload', $config);
 		
@@ -176,7 +176,7 @@ class Gallery_model extends CI_Model
 
 		$this->db->insert('pictures', $data);
 		
-		$this->createThumb($path, $file['full_path']);
+		$this->createThumb($path, $file['full_path'], $file['file_name']);
 	}
 	
 	function updatePicture( $id, $gallery_id, $title, $desc )
@@ -216,24 +216,43 @@ class Gallery_model extends CI_Model
 		}
 	}
 	
-	function createThumb($path, $file)
+	function createThumb($path, $file, $filename)
 	{
+		$size = getimagesize( $file );
+	
 		$config['source_image'] = $file;
 		$config['create_thumb'] = TRUE;
 		$config['maintain_ratio'] = TRUE;
 		$config['width'] = 220;
 		$config['height'] = 200;
 		$config['new_image'] = $this->galleryPath.'/'.$path.'/thumbs';
-
 		$this->load->library('image_lib');
 		$this->image_lib->initialize($config); 
-		if ( ! $this->image_lib->resize())
+		
+		
+		//if height > width
+		if ( $size[1] > $size[0] )
+		{
+			$config['master_dim'] = 'width';
+			$config['height'] = 200;
+			$config['width'] = 220;
+			$config['maintain_ratio'] = TRUE;
+			$this->image_lib->clear();
+			//print_r($config);
+			$this->image_lib->initialize( $config );
+			if ( ! $this->image_lib->resize() )
+			{
+				echo $this->image_lib->display_errors();
+			}
+		}
+		elseif ( ! $this->image_lib->resize() )
 		{
 			echo $this->image_lib->display_errors();
 		}
+		
 	}
 	
-	//retrieves all photos in a gallery
+		//retrieves all photos in a gallery
 	function getPictures($id, $limit, $offset)
 	{	
 		$query = $this->db->get_where('pictures', array('gallery_id'=>$id,), $limit, $offset);

@@ -26,7 +26,7 @@
 
 					
 <div class="grid_16 errors">
-	<?php //echo $errors['error']; ?>
+	<?php echo $errors['error']; ?>
 </div>
 
 </body>

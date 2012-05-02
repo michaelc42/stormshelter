@@ -34,7 +34,9 @@ body{
 }
 
 #pictures img{
+	/*
 	max-height: 160px;
+	*/
 }
 
 
@@ -45,6 +47,12 @@ body{
 .picture #image{
 	
 	height: 150px;
+}
+
+.image{
+	height: 200px;
+	width: 220px;
+	background-repeat: no-repeat;
 }
 
 

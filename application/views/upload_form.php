@@ -19,7 +19,7 @@
 
 <p class="errors">
 <?php if( $errors ): ?>
-	<?php echo $errors['errors'] ; ?>
+	<?php //echo $errors['errors']; ?>
 <?php elseif( $upload_data ): ?>
 	<h3>Upload Successful!</h3>
 	<ul>
