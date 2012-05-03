@@ -49,6 +49,12 @@ body{
 	*/
 }
 
+.image{
+	height: 200px;
+	width: 220px;
+}
+
+
 
 /* Admin Style Section */
 #admin-header{
