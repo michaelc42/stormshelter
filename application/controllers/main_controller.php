@@ -147,7 +147,7 @@ class Main_controller extends CI_Controller
 			
 			$data['galleries'] = $limited_galleries;
 			$data['active'] = 'galleries';
-			$data['header_image'] = '';
+			$data['header_image'] = 'gallery_banner.jpg';
 			
 			//$data['galleries'] = $ret;
 			$this->load->view('includes/alt-template', $data);//'includes/gallery-template', $data);
@@ -216,7 +216,7 @@ class Main_controller extends CI_Controller
 			}
 			
 			$data['active'] = 'galleries';
-			$data['header_image'] = '';
+			$data['header_image'] = 'gallery_banner.jpg';
 			$data['main_content'] = 'gallery_view';
 			$data['css'] = 'admin_galleries.css';//'gallery.css';
 			$data['title'] = 'Gallery';
@@ -231,7 +231,7 @@ class Main_controller extends CI_Controller
 		$data['main_content'] = 'photo_view';
 		$data['css'] = 'single-photo.css';
 		$data['active'] = 'galleries';
-		$data['header_image'] = '';
+		$data['header_image'] = 'gallery_banner.jpg';
 			
 		//test
 		$data['path'] = '';
