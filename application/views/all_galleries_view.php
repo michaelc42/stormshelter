@@ -3,15 +3,19 @@
 <?php foreach ($galleries as $gallery) : ?>
 	<div class="gallery	 grid_4 alpha">
 		<h3><?php echo $gallery->title; ?></h3>
-		<p>
-			<a href="<?php echo site_url().'gallery/'.$gallery->id; ?>">
-				<?php if ( $gallery->front_image ) : ?>
-					<img src="<?php echo site_url().'uploads/'.$gallery->directory_name.'/thumbs/'.$gallery->front_image;?>" alt="image" />
-				<?php else: ?>					
-					<img src="<?php echo site_url().'uploads/default_image.gif'; ?>" alt="img"/>
-				<?php endif; ?>
-			</a>
-		</p>
+		<a href="<?php echo site_url().'gallery/'.$gallery->id; ?>">
+			<p>
+				<div class="image"
+					style="background-image: url(
+					<?php if ( $gallery->front_image ) : ?>
+						<?php echo site_url();?>uploads/<?php echo $gallery->directory_name;?>/thumbs/<?php echo $gallery->front_image;?>
+					<?php else: ?>					
+						<?php echo site_url();?>uploads/default_image.gif 
+					<?php endif; ?>
+					)">
+				</div>
+			</p>
+		</a>
 		<p>
 			<?php echo $gallery->description; ?>	
 		</p>

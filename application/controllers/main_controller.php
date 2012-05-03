@@ -101,8 +101,9 @@ class Main_controller extends CI_Controller
 	 * Functions pertaining to the gallery 
 	 */
 	function galleries( $off = 0 )
-	{	$limit = 4;
-		$offset = $off;
+	{	
+		$offset = intval( $off );
+		$limit = 4;
 		$data = array();
 		$data['errors'] = NULL;
 		$data['ret'] = NULL;
@@ -145,18 +146,19 @@ class Main_controller extends CI_Controller
 			$this->pagination->initialize($config);
 			
 			$data['galleries'] = $limited_galleries;
+			$data['active'] = 'galleries';
+			$data['header_image'] = '';
 			
 			//$data['galleries'] = $ret;
-			$this->load->view('includes/gallery-template', $data);
+			$this->load->view('includes/alt-template', $data);//'includes/gallery-template', $data);
 			
 		}
 	}
 	
 	function gallery( $gallery, $off = NULL )
 	 {
-		 
+		$offset = intval( $off );
 		$limit = 8;
-		$offset = $off;
 		$data['errors'] = NULL;
 		 
 		 $this->load->model('Gallery_model');
@@ -213,20 +215,24 @@ class Main_controller extends CI_Controller
 				}
 			}
 			
-			
+			$data['active'] = 'galleries';
+			$data['header_image'] = '';
 			$data['main_content'] = 'gallery_view';
-			$data['css'] = 'gallery.css';
+			$data['css'] = 'admin_galleries.css';//'gallery.css';
 			$data['title'] = 'Gallery';
-			$this->load->view('includes/gallery-template', $data);
+			$this->load->view('includes/alt-template', $data);//'includes/gallery-template', $data);
 	 }
 	
 	function photo($id = NULL)
 	{
+		$id = intval( $id );
 		$data['errors'] = NULL;
 		$data['title'] = 'Photo';
 		$data['main_content'] = 'photo_view';
-		$data['css'] = 'style.css';
-		
+		$data['css'] = 'single-photo.css';
+		$data['active'] = 'galleries';
+		$data['header_image'] = '';
+			
 		//test
 		$data['path'] = '';
 		$data['picTitle'] = '';
@@ -259,7 +265,7 @@ class Main_controller extends CI_Controller
 			$data['errors'] = 'No ID given.';
 		}
 		
-		$this->load->view('includes/gallery-template', $data);
+		$this->load->view('includes/alt-template', $data);//'includes/gallery-template', $data);
 		
 	}
 	
@@ -356,6 +362,7 @@ class Main_controller extends CI_Controller
 		$this->load->view('includes/alt-template', $data);
 	}
 	
+	/*Testing bcrypt encryption
 	function bcrypt()
 	{
 		$password = 'michael1';
@@ -378,6 +385,7 @@ class Main_controller extends CI_Controller
 			echo 'Password Wrong!';
 		}
 	}
+	*/
 }
 
 /* End of file main_controller.php */ 

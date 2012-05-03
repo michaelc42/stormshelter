@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/reset.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/text.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/960.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/alt_style.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url().'css/'.$css;?>"/>
 <!--<![endif]-->
 <title>F5 Stormrooms - <?php echo $title; ?></title>

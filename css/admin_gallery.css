@@ -52,6 +52,7 @@ body{
 .image{
 	height: 200px;
 	width: 220px;
+	background-repeat: no-repeat;
 }
 
 

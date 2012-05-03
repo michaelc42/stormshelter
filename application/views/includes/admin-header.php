@@ -37,11 +37,15 @@
 			New Gallery
 		</a>
 		
-		<a class="grid_2 alpha" href="<?php echo site_url('user/addPhoto'); ?>">
+		<a class="grid_2 alpha" href="<?php echo site_url('user/add_photo'); ?>">
 			Add Photo
 		</a>
 		
-		<a class="grid_2 alpha suffix_4" href="<?php echo site_url('user/logout'); ?>">
+		<a class="grid_2 alpha" href="<?php echo site_url('user/add_build_locations'); ?>">
+			Add Location
+		</a>
+		
+		<a class="grid_2 alpha suffix_2" href="<?php echo site_url('user/logout'); ?>">
 			Logout
 		</a>
 	</div>

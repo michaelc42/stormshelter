@@ -15,7 +15,7 @@ class User extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		
 		//delete after debugging
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 	}
 
 	function index()
@@ -32,7 +32,7 @@ class User extends CI_Controller {
 		$this->load->model('Gallery_model');
 		
 		$data['galleries'] = $this->Gallery_model->getGalleriesList();
-		$data['selected'] = $selected;
+		$data['selected'] = intval( $selected );
 		$data['main_content'] = 'upload_form';
 		$data['title'] = 'Add a Photo';
 		$data['css'] = 'style.css';
@@ -70,129 +70,9 @@ class User extends CI_Controller {
 		}	
 		//end test code
 		
-		/*
-		if ( $this->form_validation->run() === FALSE )
-		{
-			$data['errors'] = validation_errors();
-		}
-		elseif ( $this->input->post('galleries') === TRUE &&
-				 $this->input->post('userfile') === TRUE &&
-				 $this->input->post('description') === TRUE )
-		{				
-			$path = $this->input->post('galleries');
-			$file = $this->input->post('userfile');
-			$desc = $this->input->post('description');
-	
-			//Upload settings
-			$config['upload_path'] = './uploads/'.$path.'/';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['max_size']	= '4000';
-			$config['max_width']  = '2048';
-			$config['max_height']  = '2048';
-
-			$this->load->library('upload', $config);
-			
-			if ( ! $this->upload->do_upload() )
-			{	
-				//test code, delete and uncomment previous line to revert	
-				$data['errors'] = $this->upload->display_errors();//array('error' => $this->upload->display_errors());
-				
-			}
-			else
-			{
-				$data['upload_data'] = $this->upload->data();
-				//when the picture upload is successful insert data into db
-				$this->Gallery_model->insertPicture($path, $this->upload->data(), $desc);
-				$data['success'] = 1;				
-				
-				//$data['main_content'] = 'upload_success_view';		
-						
-				//$this->load->view('includes/admin-template', $data);
-			}
-		}
-		*/
-		
 		$this->load->view('includes/admin-template', $data);	
 	}
 	//end new code
-	
-	/*
-	function addPhoto( $selected = NULL )
-	{
-		$this->authorized();
-		
-		$galleries = array();
-		$this->load->model('Gallery_model');
-		
-		$data['galleries'] = $this->Gallery_model->getGalleriesList();
-		$data['selected'] = $selected;
-		$data['main_content'] = 'upload_form';
-		$data['title'] = 'Add a Photo';
-		$data['css'] = 'style.css';
-		
-		$this->load->view('includes/admin-template', $data);
-	}
-	
-
-	function do_upload()
-	{
-		$this->authorized();
-		
-		$data['css'] = 'style.css';
-		$data['title'] = 'Uploading';
-		
-		$path = $this->input->post('galleries');
-		$file = $this->input->post('userfile');
-		$desc = $this->input->post('description');
-		
-		$config['upload_path'] = './uploads/'.$path.'/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '4000';
-		$config['max_width']  = '2048';
-		$config['max_height']  = '2048';
-
-		$this->load->library('upload', $config);
-
-
-		//Form Validation
-		$this->load->library('form_validation');	
-		$this->form_validation->set_rules('userfile', 'File', 'required');		
-		$this->form_validation->set_rules('galleries', 'Gallery', 'required');
-		
-		if (  !( $this->form_validation->run() ) )
-		{
-			$data['errors'] = validation_errors();
-		}
-		//new code ^
-
-		if ( ! $this->upload->do_upload())
-		{
-			$error = array('error' => $this->upload->display_errors());
-			//$this->load->view('upload_form', $error);
-			
-			//test code, delete and uncomment previous line to revert	
-			$data['error'] = $error;
-			//$data['main_content'] = 'upload_success'; //upload_form
-			//$this->load->view('includes/admin-template', $data);
-		}
-		else
-		{
-			$data['upload_data'] = $this->upload->data();
-			$this->load->model('Gallery_model');
-			//when the picture upload is successful insert data into db
-			$this->Gallery_model->insertPicture($path, $this->upload->data(), $desc);
-		
-			//$data['main_content'] = 'upload_success';
-			
-			//$this->load->view('includes/admin-template', $data);
-		}
-		
-		//new code
-		$data['main_content'] = 'upload_success';
-		
-		$this->load->view('includes/admin-template', $data);
-	}
-	*/
 	
 	function admin()
 	{
@@ -267,12 +147,12 @@ class User extends CI_Controller {
 		$this->authorized();
 		
 		$limit = 4;
-		$offset = $off;
+		$offset = intval( $off );
 		//$data = array();		
 		
 		//next two lines test line
 		//template variables
-		$data['css'] = 'admin_gallery.css';
+		$data['css'] = 'admin_galleries.css';//'admin_gallery.css';
 		$data['main_content'] = 'user_galleries_view';
 		$data['title'] = 'Galleries';
 		
@@ -325,7 +205,7 @@ class User extends CI_Controller {
 	 {
 		 
 		$limit = 8;
-		$offset = $off;
+		$offset = intval( $off );
 		$data['errors'] = NULL;
 		 
 		 $this->load->model('Gallery_model');
@@ -384,7 +264,7 @@ class User extends CI_Controller {
 			
 			
 			$data['main_content'] = 'user_gallery_view';
-			$data['css'] = 'admin-gallery.css';
+			$data['css'] = 'admin_galleries.css';//'admin-gallery.css';
 			$data['title'] = 'Gallery';
 			$this->load->view('includes/admin-template', $data);
 	 }
@@ -394,6 +274,7 @@ class User extends CI_Controller {
 	{
 		$this->authorized();
 		
+		$id = intval( $id );
 		// Prime Variables
 		$data['errors'] = NULL;
 		
@@ -450,7 +331,7 @@ class User extends CI_Controller {
 		}
 		
 		$data['main_content'] = 'user_photo_view';
-		$data['css'] = 'style.css';
+		$data['css'] = 'single-photo.css';
 		$data['title'] = 'Photo';
 		$this->load->view('includes/admin-template', $data);
 		
@@ -501,6 +382,8 @@ class User extends CI_Controller {
 	{
 		$this->authorized();
 		
+		$id = intval( $id );
+		
 		$data['errors'] = '';
 	
 		if ( $id )
@@ -530,6 +413,8 @@ class User extends CI_Controller {
 	
 	function confirmDelete($id)
 	{
+		$id = intval( $id );
+		
 		$this->authorized();
 		$data['id'] = $id;
 		$this->load->view('user_confirm_delete_view', $data);
@@ -539,6 +424,7 @@ class User extends CI_Controller {
 	{
 		$this->authorized();
 		
+		$id = intval( $id );
 		$data['errors'] = '';
 		$data['id'] = $id;
 		
@@ -631,6 +517,8 @@ class User extends CI_Controller {
 	{
 		$this->authorized();
 		
+		$id = intval( $id );
+		
 		if( $id )
 		{
 			$this->db->delete('build_locations', array('id'=>$id));
@@ -648,6 +536,7 @@ class User extends CI_Controller {
 	function edit_location( $id = FALSE )
 	{
 		$this->authorized();
+		$id = intval( $id );
 	}
 
 	function authorized()

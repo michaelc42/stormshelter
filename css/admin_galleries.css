@@ -17,9 +17,19 @@ a{
 	max-height: 200px;
 }
 
+.picture{
+	margin-bottom: 20px;
+}
+
 .picture #image{
 	
 	height: 150px;
+}
+
+.image{
+	height: 200px;
+	width: 220px;
+	background-repeat: no-repeat;
 }
 
 /* Admin Style Section */

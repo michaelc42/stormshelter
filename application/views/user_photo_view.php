@@ -14,7 +14,7 @@
 		<?php echo $picTitle; ?>
 	</p>
 	<p>
-		<img src="<?php echo $path; ?>" />
+		<img class="photo" src="<?php echo $path; ?>" />
 	</p>
 	<p>
 		Description: 
