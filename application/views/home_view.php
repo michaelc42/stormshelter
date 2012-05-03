@@ -74,9 +74,13 @@
 
 	<div id="info" class="grid_7">
 		<div class="grid_7 omega">
-			<img class="grid_3 alpha" src="<?php echo base_url();?>images/pic1.jpg" alt="F5 Stormrooms Image One"/>
+			<a href="<?php echo site_url('product_info');?>">
+				<img class="grid_3 alpha" src="<?php echo base_url();?>images/pic1.jpg" alt="F5 Stormrooms Image One"/>
+			</a>
 			
-			<h5 class="grid_4 alpha omega">A Safe Room in Your House</h5>
+			<a href="<?php echo site_url('product_info');?>">
+				<h5 class="grid_4 alpha omega">A Safe Room in Your House</h5>
+			</a>
 			<p class="grid_4 alpha">
 Imagine a safe, secure place right in the home, removed from harms way 
 during a tornado or hurricane. A place that can blend seamlessly with a family's everyday life and 
@@ -84,16 +88,27 @@ offer storm protection when it counts. That place is the DuPont&#8482; StormRoom
 reinforced with DuPont&#8482; Kevlar&#174;. </p>
 		</div>
 		<div class="grid_7 omega">
-			<img class="grid_3 alpha" src="<?php echo base_url();?>images/pic2.jpg" alt="F5 Storrooms Image Two"/>
-			<h5 class="grid_4 alpha omega">A Simple Yet Important Addition</h5>
+			
+			<a href="<?php echo site_url('using_product');?>">	
+				<img class="grid_3 alpha" src="<?php echo base_url();?>images/pic2.jpg" alt="F5 Storrooms Image Two"/>
+			</a>
+			<a href="<?php echo site_url('using_product');?>">	
+				<h5 class="grid_4 alpha omega">A Simple Yet Important Addition</h5>
+			</a>
 			<p class="grid_4 alpha omega">
 Available in a variety of rectangular configurations, 
 the DuPont&#8482; StormRoom&#8482; can be easily incorporated into a new building design or added to 
 an existing home without disrupting the building process or your daily routine. </p>
 		</div>
 		<div class="grid_7 omega">
-			<img class="grid_3 alpha" src="<?php echo base_url();?>images/pic3.jpg" alt="F5 Stormrooms Image Three"/>
-			<h5 class="grid_4 alpha omega">Proven by Science</h5>
+			
+			<a href="<?php echo site_url('proven_by_science');?>">
+				<img class="grid_3 alpha" src="<?php echo base_url();?>images/pic3.jpg" alt="F5 Stormrooms Image Three"/>
+			</a>
+			
+			<a href="<?php echo site_url('proven_by_science');?>">
+				<h5 class="grid_4 alpha omega">Proven by Science</h5>
+			</a>
 			<p class="grid_4 alpha omega">Proven by Science
 DuPont&#8482; StormRoom&#8482;, the only in-home shelter reinforced with DuPont&#8482; Kevlar&#174; - similar 
 to the bullet resistant material used to protect police and military personnel.</p>
