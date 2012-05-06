@@ -84,6 +84,7 @@ background-size:820px;
 #navigation .dropdown{
 	position: relative;
 	left: -10000px;
+	display: none;
 }
 #navigation .dropdown, ul li ul:hover{
 	background: #87002f;
@@ -94,6 +95,7 @@ background-size:820px;
 
 #navigation .menu:hover li{
 	left: 0;
+	display: block;
 }
 /* End navigation bar */
 
@@ -174,16 +176,23 @@ font-weight:400;
 
 .news-link .news-link-content p {
 text-align:left;
+margin-bottom: 0;
 }
 
 .news-link .news-link-content a {
 font-size:110%;
 color:#FFF;
 text-decoration:none;
+display: block;
 }
 
 .news-link .news-link-content a:hover,a:active {
 text-decoration:underline;
+}
+
+.news-link .news-link-box:hover{
+background: #C52F48;
+
 }
 
 #pre-footer {

@@ -85,6 +85,7 @@ a{
 #alt-nav .dropdown{
 	position: relative;
 	left: -10000px;
+	display: none;
 }
 #alt-nav .dropdown, ul li ul:hover{
 	background: #b2031f;
@@ -100,6 +101,7 @@ a{
 
 #alt-nav .menu:hover li{
 	left: 0;
+	display: block;
 }
 
 #alt-nav .active{
