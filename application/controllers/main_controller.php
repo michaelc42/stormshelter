@@ -11,6 +11,14 @@
  *****************************************/ 
 class Main_controller extends CI_Controller
 {
+	function __construct()
+	{
+		parent::__construct();
+		
+		//delete after debugging
+		$this->output->enable_profiler(TRUE);
+	}
+	
 	function test_gallery()
 	{
 		$this->load->view('test_view');
@@ -155,7 +163,7 @@ class Main_controller extends CI_Controller
 		}
 	}
 	
-	function gallery( $gallery, $off = NULL )
+	function gallery( $gallery = NULL, $off = NULL )
 	 {
 		$offset = intval( $off );
 		$limit = 8;
@@ -163,7 +171,7 @@ class Main_controller extends CI_Controller
 		 
 		 $this->load->model('Gallery_model');
 			//returns gallery data if gallery exists, else false
-			$ret = $this->Gallery_model->doesGalleryExist($gallery);
+			$ret = $this->Gallery_model->getGalleryById( $gallery );
 			if( $ret === FALSE )
 			{
 				$data['errors'] = 'Gallery not found.';
@@ -186,6 +194,11 @@ class Main_controller extends CI_Controller
 				else
 				{		
 					//run this if there are pictures for the gallery
+					foreach ( $pics as $pic )
+					{	
+						$thumb = $this->Gallery_model->get_thumb( $pic->title );
+						$pic->thumb = $thumb;
+					}
 					$this->load->library('pagination');
 					$config['base_url'] = site_url('gallery').'/'.$ret[0]->id.'/';
 					$config['total_rows'] = count($totalPics);
@@ -275,7 +288,7 @@ class Main_controller extends CI_Controller
 		$data['main_content'] = 'product_info_view';
 		$data['active'] = 'product_info';
 		$data['title'] = 'Product Information';
-		$data['css'] = 'alt_style.css';
+		$data['css'] = '';//'alt_style.css';
 		$data['header_image'] = 'prod_info_banner.jpg';
 		$this->load->view('includes/alt-template', $data);
 	}
@@ -286,7 +299,7 @@ class Main_controller extends CI_Controller
 		$data['main_content'] = 'proven_by_science_view';
 		$data['active'] = 'proven_by_science';
 		$data['title'] = 'Proven By Science';
-		$data['css'] = 'alt_style.css';
+		$data['css'] = '';//'alt_style.css';
 		$data['header_image'] = 'prod_info_banner.jpg';
 		$this->load->view('includes/alt-template', $data);
 	}
@@ -297,7 +310,7 @@ class Main_controller extends CI_Controller
 		$data['main_content'] = 'exceeding_standards_view';
 		$data['active'] = 'exceeding_standards';
 		$data['title'] = 'Meeting and Exceeding Standards';
-		$data['css'] = 'alt_style.css';
+		$data['css'] = '';//'alt_style.css';
 		$data['header_image'] = 'prod_info_banner.jpg';
 		$this->load->view('includes/alt-template', $data);
 	}
@@ -308,7 +321,7 @@ class Main_controller extends CI_Controller
 		$data['main_content'] = 'using_product_view';
 		$data['active'] = 'using_product';
 		$data['title'] = 'Using the Product';
-		$data['css'] = 'alt_style.css';
+		$data['css'] = '';//'alt_style.css';
 		$data['header_image'] = 'using_product_banner.jpg';
 		$this->load->view('includes/alt-template', $data);
 	}
@@ -319,7 +332,7 @@ class Main_controller extends CI_Controller
 		$data['main_content'] = 'faqs_view';
 		$data['active'] = 'faqs';
 		$data['title'] = 'Frequently Asked Questions';
-		$data['css'] = 'alt_style.css';
+		$data['css'] = '';//'alt_style.css';
 		$data['header_image'] = 'using_product_banner.jpg';
 		$this->load->view('includes/alt-template', $data);
 	}
@@ -330,7 +343,7 @@ class Main_controller extends CI_Controller
 		$data['main_content'] = 'architectural_details_view';
 		$data['active'] = 'architectural_details';
 		$data['title'] = 'Architectural Details';
-		$data['css'] = 'alt_style.css';
+		$data['css'] = '';//'alt_style.css';
 		$data['header_image'] = 'using_product_banner.jpg';
 		$this->load->view('includes/alt-template', $data);
 	}
@@ -341,7 +354,7 @@ class Main_controller extends CI_Controller
 		$data['main_content'] = 'build_locations_view';
 		$data['active'] = 'build_locations';
 		$data['title'] = 'Build Locations';
-		$data['css'] = 'alt_style.css';
+		$data['css'] = '';//'alt_style.css';
 		$data['header_image'] = 'prod_info_banner.jpg';
 		
 		$data['errors'] = FALSE;
@@ -386,6 +399,34 @@ class Main_controller extends CI_Controller
 		}
 	}
 	*/
+	
+	function data_test()
+	{
+		echo 'TEST';
+		
+		$id = 52;
+		
+		//$this->db->get_where('galleries', array('id'=>$id,));
+		$this->db->select('*');
+		$this->db->where( 'galleries.id', $id );
+		$this->db->from('galleries');
+		$this->db->join('pictures', 'galleries.id = pictures.gallery_id');
+
+		$query = $this->db->get();
+		//echo '<pre>';
+		//print_r( $query->result() );
+		//echo '</pre>';
+		
+		$results = $query->result();
+		
+		foreach ( $results as $result )
+		{
+			echo '<pre>';
+			print_r( $result );
+			
+			echo '<br /></pre>';
+		}
+	}
 }
 
 /* End of file main_controller.php */ 

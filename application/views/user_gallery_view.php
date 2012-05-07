@@ -15,7 +15,7 @@
 
 				<a href="<?php echo site_url().'user/photo/'.$pic->id; ?>">
 					<div class="image"
-					style="background-image:url('<?php echo site_url()?>uploads/<?php echo $ret[0]->directory_name;?>/thumbs/<?php echo $thumb; ?>')">
+					style="background-image:url('<?php echo site_url()?>uploads/<?php echo $ret[0]->directory_name;?>/thumbs/<?php echo $pic->thumb; ?>')">
 					</div>
 				</a>
 				<br />

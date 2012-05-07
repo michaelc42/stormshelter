@@ -15,6 +15,8 @@
 
 <title>F5 Stormrooms - <?php echo $title; ?></title>
 
+<!--<meta name="description" content="" />-->
+
 
 </head>
 

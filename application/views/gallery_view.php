@@ -3,15 +3,10 @@
 	<div id="pictures" class="grid_16 alpha omega">
 		<h2><?php echo $ret[0]->title; ?></h2>
 		<?php foreach ($pics as $pic): ?>
-		<div class="picture grid_4 alpha">
-			<?php
-			$pieces = explode('.', $pic->title);
-			$pieces[0] .= '_thumb.';
-			$thumb = $pieces[0] . $pieces[1];
-			?>
+		<div class="picture grid_4 alpha">	
 			<a href="<?php echo site_url().'photo/'.$pic->id; ?>">
 				<div class="image"
-				style="background-image:url('<?php echo site_url()?>uploads/<?php echo $ret[0]->directory_name;?>/thumbs/<?php echo $thumb; ?>')">
+				style="background-image:url('<?php echo site_url()?>uploads/<?php echo $ret[0]->directory_name;?>/thumbs/<?php echo $pic->thumb; ?>')">
 				</div>
 			</a>
 		</div><!-- end PICTURE div -->

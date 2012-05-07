@@ -86,7 +86,7 @@ background-size:820px;
 	left: -10000px;
 	display: none;
 }
-#navigation .dropdown, ul li ul:hover{
+#navigation .dropdown{
 	background: #87002f;
 }
 #navigation ul li ul li:hover{
@@ -96,6 +96,7 @@ background-size:820px;
 #navigation .menu:hover li{
 	left: 0;
 	display: block;
+	top: -5px;
 }
 /* End navigation bar */
 

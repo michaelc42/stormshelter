@@ -87,7 +87,7 @@ a{
 	left: -10000px;
 	display: none;
 }
-#alt-nav .dropdown, ul li ul:hover{
+#alt-nav .dropdown{
 	background: #b2031f;
 }
 
@@ -101,6 +101,7 @@ a{
 
 #alt-nav .menu:hover li{
 	left: 0;
+	top: -5px;
 	display: block;
 }
 

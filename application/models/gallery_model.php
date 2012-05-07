@@ -56,17 +56,52 @@ class Gallery_model extends CI_Model
 	 * Usful for getting the gallery id
 	 * Found by using unique path name
 	 */
+	 
+	/* Not Used
 	function getGallery($path)
 	{
 		return $this->db->get_where('galleries', array('directory_name'=>$path,));
 	}
+	*/
 	
+	/*
 	function getGalleryById( $id )
 	{
 		return $this->db->get_where('galleries', array('id'=>$id,))->result();
 	}
+	* 
+	* function getGalleryById( $id )
+	{
+		$query = $this->db->get_where('galleries', array('id'=>$id,));
+		
+		if ( $query->num_rows() == 1 )
+		{
+			return $query->result();
+		} 
+		else
+		{
+			return FALSE;
+		}
+	}
+	*/
+	
+	function getGalleryById( $id )
+	{
+		
+		$query = $this->db->get_where('galleries', array('id'=>$id,));
+		
+		if ( $query->num_rows() > 0 )
+		{
+			return $query->result();
+		} 
+		else
+		{
+			return FALSE;
+		}
+	}
 	
 	/* Returns a result if gallery exists */
+	/*Not used
 	function doesGalleryExist($id)
 	{
 		$query = $this->db->get_where('galleries', array('id'=>$id,));
@@ -80,6 +115,7 @@ class Gallery_model extends CI_Model
 			return FALSE;
 		}
 	}
+	*/
 	
 	
 	function addGallery($title, $description)
@@ -132,6 +168,7 @@ class Gallery_model extends CI_Model
 	}
 	
 	/* Returns TRUE or FALSE if Gallery exists */
+	/* Not used
 	function galleryExists($name)
 	{
 		$query = $this->db->get_where('galleries', array( 'title'=>$name,));
@@ -145,6 +182,7 @@ class Gallery_model extends CI_Model
 			return FALSE;
 		}
 	}
+	*/
 	
 	function addPhoto($gallery, $picture)
 	{
@@ -252,7 +290,7 @@ class Gallery_model extends CI_Model
 		
 	}
 	
-		//retrieves all photos in a gallery
+	//retrieves all photos in a gallery
 	function getPictures($id, $limit, $offset)
 	{	
 		$query = $this->db->get_where('pictures', array('gallery_id'=>$id,), $limit, $offset);
@@ -296,7 +334,8 @@ class Gallery_model extends CI_Model
 		$thumb = $this->get_thumb( $filename );
 		
 		//get directory of gallery
-		$ret = $this->doesGalleryExist( $ret->gallery_id );
+		//$ret = $this->doesGalleryExist( $ret->gallery_id );
+		$ret = $this->getGalleryById( $ret->gallery_id );
 		
 		if ( $ret === FALSE )
 		{

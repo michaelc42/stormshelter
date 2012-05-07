@@ -201,16 +201,17 @@ class User extends CI_Controller {
 	/*
 	 * Load a single gallery.
 	 */
-	 function gallery( $gallery, $off = NULL )
+	 function gallery( $gallery = NULL, $off = NULL )
 	 {
-		 
+		ini_set('display_errors', 'On');
+error_reporting(E_ALL); 
 		$limit = 8;
 		$offset = intval( $off );
 		$data['errors'] = NULL;
 		 
 		 $this->load->model('Gallery_model');
 			//returns gallery data if gallery exists, else false
-			$ret = $this->Gallery_model->doesGalleryExist($gallery);
+			$ret = $this->Gallery_model->getGalleryById($gallery);
 			if( $ret === FALSE )
 			{
 				$data['errors'] = 'Gallery not found.';
@@ -224,6 +225,7 @@ class User extends CI_Controller {
 				$totalPics = $this->Gallery_model->getPictures($ret[0]->id, NULL, $offset);
 				$pics = $this->Gallery_model->getPictures($ret[0]->id, $limit, $offset);
 				
+				
 				if( $pics === FALSE )
 				{
 					$data['errors'] = 'This gallery contains no pictures.';
@@ -233,6 +235,12 @@ class User extends CI_Controller {
 				else
 				{		
 					//run this if there are pictures for the gallery
+					foreach ( $pics as $pic )
+					{	
+						$thumb = $this->Gallery_model->get_thumb( $pic->title );
+						$pic->thumb = $thumb;
+					}
+					
 					$this->load->library('pagination');
 					$config['base_url'] = site_url('user/gallery').'/'.$ret[0]->id.'/';
 					$config['total_rows'] = count($totalPics);
