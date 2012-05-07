@@ -15,7 +15,9 @@ class User extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		
 		//delete after debugging
-		//$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);		
+		//ini_set('display_errors', 'On');
+		//error_reporting(E_ALL);
 	}
 
 	function index()
@@ -202,9 +204,7 @@ class User extends CI_Controller {
 	 * Load a single gallery.
 	 */
 	 function gallery( $gallery = NULL, $off = NULL )
-	 {
-		ini_set('display_errors', 'On');
-error_reporting(E_ALL); 
+	 { 
 		$limit = 8;
 		$offset = intval( $off );
 		$data['errors'] = NULL;
