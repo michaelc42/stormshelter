@@ -102,7 +102,72 @@ class User extends CI_Controller {
 			$data['errors'] = validation_errors();
 		}
 		else //else check to see if the username and pw are correct
-		{
+		{	
+			//set count for login_attempts and time for the first try attempt	
+			if ( $this->session->userdata('login_attempts') === FALSE )
+			{
+				$this->session->set_userdata('login_attempts', 1);
+				
+				$this->session->set_userdata('first_login_time_attempt', time());
+			}
+			
+			//add one to login attempts
+			$this->session->set_userdata('login_attempts', $this->session->userdata('login_attempts')+1);
+			
+			//check if the reset time has been satisfied and reset the attempts and time
+			if ( $this->session->userdata('last_login_time_attempt') 
+				&& time() - $this->session->userdata('last_login_time_attempt') > 30 )
+			{
+				echo 'You waited x seconds';
+				
+				//reset login attempt data
+				$this->session->set_userdata('login_attempts', 1);
+			
+				$this->session->set_userdata('first_login_time_attempt', time());
+				
+				$this->session->unset_userdata('last_login_time_attempt', time());
+			}
+			
+			//flag an error if the user attempts to login more then five times
+			//and if time
+			if( $this->session->userdata('login_attempts') > 3 
+				&& time() - $this->session->userdata('first_login_time_attempt') < 60 )
+			{
+				if ( $this->session->userdata('last_login_time_attempt') === FALSE )
+				{
+					//add a last login time to use to check the reset parameters
+					$this->session->set_userdata('last_login_time_attempt', time() );
+				}
+				$data['errors'] = 'Too many login attempts, please try again later';
+				
+			}
+			else
+			{
+				$this->load->model('Login_model');
+				//if name and pw are incorrect function returns an error message
+				$ret = $this->Login_model->checkLogin($this->input->post('username'), $this->input->post('password'));
+				
+				if ( $ret === TRUE )
+				{
+					$this->Login_model->startSession($this->input->post('username'));
+					//redirect to admin page if user is validated
+					redirect(site_url('user/admin'));
+				}
+				else
+				{
+					$data['errors'] = $ret;
+				}
+			}
+			
+//			$this->session->sess_destroy();
+			
+			echo '<pre>';
+		
+			print_r ( $this->session->all_userdata() );
+			
+			echo '</pre>';
+			
+			/*
 			$this->load->model('Login_model');
 			//if name and pw are incorrect function returns an error message
 			$ret = $this->Login_model->checkLogin($this->input->post('username'), $this->input->post('password'));
@@ -117,6 +182,7 @@ class User extends CI_Controller {
 			{
 				$data['errors'] = $ret;
 			}
+			*/
 		}		
 		$data['main_content'] = 'login_view';
 		$data['title'] = 'Login';
