@@ -80,6 +80,14 @@ background-size:820px;
 	width: 95%;
 }
 
+#navigation #galleries-link ul{
+	width: 9%;
+}
+
+
+#navigation #build-locations-link ul {
+	width: 16%;
+}
 
 #navigation .dropdown{
 	position: relative;

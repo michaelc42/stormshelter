@@ -80,6 +80,13 @@ a{
 #alt-nav #using-prod-link .dropdown{
 	width: 91%;
 }
+#alt-nav #galleries-link ul:first-child{
+	width: 9%;
+}
+
+#alt-nav #build-locations-link ul:first-child{
+	width: 15%;
+}
 
 
 #alt-nav .dropdown{

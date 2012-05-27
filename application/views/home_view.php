@@ -54,7 +54,7 @@
 					</ul>
 					</div>
 				</li>
-				<!--
+				
 				<li id="galleries-link">
 					<ul>
 						<li>
@@ -62,7 +62,15 @@
 						</li>
 					</ul>
 				</li>
-				-->
+				
+				<li id="build-locations-link">
+					<ul>
+						<li>
+							<a href="<? echo site_url('build_locations');?>">Build Locations</a>	
+						</li>
+					</ul>
+				</li>
+				
 			</ul>
 		</div>
 	</div>

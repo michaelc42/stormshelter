@@ -16,7 +16,7 @@ class Main_controller extends CI_Controller
 		parent::__construct();
 		
 		//delete after debugging
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 	}
 	
 	function test_gallery()

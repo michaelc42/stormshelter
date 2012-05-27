@@ -8,5 +8,4 @@ class Jquery_controller extends CI_Controller
 		$this->load->view('tests/jquery_test');
 	}
 	
-	
 }

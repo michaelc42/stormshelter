@@ -1,5 +1,5 @@
-<div id="container" class="grid_16 alpha omega">
-<div class="galleries grid_16 alpha omega">
+<div id="container" class="grid_14 alpha omega">
+<div class="galleries grid_14 alpha omega">
 <?php foreach ($galleries as $gallery) : ?>
 	<div class="gallery	 grid_4 alpha">
 		<h3><?php echo $gallery->title; ?></h3>
@@ -23,7 +23,7 @@
 <?php endforeach; ?>
 </div>
 
-<div id="pagination" class="grid_16 alpha">
+<div id="pagination" class="grid_14 alpha">
 	<p>
 		<?php echo $this->pagination->create_links(); ?>
 	</p>

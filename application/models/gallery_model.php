@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /** Gallery_model
  * @author Michael W. Casey 
  * @link www.f5stormrooms.com
@@ -29,8 +29,6 @@ class Gallery_model extends CI_Model
 		{
 			return FALSE;
 		}
-		
-		//return $galleries;
 	}
 	
 	/*
@@ -46,44 +44,11 @@ class Gallery_model extends CI_Model
 			
 			foreach ($query as $row)
 			{
-				$galleries[$row->directory_name] = $row->title;//array(, $row->id);
+				$galleries[$row->id] = $row->title;//directory_name] = $row->title;//array(, $row->id);
 			}
 			return $galleries;
 		}
 	}
-	
-	/* Use this function to get an indivual gallery info.
-	 * Usful for getting the gallery id
-	 * Found by using unique path name
-	 */
-	 
-	/* Not Used
-	function getGallery($path)
-	{
-		return $this->db->get_where('galleries', array('directory_name'=>$path,));
-	}
-	*/
-	
-	/*
-	function getGalleryById( $id )
-	{
-		return $this->db->get_where('galleries', array('id'=>$id,))->result();
-	}
-	* 
-	* function getGalleryById( $id )
-	{
-		$query = $this->db->get_where('galleries', array('id'=>$id,));
-		
-		if ( $query->num_rows() == 1 )
-		{
-			return $query->result();
-		} 
-		else
-		{
-			return FALSE;
-		}
-	}
-	*/
 	
 	function getGalleryById( $id )
 	{
@@ -100,31 +65,15 @@ class Gallery_model extends CI_Model
 		}
 	}
 	
-	/* Returns a result if gallery exists */
-	/*Not used
-	function doesGalleryExist($id)
-	{
-		$query = $this->db->get_where('galleries', array('id'=>$id,));
-		
-		if( $query->num_rows() == 1 )
-		{
-			return $query->result();
-		}
-		else
-		{
-			return FALSE;
-		}
-	}
-	*/
-	
-	
 	function addGallery($title, $description)
 	{	
 		$titleclean = preg_replace("/[^A-Za-z0-9]/","_",$title);
 		
 		$url = './uploads/'.$titleclean;
 		
-		if($this->galleryExists($title) === TRUE)
+		$query = $this->db->get_where('galleries' , array('title'=>$title) ) ;
+		
+		if( $query->num_rows() > 0 )
 		{
 			return FALSE;
 		}
@@ -167,23 +116,6 @@ class Gallery_model extends CI_Model
 		$this->rrmdir( './uploads/'.$dir);
 	}
 	
-	/* Returns TRUE or FALSE if Gallery exists */
-	/* Not used
-	function galleryExists($name)
-	{
-		$query = $this->db->get_where('galleries', array( 'title'=>$name,));
-		if( $query->num_rows() > 0)
-		{
-			
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
-	}
-	*/
-	
 	function addPhoto($gallery, $picture)
 	{
 		$config['upload_path'] = './uploads/' . $gallery;
@@ -199,14 +131,14 @@ class Gallery_model extends CI_Model
 		$this->upload->data();
 	}
 	
-	function insertPicture($path, $file, $desc)
+	//Changes
+	//get gallery by ID
+	function insertPicture($id, $file, $desc)
 	{
-		$ret = $this->getGallery($path);
-		
-		$ret = $ret->row();
+		$ret = $this->getGalleryById($id);
 		
 		$data = array(
-		   'gallery_id' => $ret->id,
+		   'gallery_id' => $ret[0]->id,
 		   'title' =>  $file['file_name'],
 		   'description' => $desc,
 		   
@@ -214,7 +146,7 @@ class Gallery_model extends CI_Model
 
 		$this->db->insert('pictures', $data);
 		
-		$this->createThumb($path, $file['full_path'], $file['file_name']);
+		$this->createThumb($ret[0]->directory_name, $file['full_path'], $file['file_name']);
 	}
 	
 	function updatePicture( $id, $gallery_id, $title, $desc )

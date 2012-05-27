@@ -5,8 +5,8 @@
  */
 /*****************************************
  * This controller limits access to
- * all specialized site activies
- * user must be logged in and authorized.
+ * all specialized site activties. 
+ * User must be logged in and authorized.
  *****************************************/ 
 class User extends CI_Controller {
 	function __construct()
@@ -15,9 +15,9 @@ class User extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		
 		//delete after debugging
-		//$this->output->enable_profiler(TRUE);		
-		//ini_set('display_errors', 'On');
-		//error_reporting(E_ALL);
+		$this->output->enable_profiler(TRUE);		
+		ini_set('display_errors', 'On');
+		error_reporting(E_ALL);
 	}
 
 	function index()
@@ -39,38 +39,48 @@ class User extends CI_Controller {
 		$data['title'] = 'Add a Photo';
 		$data['css'] = 'style.css';
 		$data['errors'] = FALSE;
+		$data['upload_data'] = NULL;
 		
-		$path = $this->input->post('galleries');
+		$gallery_id = $this->input->post('galleries');
 		$file = $this->input->post('userfile');
 		$desc = $this->input->post('description');
-
-		//Upload settings
-		$config['upload_path'] = './uploads/'.$path.'/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '4096';
-		$config['max_width']  = '4096';
-		$config['max_height']  = '4096';
 		
-		
-		$this->load->library('upload', $config);
-		
-		if ( ! $this->upload->do_upload() )
-		{	
-			//test code, delete and uncomment previous line to revert	
-			$data['errors'] = $this->upload->display_errors();//array('error' => $this->upload->display_errors());
-			
-		}
-		else
+		//get gallery path
+		if ( $gallery_id )
 		{
-			$data['upload_data'] = $this->upload->data();
-			//when the picture upload is successful insert data into db
-			$this->Gallery_model->insertPicture($path, $this->upload->data(), $desc);
+			$gallery_info = $this->Gallery_model->getGalleryById( $gallery_id );
+			$data['selected'] = $gallery_id;
+		
+			//Upload settings
+			$config['upload_path'] = './uploads/'.$gallery_info[0]->directory_name.'/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size']	= '4096';
+			$config['max_width']  = '4096';
+			$config['max_height']  = '4096';
 			
-			//$data['main_content'] = 'upload_success_view';		
-					
-			//$this->load->view('includes/admin-template', $data);
-		}	
-		//end test code
+			
+			$this->load->library('upload', $config);
+			
+			
+			if ( ! $this->upload->do_upload() )
+			{	
+				$data['errors'] = $this->upload->display_errors();//array('error' => $this->upload->display_errors());
+				
+			}
+		
+			else
+			{
+				$data['upload_data'] = $this->upload->data();
+				//when the picture upload is successful insert data into db
+				
+				$this->Gallery_model->insertPicture($gallery_id, $this->upload->data(), $desc);
+				
+				//$data['main_content'] = 'upload_success_view';		
+						
+				//$this->load->view('includes/admin-template', $data);
+			}	
+			//end test code
+		}
 		
 		$this->load->view('includes/admin-template', $data);	
 	}
@@ -116,7 +126,7 @@ class User extends CI_Controller {
 			
 			//check if the reset time has been satisfied and reset the attempts and time
 			if ( $this->session->userdata('last_login_time_attempt') 
-				&& time() - $this->session->userdata('last_login_time_attempt') > 30 )
+				&& time() - $this->session->userdata('last_login_time_attempt') > 60 )
 			{
 				echo 'You waited x seconds';
 				
@@ -130,7 +140,7 @@ class User extends CI_Controller {
 			
 			//flag an error if the user attempts to login more then five times
 			//and if time
-			if( $this->session->userdata('login_attempts') > 3 
+			if( $this->session->userdata('login_attempts') > 5 
 				&& time() - $this->session->userdata('first_login_time_attempt') < 60 )
 			{
 				if ( $this->session->userdata('last_login_time_attempt') === FALSE )
@@ -161,11 +171,11 @@ class User extends CI_Controller {
 			
 //			$this->session->sess_destroy();
 			
-			echo '<pre>';
+			//echo '<pre>';
 		
-			print_r ( $this->session->all_userdata() );
+			//print_r ( $this->session->all_userdata() );
 			
-			echo '</pre>';
+			//echo '</pre>';
 			
 			/*
 			$this->load->model('Login_model');
@@ -266,9 +276,9 @@ class User extends CI_Controller {
 	}
 	
 	
-	/*
-	 * Load a single gallery.
-	 */
+	 /*
+	  * Load a single gallery.
+	  */
 	 function gallery( $gallery = NULL, $off = NULL )
 	 { 
 		$limit = 8;

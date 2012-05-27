@@ -76,15 +76,20 @@
 				</ul>
 				</div>
 			</li>
-			<!--
 			<li id="galleries-link">
 				<ul>
-					<li>
+					<li class="<?php echo ( $active == 'galleries' ? 'active' : ''); ?>">
 						<a href="<? echo site_url('galleries');?>">Gallery</a>	
 					</li>
 				</ul>
 			</li>
-			-->
+			<li id="build-locations-link">
+				<ul>
+					<li class="<?php echo ( $active == 'build_locations' ? 'active' : ''); ?>">
+						<a href="<? echo site_url('build_locations');?>">Build Locations</a>	
+					</li>
+				</ul>
+			</li>
 		</ul>
 	</div><!-- end alt-nav div -->
 	<div class="grid_14 alpha omega beta" id="info-section">
