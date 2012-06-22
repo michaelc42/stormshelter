@@ -16,7 +16,7 @@ class Main_controller extends CI_Controller
 		parent::__construct();
 		
 		//delete after debugging
-		//$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(TRUE);
 	}
 	
 	function test_gallery()
@@ -120,9 +120,12 @@ class Main_controller extends CI_Controller
 		$data['main_content'] = 'all_galleries_view';
 		$data['css'] = 'admin_galleries.css';
 		$data['title'] = 'Gallery';
+		$data['all_images'] = '';
 		
 		if( TRUE ) 
 		{ 
+			
+			$image_ids = array();
 			//load all galleries 
 			$this->load->model('Gallery_model');
 			
@@ -135,6 +138,8 @@ class Main_controller extends CI_Controller
 			{
 				$pic = $this->Gallery_model->getPhoto( $gallery->front_image );
 				
+				$image_ids[] = $gallery->id;
+				
 				if( $pic ) 
 				{ 
 					$thumb = $this->Gallery_model->get_thumb( $pic->title );
@@ -143,6 +148,12 @@ class Main_controller extends CI_Controller
 				}
 				
 			}
+			
+			
+			$allImages = $this->Gallery_model->getPicturesWithArray ( $image_ids );
+			
+			$data['all_images'] = $allImages;
+			//print_r( $image_ids );
 			
 			$this->load->library('pagination');
 			$config['base_url'] = site_url('galleries');
@@ -161,6 +172,20 @@ class Main_controller extends CI_Controller
 			$this->load->view('includes/alt-template', $data);//'includes/gallery-template', $data);
 			
 		}
+	}
+	
+	/* Returns data to use with colorbox */
+	function colorbox( $id )
+	{
+		echo '
+		<div class="colorbox" style="display:">																																												
+			<a class="52" rel="" href="http://localhost/stormshelter/uploads/Testseven/animals-q-c-640-480-33.jpg">HELP</a>																	
+			<a class="52" rel="" href="http://localhost/stormshelter/uploads/Testseven/fashion-h-g-189-480-3.jpg">HELP</a>														
+			<a class="52" rel="" href="http://localhost/stormshelter/uploads/Testseven/animals-q-c-640-480-3.jpg">HELP</a>			
+			<a class="52" rel="" href="http://localhost/stormshelter/uploads/Testseven/dandelion.jpg">HELP</a>
+			<a class="52" rel="" href="http://localhost/stormshelter/uploads/Testseven/food-h-c-617-840-3.jpg">HELP</a>			
+		</div>
+		';
 	}
 	
 	function gallery( $gallery = NULL, $off = NULL )
@@ -231,7 +256,7 @@ class Main_controller extends CI_Controller
 			$data['active'] = 'galleries';
 			$data['header_image'] = 'gallery_banner.jpg';
 			$data['main_content'] = 'gallery_view';
-			$data['css'] = 'admin_galleries.css';//'gallery.css';
+			$data['css'] = 'admin_galleries.css';
 			$data['title'] = 'Gallery';
 			$this->load->view('includes/alt-template', $data);//'includes/gallery-template', $data);
 	 }

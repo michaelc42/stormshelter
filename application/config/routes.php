@@ -56,6 +56,7 @@ $route['using_product'] = 'main_controller/using_product';
 $route['frequently_asked_questions'] = 'main_controller/frequently_asked_questions';
 $route['architectural_details'] = 'main_controller/architectural_details';
 $route['build_locations'] = 'main_controller/build_locations';
+$route['colorbox/(:any)'] = 'main_controller/colorbox/$1';
 //$route['user'] = 'user';
 //$route['user/login'] = 'user/login';
 

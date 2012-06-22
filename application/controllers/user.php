@@ -247,18 +247,24 @@ class User extends CI_Controller {
 			$total_galleries = $this->Gallery_model->getGalleries();
 			$limited_galleries = $this->Gallery_model->getGalleries($limit, $offset);
 			
-			foreach( $limited_galleries as $gallery )
+			if ( $limited_galleries )
 			{
-				$pic = $this->Gallery_model->getPhoto( $gallery->front_image );
-				
-				if( $pic ) 
-				{ 
-					$thumb = $this->Gallery_model->get_thumb( $pic->title );
+				foreach( $limited_galleries as $gallery )
+				{
+					$pic = $this->Gallery_model->getPhoto( $gallery->front_image );
 					
-					$gallery->front_image = $thumb; 
+					if( $pic ) 
+					{ 
+						$thumb = $this->Gallery_model->get_thumb( $pic->title );
+						
+						$gallery->front_image = $thumb; 
+					}
 				}
 			}
-			
+			else
+			{
+				$data['errors'] = 'No Galleries Exist';
+			}
 			$this->load->library('pagination');
 			$config['base_url'] = site_url('user/galleries');
 			$config['total_rows'] = count($total_galleries);
@@ -474,7 +480,7 @@ class User extends CI_Controller {
 		{
 			$this->load->model('Gallery_model');
 			
-			if ( $ret = $this->Gallery_model->doesGalleryExist($id) )
+			if ( $ret = $this->Gallery_model->getGalleryById($id) )
 			{
 				if ( $this->Gallery_model->deleteGallery($id, $ret[0]->directory_name) )
 				{
@@ -629,7 +635,7 @@ class User extends CI_Controller {
 		{
 			//redirect to login page
 			echo 'Not authorized';
-			break;
+			//break;
 		}
 		else
 		{

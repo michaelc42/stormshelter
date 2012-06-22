@@ -127,3 +127,6 @@ LOGOUT REDIRECT NOT WORKING
 CREATE ADMIN HEADER TEMPLATE
 
 FILE PATH TO GALLERIES NOT INSERTING UNDERSCORES INTO FILE PATH
+
+FIX: if user deletes front image, also delete the front image info from the 
+database.

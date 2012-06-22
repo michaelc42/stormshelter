@@ -15,7 +15,6 @@
 <script type="text/Javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script type="text/Javascript" src="<?php echo site_url();?>js/jquery.colorbox-min.js"></script>
 
-
 <title>jQuery Tests</title>
 
 <script>
@@ -83,6 +82,7 @@
 
 	*/
 
+	/*
 	$(document).ready(function()
 	{
 		var $green = $('#green');
@@ -92,6 +92,13 @@
 			$green.css('left', greenLeft+=1);
 		}, 200);
 
+	});
+	*/
+	
+	$(document).ready(function(){
+		//Examples of how to assign the ColorBox event to elements
+		$(".group1").colorbox({rel:'group1'});
+	
 	});
 
 </script>
@@ -141,10 +148,22 @@
 <div id="container">
 	
 <h1>jQuery Test</h1>
+
+<a href="<?php echo site_url('images/prod_info_banner.jpg');?>" class="group1">Pic</a>
+
+<a href="<?php echo site_url('images/prod_info_banner.jpg');?>" class="group1">Pic</a>
+
+<a href="<?php echo site_url('images/prod_info_banner.jpg');?>" class="group1">Pic</a>
+
+<a href="<?php echo site_url('images/prod_info_banner.jpg');?>" class="group1">Pic</a>
+<a href="<?php echo site_url('images/prod_info_banner.jpg');?>" class="group1">Pic</a>
+
+<!--
 <div>
 	<div id="green" class="box">Go!</div>
 	<div id="red" class="box">Go!</div>
 </div>
+-->
 
 <!--
 <a href="<?php echo site_url('images/prod_info_banner.jpg');?>" class="lightbox">Pic</a>

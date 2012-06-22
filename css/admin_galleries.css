@@ -12,6 +12,8 @@ a{
 p{
 	margin-bottom: 0;
 }
+
+/*
 #pictures{
 	margin-top: 20px;
 }
@@ -19,6 +21,7 @@ p{
 #pictures img{
 	max-height: 200px;
 }
+
 
 .picture{
 	max-width: 220px;
@@ -34,6 +37,25 @@ p{
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+*/
+
+#container #all_galleries{
+	margin-bottom: 20px;
+}
+
+#container .gallery {
+	width: 260px;
+	background: yellow;
+}
+
+#container .gallery .image-p{
+	}
+
+#container .gallery img{
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 

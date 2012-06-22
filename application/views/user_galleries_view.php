@@ -2,21 +2,21 @@
 
 <h2>Galleries</h2>
 
-<div class="all_galleries grid_14 alpha omega">
+<div id="all_galleries grid_14 alpha omega">
+
+<?php if( $galleries ): ?>	
 <?php foreach ($galleries as $gallery) : ?>
 	<div class="gallery grid_4 alpha">
 		<h3><?php echo $gallery->title; ?></h3>			
 		<a href="<?php echo site_url().'user/gallery/'.$gallery->id; ?>">
-			<p>
-				<div class="image"
-					style="background-image: url(
+			<p class="image-p">
+				<img src="
 					<?php if ( $gallery->front_image ) : ?>
-						<?php echo site_url();?>uploads/<?php echo $gallery->directory_name;?>/thumbs/<?php echo $gallery->front_image;?>
+					<?php echo site_url();?>uploads/<?php echo $gallery->directory_name;?>/thumbs/<?php echo $gallery->front_image;?>
 					<?php else: ?>					
 						<?php echo site_url();?>uploads/default_image.gif 
 					<?php endif; ?>
-					)">
-				</div>
+				" class="image" />
 			</p>
 		</a>
 		<p>
@@ -29,6 +29,11 @@
 		</p>
 	</div> 
 <?php endforeach; ?>
+<?php endif; ?>
+
+<?php if( $errors ):?>
+	<p class="error"><?php echo $errors; ?></p>
+<?php endif; ?>
 </div> <!-- End All Galleries Div -->
 
 <div id="pagination" class="grid_14">
@@ -36,3 +41,4 @@
 		<?php echo $this->pagination->create_links(); ?>
 	</p>
 </div>
+

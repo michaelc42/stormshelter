@@ -192,36 +192,140 @@ class Gallery_model extends CI_Model
 	
 		$config['source_image'] = $file;
 		$config['create_thumb'] = TRUE;
-		$config['maintain_ratio'] = TRUE;
-		$config['width'] = 220;
-		$config['height'] = 200;
+		$config['maintain_ratio'] = FALSE;
+		$config['width'] = 1952;
+		$config['height'] = 1952;
 		$config['new_image'] = $this->galleryPath.'/'.$path.'/thumbs';
+		$config['x_axis'] = '0';
+		$config['y_axis'] = '0';
+		
+		
 		$this->load->library('image_lib');
 		$this->image_lib->initialize($config); 
 		
+		if ( ! $this->image_lib->crop())
+		{
+			echo $this->image_lib->display_errors();
+		}
+	
+		unset( $config );
+		
+		//Add new resize info to $config
+		$config['source_image'] = $this->galleryPath.'/'.$path.'/thumbs/'.$this->get_thumb( $filename );
+		$config['create_thumb'] = FALSE;
+		$config['width'] = 260;
+		$config['height'] = 260;
+		$config['new_image'] = $this->galleryPath.'/'.$path.'/thumbs';
+		
+		
+		echo $config['source_image'];
+		
+		
+		echo '<pre>';
+		
+		print_r( $config );
+		
+		echo '</pre>';
+		
+		
+		$this->image_lib->initialize($config); 
+		
+		if ( ! $this->image_lib->resize() )
+		{
+			echo $this->image_lib->display_errors();
+		}
+		else
+		{
+			echo 'Image supposedly resized';
+		}
+		
+		/*
 		
 		//if height > width
 		if ( $size[1] > $size[0] )
 		{
 			$config['master_dim'] = 'width';
-			$config['height'] = 200;
-			$config['width'] = 220;
+			//$config['height'] = 260;
+			$config['width'] = 260;
 			$config['maintain_ratio'] = TRUE;
-			$this->image_lib->clear();
-			//print_r($config);
+			//$this->image_lib->clear();
+			print_r($config);
 			$this->image_lib->initialize( $config );
 			if ( ! $this->image_lib->resize() )
 			{
 				echo $this->image_lib->display_errors();
 			}
 		}
+		
+		
+		$this->crop_thumb( $config['new_image'], $filename );
+		
+		/*
 		elseif ( ! $this->image_lib->resize() )
 		{
 			echo $this->image_lib->display_errors();
 		}
+		*/
+		
+		
+		
+		/*
+		if ( $size[1] > $size[0] )
+		{
+			$this->image_lib->clear();
+			$config['source_image'] = $file;
+			$config['x_axis'] = '0';
+			$config['y_axis'] = '100';
+			print_r($config);
+			$this->image_lib->initialize( $config );
+			if ( ! $this->image_lib->crop() )
+			{
+				echo $this->image_lib->display_errors();
+			}
+		}
+		elseif ( ! $this->image_lib->crop() )
+		{
+			echo $this->image_lib->display_errors();
+		}
+		*/
 		
 	}
 	
+	function crop_thumb( $path, $filename )
+	{
+		echo $source = "'".$path.'/'.$this->get_thumb( $filename )."'";
+
+		$config['source_image'] = $source;	
+		$config['width'] = 260;
+		$config['height'] = 260;
+		//$config['maintain_ratio'] = FALSE;
+		$config['x_axis'] = '0';
+		$config['y_axis'] = '0';
+		
+		print_r( $config );
+		$this->load->library('image_lib');
+		
+		$this->image_lib->initialize($config);
+
+		if ( ! $this->image_lib->crop())
+		{
+			echo $this->image_lib->display_errors();
+		}
+	}
+	
+	function getPicturesWithArray( $ids )
+	{
+		$this->db->select('*');
+		foreach( $ids as $id )
+		{
+			$this->db->or_where( 'gallery_id', $id );
+		}
+		
+		$query = $this->db->get('pictures');
+	
+		return $query->result();
+	}
+		
 	//retrieves all photos in a gallery
 	function getPictures($id, $limit, $offset)
 	{	
