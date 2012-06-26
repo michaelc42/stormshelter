@@ -20,7 +20,7 @@
 			</p>
 		</a>
 		<p>
-			<a href="<?php echo site_url().'user/addphoto/'.$gallery->directory_name; ?>">Add Photo</a>
+			<a href="<?php echo site_url().'user/add_photo/'.$gallery->directory_name; ?>">Add Photo</a>
 			<a href="<?php echo site_url(); ?>user/confirmDelete/<?php echo $gallery->id; ?>">delete</a>
 		</p>
 		
