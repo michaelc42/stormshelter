@@ -147,6 +147,8 @@ class Gallery_model extends CI_Model
 
 		$this->db->insert('pictures', $data);
 		
+		$this->resize_image($ret[0]->directory_name, $file['full_path'], $file['file_name']);
+		
 		$this->createThumb($ret[0]->directory_name, $file['full_path'], $file['file_name']);
 	}
 	
@@ -184,6 +186,30 @@ class Gallery_model extends CI_Model
 		else
 		{
 			return FALSE;
+		}
+	}
+	
+	/*
+	 * Resizes the uploaded image to a more manageble size 
+	 */
+	function resize_image( $path, $file, $filename )
+	{
+		$size = getimagesize( $file );
+		$width = $size[0];
+		$height = $size[1];
+		
+		$config['source_image'] = $file;
+		$config['create_thumb'] = FALSE;
+		$config['maintain_ratio'] = TRUE;
+		$config['width'] = 640;
+		$config['height'] = 480;
+		
+		$this->load->library('image_lib');
+		$this->image_lib->initialize($config);
+		
+		if ( ! $this->image_lib->resize() )
+		{
+			echo $this->image_lib->display_errors();
 		}
 	}
 	

@@ -53,7 +53,7 @@ class User extends CI_Controller {
 		
 			//Upload settings
 			$config['upload_path'] = './uploads/'.$gallery_info[0]->directory_name.'/';
-			$config['allowed_types'] = 'gif|jpg|png';
+			$config['allowed_types'] = 'gif|jpg|jpeg|png';
 			$config['max_size']	= '4096';
 			$config['max_width']  = '4096';
 			$config['max_height']  = '4096';
@@ -287,77 +287,77 @@ class User extends CI_Controller {
 	  */
 	 function gallery( $gallery = NULL, $off = NULL )
 	 { 
-		$limit = 8;
+		$limit = 20;
 		$offset = intval( $off );
 		$data['errors'] = NULL;
 		 
-		 $this->load->model('Gallery_model');
-			//returns gallery data if gallery exists, else false
-			$ret = $this->Gallery_model->getGalleryById($gallery);
-			if( $ret === FALSE )
+		$this->load->model('Gallery_model');
+		//returns gallery data if gallery exists, else false
+		$ret = $this->Gallery_model->getGalleryById($gallery);
+		if( $ret === FALSE )
+		{
+			$data['errors'] = 'Gallery not found.';
+			//show_404();
+			//return;
+		}
+		else
+		{ 
+			// get pictures
+			//get all pictures that have a gallery_id of $ret->id
+			$totalPics = $this->Gallery_model->getPictures($ret[0]->id, NULL, $offset);
+			$pics = $this->Gallery_model->getPictures($ret[0]->id, $limit, $offset);
+			
+			
+			if( $pics === FALSE )
 			{
-				$data['errors'] = 'Gallery not found.';
-				//show_404();
-				//return;
+				$data['errors'] = 'This gallery contains no pictures.';
+				//Pass gallery info anyways
+				$data['ret'] = $ret;
 			}
 			else
-			{ 
-				// get pictures
-				//get all pictures that have a gallery_id of $ret->id
-				$totalPics = $this->Gallery_model->getPictures($ret[0]->id, NULL, $offset);
-				$pics = $this->Gallery_model->getPictures($ret[0]->id, $limit, $offset);
+			{		
+				//run this if there are pictures for the gallery
+				foreach ( $pics as $pic )
+				{	
+					$thumb = $this->Gallery_model->get_thumb( $pic->title );
+					$pic->thumb = $thumb;
+				}
 				
+				$this->load->library('pagination');
+				$config['base_url'] = site_url('user/gallery').'/'.$ret[0]->id.'/';
+				$config['total_rows'] = count($totalPics);
+				$config['per_page'] = $limit;
+				//user controller needs uri_segment of four because 'url/user/gall.../id/offset'
+				$config['uri_segment'] = 4;
+			
+				$this->pagination->initialize($config);
+				$data['pics'] = $pics;
+				$data['ret'] = $ret;
+				$data['front_image'] = $ret[0]->front_image;
 				
-				if( $pics === FALSE )
+				//if checkbox input exists update the gallery with the front image
+				if ( $this->input->post('front_image') )
 				{
-					$data['errors'] = 'This gallery contains no pictures.';
-					//Pass gallery info anyways
-					$data['ret'] = $ret;
-				}
-				else
-				{		
-					//run this if there are pictures for the gallery
-					foreach ( $pics as $pic )
-					{	
-						$thumb = $this->Gallery_model->get_thumb( $pic->title );
-						$pic->thumb = $thumb;
-					}
-					
-					$this->load->library('pagination');
-					$config['base_url'] = site_url('user/gallery').'/'.$ret[0]->id.'/';
-					$config['total_rows'] = count($totalPics);
-					$config['per_page'] = $limit;
-					//user controller needs uri_segment of four because 'url/user/gall.../id/offset'
-					$config['uri_segment'] = 4;
-				
-					$this->pagination->initialize($config);
-					$data['pics'] = $pics;
-					$data['ret'] = $ret;
-					$data['front_image'] = $ret[0]->front_image;
-					
-					//if checkbox input exists update the gallery with the front image
-					if ( $this->input->post('front_image') )
+					//update table and input the id for the front_picture
+					if ( $this->Gallery_model->update_gallery( $gallery, $this->input->post('front_image')) == FALSE )
 					{
-						//update table and input the id for the front_picture
-						if ( $this->Gallery_model->update_gallery( $gallery, $this->input->post('front_image')) == FALSE )
-						{
-							$data['errors'] = 'Could not set front image.';
-						}
-						else
-						{
-							$data['front_image'] = $this->input->post('front_image');
-						}
+						$data['errors'] = 'Could not set front image.';
 					}
-					
+					else
+					{
+						$data['front_image'] = $this->input->post('front_image');
+					}
 				}
+				
 			}
-			
-			
-			$data['main_content'] = 'user_gallery_view';
-			$data['css'] = 'admin_galleries.css';//'admin-gallery.css';
-			$data['title'] = 'Gallery';
-			$this->load->view('includes/admin-template', $data);
-	 }
+		}
+		
+		
+		$data['main_content'] = 'user_gallery_view';
+		$data['css'] = 'admin_galleries.css';//'admin-gallery.css';
+		$data['title'] = 'Gallery';
+		$this->load->view('includes/admin-template', $data);
+	}
 	 
 	
 	function photo( $id = NULL )

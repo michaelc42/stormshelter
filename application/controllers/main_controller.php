@@ -191,7 +191,7 @@ class Main_controller extends CI_Controller
 	function gallery( $gallery = NULL, $off = NULL )
 	 {
 		$offset = intval( $off );
-		$limit = 8;
+		$limit = 20;
 		$data['errors'] = NULL;
 		 
 		 $this->load->model('Gallery_model');

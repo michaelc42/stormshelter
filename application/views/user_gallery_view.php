@@ -3,10 +3,10 @@
 	<h2><?php echo $ret[0]->title; ?></h2>
 	<p>Click image to edit details.</p>
 	<?php echo form_open(current_url()); ?>
-	<div id="pictures" class="grid_16 alpha">
+	<div id="pictures" class="grid_16 alpha omega">
 		
 		<?php foreach ($pics as $pic): ?>
-			<div class="picture grid_4 alpha">
+			<div class="picture grid_4 alpha omega">
 				<?php
 				$pieces = explode('.', $pic->title);
 				$pieces[0] .= '_thumb.';
@@ -14,9 +14,10 @@
 				?>
 
 				<a href="<?php echo site_url().'user/photo/'.$pic->id; ?>">
-					<div class="image"
-					style="background-image:url('<?php echo site_url()?>uploads/<?php echo $ret[0]->directory_name;?>/thumbs/<?php echo $pic->thumb; ?>')">
-					</div>
+					<img class="image"
+					src="<?php echo site_url()?>uploads/<?php echo $ret[0]->directory_name;?>/thumbs/<?php echo $pic->thumb; ?>"
+					alt="<?php echo $pic->description;?>">
+					</img>
 				</a>
 				<br />
 				<p>

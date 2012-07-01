@@ -49,13 +49,15 @@ p{
 	background: yellow;
 }
 
-#container .gallery .image-p{
-	}
-
 #container .gallery img{
 	display: block;
 	margin-right: auto;
 	margin-left: auto;
+}
+
+#pictures img{
+	width: 220px;
+	margin-bottom: 10px;
 }
 
 
