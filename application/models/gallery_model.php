@@ -221,6 +221,7 @@ class Gallery_model extends CI_Model
 			
 		$config['source_image'] = $file;
 		$config['create_thumb'] = TRUE;
+		$config['thumb_marker'] = '_thumb';
 		$config['maintain_ratio'] = FALSE;
 		$config['new_image'] = $this->galleryPath.'/'.$path.'/thumbs';
 		
