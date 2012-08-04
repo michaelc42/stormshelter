@@ -19,8 +19,7 @@
 	<p>
 		Description: 
 		<br />
-
-		<?php echo form_textarea('description', $picDesc); ?>
+		<?php echo form_textarea(array('name' => 'description', 'maxLength' => '60', 'size'=>'70', 'value' => $picDesc) ); //$picDesc, $array); ?>
 	</p>
 	<p>
 		<?php echo form_submit('submit', 'save'); ?>

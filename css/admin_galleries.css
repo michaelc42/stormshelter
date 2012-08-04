@@ -46,18 +46,18 @@ p{
 
 #container .gallery {
 	width: 260px;
-	background: yellow;
+	background: ;
+	margin-bottom: 10px;
 }
 
-#container .gallery img{
-	display: block;
-	margin-right: auto;
-	margin-left: auto;
-}
 
 #pictures img{
 	width: 220px;
 	margin-bottom: 10px;
+}
+
+.description{
+	height: 80px;
 }
 
 
